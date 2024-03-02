@@ -1,6 +1,5 @@
 package pojos;
 
-import atm.*;
 import java.util.HashSet;
 import java.util.Set;
 
