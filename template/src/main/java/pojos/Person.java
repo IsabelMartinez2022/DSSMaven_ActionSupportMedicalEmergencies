@@ -18,7 +18,7 @@ public class Person {
     private boolean breathing; // boolean
     private enum bleeding; // enum
     private boolean emit_words; // enum
-    private boolean chest_pain; // enum
+    private boolean chest_pain; // enum //YO LO PONDRíA BOOLEAN
     private boolean cough; // boolean
     private boolean seizure; // enum //YO LO PONDRÍA BOOLEAN
     private boolean possible_poisoning; // boolean
