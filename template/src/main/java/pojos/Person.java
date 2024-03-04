@@ -16,7 +16,7 @@ public class Person {
     private boolean conscious; // boolean
     private boolean dizzy; // enum
     private boolean breathing; // boolean
-    private enum bleeding; // enum
+    private boolean bleeding; // enum
     private boolean emit_words; // enum
     private boolean chest_pain; // enum //YO LO PONDRíA BOOLEAN
     private boolean cough; // boolean
@@ -27,7 +27,9 @@ public class Person {
     private boolean car_accident; // boolean
     private boolean vomit; // boolean
     private boolean difficulty_breathing; // enum
-    private List<String> protocol;
+    private Protocol protocol;
+    public static enum Urgency {URGENT,MEDIUM,MINOR};
+    private Urgency protocolType;
    //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
    //unknown -> enum que comprendan el si o el no
     
@@ -52,6 +54,10 @@ public class Person {
         this.protocol= new ArrayList<String>();
     }
 
+    public void setUrgency(Urgency protocolType){
+        this.protocolType= protocolType;
+    }
+    
     public boolean isConscious() {
         return conscious;
     }
@@ -182,51 +188,6 @@ public class Person {
         }		
         
 	}
-	
-    // removeProtocol???
-    
-    //para los test
-    /*
-    public boolean isTurnOffPowerSourcePrinted() {
-        return turnOffPowerSourcePrinted;
-    }
-
-    public void setTurnOffPowerSourcePrinted(boolean turnOffPowerSourcePrinted) {
-        this.turnOffPowerSourcePrinted = turnOffPowerSourcePrinted;
-    }
-
-    public boolean isDoNotCoverBurntsPrinted() {
-        return doNotCoverBurntsPrinted;
-    }
-
-    public void setDoNotCoverBurntsPrinted(boolean doNotCoverBurntsPrinted) {
-        this.doNotCoverBurntsPrinted = doNotCoverBurntsPrinted;
-    }
-
-    public boolean isCall112Printed() {
-        return call112Printed;
-    }
-
-    public void setCall112Printed(boolean call112Printed) {
-        this.call112Printed = call112Printed;
-    }
-
-    public boolean isStartCPRPrinted() {
-        return startCPRPrinted;
-    }
-
-    public void setStartCPRPrinted(boolean startCPRPrinted) {
-        this.startCPRPrinted = startCPRPrinted;
-    }
-
-    public boolean isUseAEDPrinted() {
-        return useAEDPrinted;
-    }
-
-    public void setUseAEDPrinted(boolean useAEDPrinted) {
-        this.useAEDPrinted = useAEDPrinted;
-    }
-    */
     @Override
     public String toString() {
         return "Person [conscious=" + conscious + ", dizzy=" + dizzy + ", breathing=" + breathing
