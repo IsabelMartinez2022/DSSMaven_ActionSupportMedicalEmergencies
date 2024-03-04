@@ -14,21 +14,21 @@ import java.util.List;
 public class Person {
     
     private boolean conscious; // boolean
-    private boolean dizzy; // enum
+    private enum dizzy; // enum
     private boolean breathing; // boolean
-    private boolean bleeding; // enum
-    private boolean emit_words; // enum
-    private boolean chest_pain; // enum //YO LO PONDRíA BOOLEAN
+    private enum bleeding; // enum
+    private enum emit_words; // enum
+    private enum chest_pain; // enum //
     private boolean cough; // boolean
-    private boolean seizure; // enum //YO LO PONDRÍA BOOLEAN
+    private boolean seizure; // boolean
     private boolean possible_poisoning; // boolean
     private boolean electric_shock; // boolean
     private boolean major_trauma; // boolean
     private boolean car_accident; // boolean
     private boolean vomit; // boolean
-    private boolean difficulty_breathing; // enum
+    private enum difficulty_breathing; // enum
     private Protocol protocol;
-    public static enum Urgency {URGENT,MEDIUM,MINOR};
+    //public static enum Urgency {URGENT,MEDIUM,MINOR};
     private Urgency protocolType;
    //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
    //unknown -> enum que comprendan el si o el no

@@ -11,9 +11,12 @@ import pojos.Person;
 public class PersonUnit implements RuleUnitData {
 
    private final DataStore<Person> people;
+   
+   private final Map<Protocol> protocols;
 
     public PersonUnit() {
         this(DataSource.createStore());
+        protocols = Protocol.PROTOCOLS_MAP;
     }
 
     public PersonUnit(DataStore<Person> people) {
