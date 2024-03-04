@@ -4,6 +4,9 @@
  */
 package pojos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author marty
@@ -13,21 +16,23 @@ public class Person {
     private boolean conscious; // boolean
     private boolean dizzy; // enum
     private boolean breathing; // boolean
-    private boolean bleeding; // boolean
+    private enum bleeding; // enum
     private boolean emit_words; // enum
     private boolean chest_pain; // enum
     private boolean cough; // boolean
-    private boolean seizure; // enum
+    private boolean seizure; // enum //YO LO PONDRÍA BOOLEAN
     private boolean possible_poisoning; // boolean
     private boolean electric_shock; // boolean
     private boolean major_trauma; // boolean
     private boolean car_accident; // boolean
     private boolean vomit; // boolean
     private boolean difficulty_breathing; // enum
-    private String protocol;// LIST?
+    private List<String> protocol;
    //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
    //unknown -> enum que comprendan el si o el no
     
+    //CRITICAL STATE
+    public Person(boolean conscious, boolean breathing, enum bleeding, boolean bleeding, )
     public Person(boolean conscious, boolean dizzy, boolean breathing, boolean bleeding, boolean emit_words, boolean chest_pain, boolean cough, boolean seizure, boolean possible_poisoning, boolean electric_shock, boolean major_trauma, boolean car_accident, boolean vomit, boolean difficulty_breathing) {
         this.conscious = conscious;
         this.dizzy = dizzy;
@@ -43,6 +48,8 @@ public class Person {
         this.car_accident = car_accident;
         this.vomit = vomit;
         this.difficulty_breathing = difficulty_breathing;
+        
+        this.protocol= new ArrayList<String>();
     }
 
     public boolean isConscious() {
@@ -101,7 +108,7 @@ public class Person {
         return difficulty_breathing;
     }
 
-    public String getProtocol() {
+    public List<String> getProtocol() {
         return protocol;
     }
 
@@ -160,11 +167,23 @@ public class Person {
     public void setDifficulty_breathing(boolean difficulty_breathing) {
         this.difficulty_breathing = difficulty_breathing;
     }
-
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
-    }
- 
+        
+    public void setProtocol(int num) {
+        
+        switch (num){
+            case 1: this.protocol.add(call_112());
+            case 2: this.protocol.add(perform_CPR());
+            case 3: this.protocol.add(use_AED());
+            case 4: this.protocol.add(burns_procedure());//"Turn off power source, do not cover the burnts
+            case 5: this.protocol.add(donot_move());
+            case 6: this.protocol.add(apply_pressure());
+            case 7: this.protocol.add(protect_PAR());
+            case 8: this.protocol.add(rescue_PAR);
+        }		
+        
+	}
+	
+    // removeProtocol???
     
     //para los test
     /*

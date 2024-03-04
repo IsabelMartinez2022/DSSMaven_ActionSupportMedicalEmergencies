@@ -15,3 +15,181 @@
  */
 
 package person;
+import pojos.Person;
+
+unit OperationUnit;
+
+rule "Emergency Response 1"
+    dialect "java"
+    when
+        $person : /people[conscious == false,
+                    breathing == false,
+                    bleeding == Bleeding.NO ||== Bleeding.A_LITTLE,//multi-restriction?????
+                    electric_shock == false,
+                    major_trauma == false,
+                    seizures== false]
+    then
+        $person.setProtocol(1);
+        $person.setProtocol(2);
+        $person.setProtocol(3);
+end
+
+rule "Emergency Response 2"
+dialect "java"
+when
+    $person : /people[conscious == false,
+                                  breathing == false,
+                                  bleeding == Bleeding.NO ||== Bleeding.A_LITTLE,
+                                  electric_shock == true,
+                                  major_trauma ==false]   //ADDED . Car accident??                              
+then
+    $person.setProtocol(4);
+    $person.setProtocol(1);
+    $person.setProtocol(2);
+    $person.setProtocol(3);
+end
+
+rule "Emergency Response 3"
+dialect "java"
+when
+    $person : /people[conscious == false,
+                                  breathing == false,
+                                  bleeding == Bleeding.NO ||== Bleeding.A_LITTLE,
+                                  electric_shock == false,
+                                  major_trauma == true,
+                                  car_accident == false]
+then
+    $person.setProtocol(1);
+    $person.setProtocol(5);
+    $person.setProtocol(2);
+    $person.setProtocol(3);
+end
+
+rule "Emergency Response 4"
+dialect "java"
+when
+    $person : /people[conscious == false,
+                                  breathing == false,
+                                  bleeding == Bleeding.A_LOT,
+                                  major_trauma == true,
+                                  car_accident == false]
+then
+    $person.setProtocol(1);
+    $person.setProtocol(5);
+    $person.setProtocol(6);
+    $person.setProtocol(2);
+    $person.setProtocol(3);
+end
+
+rule "Emergency Response 5"
+dialect "java"
+when
+    $person : /people[conscious == false,
+                                  breathing == true,
+                                  bleeding == Bleeding.A_LITTLE||== Bleeding.NO,
+                                  major_trauma == true,
+                                  car_accident == true]
+then
+    $person.setProtocol(7);
+    $person.setProtocol(1);
+    $person.setProtocol(8);
+end
+
+rule "Emergency Response 6"
+dialect "java"
+when
+    $person : /people[conscious == false,
+                                  breathing == true,
+                                  bleeding == Bleeding.A_LITTLE||== Bleeding.NO,
+                                  major_trauma == true,
+                                  car_accident == true]
+then
+    $person.setProtocol(7);
+    $person.setProtocol(1);
+    $person.setProtocol(8);
+    $person.setProtocol(2);
+    $person.setProtocol(3);
+end
+
+//CONTINUAR
+rule "Emergency Response 7"
+dialect "java"
+when
+    p7 : Person(conscious == false,
+                                  breathing == false,
+                                  bleeding == false,
+                                  electric_shock == false,
+                                  major_trauma == true,
+                                  car_accident == true)
+then
+    p7.setProtocol("Protect the person, call 112, do not move the person or remove the helmet, protect from cold or heat and do not give food or drinks, start CPR, use AED");
+end
+
+rule "Emergency Response 8"
+dialect "java"
+when
+    p8 : Person(conscious == false,
+                                  breathing == false,
+                                  bleeding == true,
+                                  major_trauma == true,
+                                  car_accident == true)
+then
+    p8.setProtocol("Protect the person, call 112, do not move the person or remove the helmet, protect from cold or heat and do not give food or drinks, start CPR and use AED");
+end
+
+rule "Emergency Response 9"
+dialect "java"
+when
+    p9 : Person(conscious == true,
+                                  dizzy == false,
+                                  emit_words == true,
+                                  trying_to_cough == true,
+                                  difficulty_breathing == true)
+then
+    p9.setProtocol("Encourage the person to cough");
+end
+
+rule "Emergency Response 10"
+dialect "java"
+when
+    p10 : Person(conscious == true,
+                                  dizzy == false,
+                                  emit_words == false,
+                                  difficulty_breathing == true)
+then
+    p10.setProtocol("Do the Heimlich maneuver");
+end
+
+rule "Emergency Response 11"
+dialect "java"
+when
+    p11 : Person(chest_pain == true)
+
+then
+    p11.setProtocol("Call 112, look for medication");
+end
+
+rule "Emergency Response 12"
+dialect "java"
+when
+    p12 : Person(conscious == false,
+                                  breathing == true,
+                                  bleeding == false,
+                                  major_trauma == false,
+                                  vomit == false)
+
+then
+    p12.setProtocol("Secure the are, put legs up, loosen tight clothing, call 112 if the person is not recovered after the previous stage");
+end
+
+rule "Emergency Response 13"
+dialect "java"
+when
+    p13 : Person(conscious == false,
+                                  breathing == true,
+                                  bleeding == false,
+                                  major_trauma == false,
+                                  vomit == true)
+then
+    p13.setProtocol("Secure the area, put the person in recovery position, call 112 if the person is not recovered after the previous stage");
+end
