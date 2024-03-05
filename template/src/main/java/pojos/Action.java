@@ -10,10 +10,61 @@ package pojos;
  */
 public class Action {
  
-   public String performCPR(){
-       return "";
+    private final String instruction;
+    //Many to many relationship with Protocols
+    
+    /*
+    public Action(Type protocolType){
+        this.instruction= setAction(protocolType);
+    }
+   */
+    
+    public Action(String instruction){
+        this.instruction= instruction;
+    }
+    //getter enum
+
+    
+    public static Action call_112(){
+        String info= "";
+        return new Action(info);
+    }
+    
+    //MAP ENUM-STRING/LIST
+    public static Action perform_CPR(){
+       String info= "";
+        return new Action(info);
    }
+    
+    public static Action use_AED(){
+        String info= "";
+        return new Action(info);
+    }
+   
+    //"Turn off power source, do not cover the burnts
+    public static Action burns_procedure(){
+        String info= "";
+        return new Action(info);
+    }
+
+   public static Action donot_move(){
+        String info= "";
+        return new Action(info);
+   }
+   
+   public static Action apply_pressure(){
+        String info= "";
+        return new Action(info);
+   }
+   
+   public static Action protect_PAR(){
+        String info= "";
+        return new Action(info);
+   }
+   
+   public static Action rescue_PAR(){
+        String info= "";
+        return new Action(info);
+   }
+   
 }
-
-
-//pulic string setString(){

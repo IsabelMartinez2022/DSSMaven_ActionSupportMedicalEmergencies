@@ -8,9 +8,6 @@ package pojos;
  *
  * @author isama
  */
-public class Auxiliar {
+public class Arraylist {
     
-    public static String perform_CPR(){
-        return "";
-    }
 }

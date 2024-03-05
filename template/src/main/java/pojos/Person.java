@@ -14,11 +14,11 @@ import java.util.List;
 public class Person {
     
     private boolean conscious; // boolean
-    private enum dizzy; // enum
+    private Dizzy dizzy; // enum
     private boolean breathing; // boolean
-    private enum bleeding; // enum
-    private enum emit_words; // enum
-    private enum chest_pain; // enum //
+    private Bleeding bleeding; // enum
+    private EmitWords emit_words; // enum
+    private ChestPain chest_pain; // enum //
     private boolean cough; // boolean
     private boolean seizure; // boolean
     private boolean possible_poisoning; // boolean
@@ -26,16 +26,14 @@ public class Person {
     private boolean major_trauma; // boolean
     private boolean car_accident; // boolean
     private boolean vomit; // boolean
-    private enum difficulty_breathing; // enum
+    private DifficultyBreathing difficulty_breathing; // enum
     private Protocol protocol;
-    //public static enum Urgency {URGENT,MEDIUM,MINOR};
-    private Urgency protocolType;
+    //public static enum Urgency {URGENT,MEDIUM,MINOR};??
+   // private Urgency urgency;
    //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
-   //unknown -> enum que comprendan el si o el no
     
-    //CRITICAL STATE
-    public Person(boolean conscious, boolean breathing, enum bleeding, boolean bleeding, )
-    public Person(boolean conscious, boolean dizzy, boolean breathing, boolean bleeding, boolean emit_words, boolean chest_pain, boolean cough, boolean seizure, boolean possible_poisoning, boolean electric_shock, boolean major_trauma, boolean car_accident, boolean vomit, boolean difficulty_breathing) {
+    public Person(boolean conscious, Dizzy dizzy, boolean breathing, Bleeding bleeding, EmitWords emit_words, 
+            ChestPain chest_pain, boolean cough, boolean seizure, boolean possible_poisoning, boolean electric_shock, boolean major_trauma, boolean car_accident, boolean vomit, DifficultyBreathing difficulty_breathing) {
         this.conscious = conscious;
         this.dizzy = dizzy;
         this.breathing = breathing;
@@ -50,19 +48,22 @@ public class Person {
         this.car_accident = car_accident;
         this.vomit = vomit;
         this.difficulty_breathing = difficulty_breathing;
+       
         
-        this.protocol= new ArrayList<String>();
+        //this.protocol
     }
 
+    /*
     public void setUrgency(Urgency protocolType){
         this.protocolType= protocolType;
     }
+    */
     
     public boolean isConscious() {
         return conscious;
     }
 
-    public boolean isDizzy() {
+    public Dizzy isDizzy() {
         return dizzy;
     }
 
@@ -70,15 +71,15 @@ public class Person {
         return breathing;
     }
 
-    public boolean isBleeding() {
+    public Bleeding isBleeding() {
         return bleeding;
     }
 
-    public boolean isEmit_words() {
+    public EmitWords isEmit_words() {
         return emit_words;
     }
 
-    public boolean isChest_pain() {
+    public ChestPain isChest_pain() {
         return chest_pain;
     }
 
@@ -122,7 +123,7 @@ public class Person {
         this.conscious = conscious;
     }
 
-    public void setDizzy(boolean dizzy) {
+    public void setDizzy(Dizzy dizzy) {
         this.dizzy = dizzy;
     }
 
@@ -130,15 +131,15 @@ public class Person {
         this.breathing = breathing;
     }
 
-    public void setBleeding(boolean bleeding) {
+    public void setBleeding(Bleeding bleeding) {
         this.bleeding = bleeding;
     }
 
-    public void setEmit_words(boolean emit_words) {
+    public void setEmit_words(EmitWords emit_words) {
         this.emit_words = emit_words;
     }
 
-    public void setChest_pain(boolean chest_pain) {
+    public void setChest_pain(ChestPain chest_pain) {
         this.chest_pain = chest_pain;
     }
 
@@ -170,13 +171,14 @@ public class Person {
         this.vomit = vomit;
     }
 
-    public void setDifficulty_breathing(boolean difficulty_breathing) {
+    public void setDifficulty_breathing(DifficultyBreathing difficulty_breathing) {
         this.difficulty_breathing = difficulty_breathing;
     }
         
     public void setProtocol(int num) {
         
-        switch (num){
+        //ENUM
+        /*switch (num){
             case 1: this.protocol.add(call_112());
             case 2: this.protocol.add(perform_CPR());
             case 3: this.protocol.add(use_AED());
@@ -185,7 +187,8 @@ public class Person {
             case 6: this.protocol.add(apply_pressure());
             case 7: this.protocol.add(protect_PAR());
             case 8: this.protocol.add(rescue_PAR);
-        }		
+        }	
+        */
         
 	}
     @Override

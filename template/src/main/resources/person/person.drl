@@ -17,22 +17,21 @@
 package person;
 import pojos.Person;
 
-unit OperationUnit;
+unit PersonUnit;
 
 //CHANGE NAMES
-rule "Emergency Response 1"
+rule "Cardiorespiratory arrest"
     dialect "java"
     when
         $person : /people[conscious == false,
                     breathing == false,
-                    bleeding == Bleeding.NO ||== Bleeding.A_LITTLE,//multi-restriction?????
+                    bleeding == Bleeding.NO || bleeding== Bleeding.A_LITTLE,//multi-restriction
                     electric_shock == false,
                     major_trauma == false,
                     seizures== false]
-    then
-        $person.setProtocol(1);
-        $person.setProtocol(2);
-        $person.setProtocol(3);
+    then 
+        modify($person) {setProtocol(PROTOCOLS_MAP.get(Type.CARDIO_ARREST))};
+//cómo acceder a PROTOCOLS_MAP desde PersonUnit como Unauth... add()
 end
 
 rule "Emergency Response 2"
