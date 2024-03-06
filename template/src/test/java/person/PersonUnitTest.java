@@ -24,6 +24,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Before;
 import pojos.Bleeding;
+import pojos.Protocol;
+import static pojos.Protocol.PROTOCOLS_MAP;
+import pojos.Protocol.ProtocolType;
 
 /**
  *
@@ -66,11 +69,26 @@ public class PersonUnitTest {
         try {
             LOG.info("Run query to find cardiorespiratory arrests. Rules are also fired");
             instance.fire();
-            List<Person> cardiorespirarotyArrest = instance.executeQuery("FindAuthorizedOperations").toList("$people");
-            //??assertEquals(1, authorizedOperations.size());
-            //??assertEquals(op3, authorizedOperations.get(0));
+            List<Person> cardiorespiratoryArrest = instance.executeQuery("FindMedicalEmergencies").toList("$p");
+            assertEquals(1, cardiorespiratoryArrest.size());
+            assertTrue("contains protocol1", cardiorespiratoryArrest.get(0).getProtocol().equals(PROTOCOLS_MAP.get(ProtocolType.CARDIO_ARREST)));
         } finally {
             instance.close();
         }
     }
 }
+    /*public void testCardiorespiratoryArrest() {
+        try {
+            LOG.info("Run query to find cardiorespiratory arrests. Rules are also fired");
+            instance.fire();
+            List<Person> cardiorespirarotyArrest = instance.executeQuery("FindMedicalEmergencies").toList("$p");
+            assertEquals(1, cardiorespirarotyArrest.size());
+            System.out.println(queryResult);
+            assertTrue("contains protocol1", personUnit.getPeople().;
+            //??assertEquals(1, authorizedOperations.size());
+            //??assertEquals(op3, authorizedOperations.get(0));
+        } finally {
+            instance.close();
+        }
+    }*/
+
