@@ -4,8 +4,8 @@
  */
 package pojos;
 
-import java.util.ArrayList;
-import java.util.List;
+import static pojos.Protocol.PROTOCOLS_MAP;
+import pojos.Protocol.ProtocolType;
 
 /**
  *
@@ -28,6 +28,8 @@ public class Person {
     private boolean vomit; // boolean
     private DifficultyBreathing difficulty_breathing; // enum
     private Protocol protocol;
+    
+    //TODO LATER (POSSIBLE ADDITIONAL FUNCTIONALITY)
     //public static enum Urgency {URGENT,MEDIUM,MINOR};??
    // private Urgency urgency;
    //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
@@ -48,14 +50,26 @@ public class Person {
         this.car_accident = car_accident;
         this.vomit = vomit;
         this.difficulty_breathing = difficulty_breathing;
-       
         
-        //this.protocol
+        this.protocol=PROTOCOLS_MAP.get(ProtocolType.NOEMERGENCYFOUND);
+    }
+    
+    //EMERGENCY RESPONSE CARDIORESPIRATORY_ARREST
+    public Person(boolean conscious, boolean breathing, Bleeding bleeding,boolean electric_shock, 
+            boolean major_trauma, boolean seizure) {
+        this.conscious = conscious;
+        this.breathing = breathing;
+        this.bleeding = bleeding;
+        this.seizure = seizure;
+        this.electric_shock = electric_shock;
+        this.major_trauma = major_trauma;
+        
+        this.protocol=PROTOCOLS_MAP.get(ProtocolType.NOEMERGENCYFOUND);
     }
 
     /*
-    public void setUrgency(Urgency protocolType){
-        this.protocolType= protocolType;
+    public void setUrgency(Urgency urgency){
+        this.urgency= urgency;
     }
     */
     
@@ -111,11 +125,11 @@ public class Person {
         return vomit;
     }
 
-    public boolean isDifficulty_breathing() {
+    public DifficultyBreathing isDifficulty_breathing() {
         return difficulty_breathing;
     }
 
-    public List<String> getProtocol() {
+    public Protocol getProtocol() {
         return protocol;
     }
 
@@ -175,22 +189,10 @@ public class Person {
         this.difficulty_breathing = difficulty_breathing;
     }
         
-    public void setProtocol(int num) {
-        
-        //ENUM
-        /*switch (num){
-            case 1: this.protocol.add(call_112());
-            case 2: this.protocol.add(perform_CPR());
-            case 3: this.protocol.add(use_AED());
-            case 4: this.protocol.add(burns_procedure());//"Turn off power source, do not cover the burnts
-            case 5: this.protocol.add(donot_move());
-            case 6: this.protocol.add(apply_pressure());
-            case 7: this.protocol.add(protect_PAR());
-            case 8: this.protocol.add(rescue_PAR);
-        }	
-        */
-        
-	}
+    public void setProtocol(Protocol protocol) {
+        this.protocol=protocol;
+    }
+    
     @Override
     public String toString() {
         return "Person [conscious=" + conscious + ", dizzy=" + dizzy + ", breathing=" + breathing

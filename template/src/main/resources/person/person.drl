@@ -25,12 +25,12 @@ rule "Cardiorespiratory arrest"
     when
         $person : /people[conscious == false,
                     breathing == false,
-                    bleeding == Bleeding.NO || bleeding== Bleeding.A_LITTLE,//multi-restriction
+                    bleeding == Bleeding.NO || bleeding== Bleeding.A_LITTLE,
                     electric_shock == false,
                     major_trauma == false,
                     seizures== false]
     then 
-        modify($person) {setProtocol(PROTOCOLS_MAP.get(Type.CARDIO_ARREST))};
+        modify($person) {setProtocol(PROTOCOLS_MAP.get(ProtocolType.CARDIO_ARREST))};
 //cómo acceder a PROTOCOLS_MAP desde PersonUnit como Unauth... add()
 end
 

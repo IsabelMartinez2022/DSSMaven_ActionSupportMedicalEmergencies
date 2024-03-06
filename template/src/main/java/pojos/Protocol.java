@@ -16,27 +16,29 @@ import java.util.Map;
  */
 public class Protocol {
     private int id;
-    public static enum Type {NOEMERGENCYFOUND, CARDIO_ARREST};
-    private Type protocolType;
+    public static enum ProtocolType {NOEMERGENCYFOUND, CARDIO_ARREST};
+    private ProtocolType protocolType;
     private List<Action> actions;
     
-    public Protocol(Type protocolType, List<Action> actions){
+    public Protocol(ProtocolType protocolType, List<Action> actions){
         this.protocolType=protocolType;
         this.actions= actions;
 }
     
     // Map ENUMNOMBREPROTOCOL-PROTOCOL // TODO CHECK UNMODIFIABLE
-    //OPTION1 
-    
  
-    public static final Map<Type, Protocol>PROTOCOLS_MAP=new HashMap();
+    public static final Map<ProtocolType, Protocol> PROTOCOLS_MAP =new HashMap();
     static {
-        // añadir acciones al protocolo
+        
+        // OR ARRAYLIST???
         List<Action> actions = new LinkedList();
         
-        actions.add(new Action("whatever"));
-        Protocol protocol1 = new Protocol(Type.CARDIO_ARREST,actions);
-        PROTOCOLS_MAP.put(Type.CARDIO_ARREST, protocol1);
+        //EMERGENCY RESPONSE CARDIORESPIRATORY ARREST
+        actions.add(Action.call_112());
+        actions.add(Action.perform_CPR());
+        actions.add(Action.use_AED());
+        Protocol protocol1 = new Protocol(ProtocolType.CARDIO_ARREST,actions);
+        PROTOCOLS_MAP.put(ProtocolType.CARDIO_ARREST, protocol1);
     }
     
 

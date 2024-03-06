@@ -13,24 +13,26 @@ public class Action {
     private final String instruction;
     //Many to many relationship with Protocols
     
-    /*
-    public Action(Type protocolType){
-        this.instruction= setAction(protocolType);
-    }
-   */
-    
     public Action(String instruction){
         this.instruction= instruction;
     }
-    //getter enum
-
+    
+    /* TODO???? I
+    
+    Instead of static factory methods, MAP ENUM-STRING/LIST (Alberto's idea)
+    
+    public Action(Type protocolType){
+        this.instruction= setAction(protocolType);
+    }
+   
+    + getter enum
+    */
     
     public static Action call_112(){
         String info= "";
         return new Action(info);
     }
     
-    //MAP ENUM-STRING/LIST
     public static Action perform_CPR(){
        String info= "";
         return new Action(info);
@@ -57,11 +59,13 @@ public class Action {
         return new Action(info);
    }
    
+   //Proteger from Spanish PAS rule
    public static Action protect_PAR(){
         String info= "";
         return new Action(info);
    }
    
+   //Socorrer from Spanish PAS rule
    public static Action rescue_PAR(){
         String info= "";
         return new Action(info);
