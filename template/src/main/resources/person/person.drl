@@ -30,8 +30,9 @@ rule "Cardiorespiratory arrest"
                     major_trauma == false,
                     seizures== false]
     then 
-        modify($person) {setProtocol(PROTOCOLS_MAP.get(ProtocolType.CARDIO_ARREST))};
+        modify($person) {setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIO_ARREST))};
 //cómo acceder a PROTOCOLS_MAP desde PersonUnit como Unauth... add()
+//OJO, el protocolo es ESTATICO y YA ESTA DEFINIDO, no hay que añadirle nada solo ver qué tiene 
 end
 
 rule "Emergency Response 2"

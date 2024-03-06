@@ -13,18 +13,18 @@ import pojos.Person;
 
 public class ActionSupportMedicalEmergencies {
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         System.out.println("prueba");
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
 
         execute(kc);
-    }
-
+    }*/
+/*
     public static void execute(KieContainer kc) {
         KieSession ksession = kc.newKieSession("MedicalEmergencyKS");
         Person p = new Person();
-        assignUrgency(p);
+        //assignUrgency(p);
         ksession.insert(p);
         /*Person p1 = new Person(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false); //primera rama empezando por derecha
         Person p2 = new Person(false, false, false, false, false, false, false, false, false, false, false, false, false, false, true);
@@ -72,12 +72,12 @@ public class ActionSupportMedicalEmergencies {
         ksession.insert(p20);
         ksession.insert(p21);
         ksession.insert(p22);
-        ksession.insert(p23);*/
+        ksession.insert(p23);
         
         ksession.fireAllRules();
         ksession.dispose();
-    }
-    
+    }*/
+    /*
     public static void assignUrgency(Person p){
         Scanner scanner = new Scanner(System.in);
         System.out.println("It is conscious?");
@@ -141,5 +141,5 @@ public class ActionSupportMedicalEmergencies {
                 p.setVomit(seizuresAnswer);
             }
         }
-    }
+    }*/
 }

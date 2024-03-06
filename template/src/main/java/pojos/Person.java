@@ -67,6 +67,10 @@ public class Person {
         this.protocol=PROTOCOLS_MAP.get(ProtocolType.NOEMERGENCYFOUND);
     }
 
+    public Person() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     /*
     public void setUrgency(Urgency urgency){
         this.urgency= urgency;
@@ -130,7 +134,7 @@ public class Person {
     }
 
     public Protocol getProtocol() {
-        return protocol;
+        return this.protocol;
     }
 
     public void setConscious(boolean conscious) {

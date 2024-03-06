@@ -23,7 +23,15 @@ public class Protocol {
     public Protocol(ProtocolType protocolType, List<Action> actions){
         this.protocolType=protocolType;
         this.actions= actions;
-}
+    }
+    
+    public ProtocolType getProtocolType() {
+        return protocolType;
+    }
+
+    public List<Action> getActions() {
+        return actions;
+    }
     
     // Map ENUMNOMBREPROTOCOL-PROTOCOL // TODO CHECK UNMODIFIABLE
  
