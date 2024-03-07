@@ -15,14 +15,12 @@
  */
 
 package pojos;
+unit PersonUnit; // Correct syntax for unit declaration
 
-unit PersonUnit;
 //CHANGE NAMES
 rule "Cardiorespiratory arrest"
-    dialect "java"
     when
-        $person : /people[conscious == false,
-                    breathing == false]
+        $person : /people[conscious == false,breathing == false,bleeding== Bleeding.A_LITTLE]
     then 
         System.out.println("whatever");
 //cómo acceder a PROTOCOLS_MAP desde PersonUnit como Unauth... add()

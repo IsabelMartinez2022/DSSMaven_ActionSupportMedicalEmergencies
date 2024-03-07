@@ -8,6 +8,4 @@ package pojos;
  *
  * @author isama
  */
-public enum Bleeding {
-    A_LOT, A_LITTLE, NO;
-}
+public enum Bleeding {A_LOT, A_LITTLE, NO}
