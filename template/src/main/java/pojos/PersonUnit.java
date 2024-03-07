@@ -9,7 +9,7 @@ import org.drools.ruleunits.api.DataSource;
 import org.drools.ruleunits.api.DataStore;
 import org.drools.ruleunits.api.RuleUnitData;
 import pojos.Person;
-import pojos.Protocol.ProtocolType;
+import pojos.ProtocolType;
 
 public class PersonUnit implements RuleUnitData {
 

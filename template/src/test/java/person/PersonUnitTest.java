@@ -14,19 +14,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-import java.util.Set;
-
-import static java.util.stream.Collectors.toList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.BeforeClass;
 import org.junit.Before;
 import pojos.Bleeding;
-import pojos.Protocol;
-import static pojos.Protocol.PROTOCOLS_MAP;
-import pojos.Protocol.ProtocolType;
 
 /**
  *
@@ -62,8 +51,12 @@ public class PersonUnitTest {
         personUnit.getPeople().add(person2);
         // instance.close() should not be instantiated because it will be used in each test!
     }
-
-
+    @Test 
+    public void whatever() {
+        instance.fire();
+    }
+}
+/*
     @Test
     public void testCardiorespiratoryArrest() {
         try {

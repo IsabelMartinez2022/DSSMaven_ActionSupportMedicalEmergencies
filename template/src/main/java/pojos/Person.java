@@ -5,7 +5,7 @@
 package pojos;
 
 import static pojos.Protocol.PROTOCOLS_MAP;
-import pojos.Protocol.ProtocolType;
+import pojos.ProtocolType;
 
 /**
  *

@@ -16,7 +16,6 @@ import java.util.Map;
  */
 public class Protocol {
     private int id;
-    public static enum ProtocolType {NOEMERGENCYFOUND, CARDIO_ARREST};
     private ProtocolType protocolType;
     private List<Action> actions;
     
