@@ -16,6 +16,8 @@ public class PersonUnit implements RuleUnitData {
    private final DataStore<Person> people;
    private final Map<ProtocolType,Protocol> protocols;
    
+    private final Set<Person> cardiorespiratoryArrestpeople; //will contain person with this emergency. Adding from rules
+   
    private String testString;
 
     public PersonUnit() {
@@ -25,6 +27,7 @@ public class PersonUnit implements RuleUnitData {
     public PersonUnit(DataStore<Person> people) {
         this.people = people;
         this.protocols=new HashMap(); 
+        this.cardiorespiratoryArrestpeople= new HashSet<>();
     }
 
     public DataStore<Person> getPeople  () {
@@ -35,6 +38,9 @@ public class PersonUnit implements RuleUnitData {
         return this.protocols;
     }
     
+    public Set<Person> getCardiorespiratoryArrestpeople() {
+        return this.cardiorespiratoryArrestpeople;
+    }
     
     public String getTestString() {
         return testString;

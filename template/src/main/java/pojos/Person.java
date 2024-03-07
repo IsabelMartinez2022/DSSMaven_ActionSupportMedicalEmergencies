@@ -89,7 +89,7 @@ public class Person {
         return breathing;
     }
 
-    public Bleeding isBleeding() {
+    public Bleeding getBleeding() {
         return bleeding;
     }
 

@@ -4,11 +4,14 @@
  */
 package person;
 
+import java.util.Set;
 import pojos.Person;
 import pojos.PersonUnit;
 
 import org.drools.ruleunits.api.RuleUnitProvider;
 import org.drools.ruleunits.api.RuleUnitInstance;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -51,37 +54,27 @@ public class PersonUnitTest {
         personUnit.getPeople().add(person2);
         // instance.close() should not be instantiated because it will be used in each test!
     }
+    
+    /*
     @Test 
     public void whatever() {
         instance.fire();
     }
-}
-/*
+    */
+
     @Test
     public void testCardiorespiratoryArrest() {
         try {
             LOG.info("Run query to find cardiorespiratory arrests. Rules are also fired");
             instance.fire();
-            List<Person> cardiorespiratoryArrest = instance.executeQuery("FindMedicalEmergencies").toList("$p");
+            Set<Person> cardiorespiratoryArrest = personUnit.getCardiorespiratoryArrestpeople();
             assertEquals(1, cardiorespiratoryArrest.size());
-            assertTrue("contains protocol1", cardiorespiratoryArrest.get(0).getProtocol().equals(PROTOCOLS_MAP.get(ProtocolType.CARDIO_ARREST)));
+            assertTrue(cardiorespiratoryArrest.contains(person1));
+            //assertTrue("contains protocol1", cardiorespiratoryArrest.get(0).getProtocol().equals(PROTOCOLS_MAP.get(ProtocolType.CARDIO_ARREST)));
+        
+            System.out.println(personUnit.getTestString());
         } finally {
             instance.close();
         }
-    }
+    }  
 }
-    /*public void testCardiorespiratoryArrest() {
-        try {
-            LOG.info("Run query to find cardiorespiratory arrests. Rules are also fired");
-            instance.fire();
-            List<Person> cardiorespirarotyArrest = instance.executeQuery("FindMedicalEmergencies").toList("$p");
-            assertEquals(1, cardiorespirarotyArrest.size());
-            System.out.println(queryResult);
-            assertTrue("contains protocol1", personUnit.getPeople().;
-            //??assertEquals(1, authorizedOperations.size());
-            //??assertEquals(op3, authorizedOperations.get(0));
-        } finally {
-            instance.close();
-        }
-    }*/
-
