@@ -30,6 +30,4 @@ dialect "java"
     then 
         modify($person) {setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIO_ARREST))}
         cardiorespiratoryArrestpeople.add($person);
-//cómo acceder a PROTOCOLS_MAP desde PersonUnit como Unauth... add()
-//OJO, el protocolo es ESTATICO y YA ESTA DEFINIDO, no hay que añadirle nada solo ver qué tiene 
 end

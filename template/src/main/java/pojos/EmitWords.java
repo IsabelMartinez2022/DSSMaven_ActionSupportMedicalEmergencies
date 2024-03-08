@@ -8,6 +8,4 @@ package pojos;
  *
  * @author marty
  */
-public enum EmitWords {
-    
-}
+public enum EmitWords {SOME, FEW, NONE};

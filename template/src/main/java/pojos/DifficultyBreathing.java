@@ -8,6 +8,4 @@ package pojos;
  *
  * @author marty
  */
-public enum DifficultyBreathing {
-    
-}
+public enum DifficultyBreathing {MEDIUM, A_LITTLE}

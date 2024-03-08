@@ -11,6 +11,7 @@ import pojos.PersonUnit;
 import org.drools.ruleunits.api.RuleUnitProvider;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -56,13 +57,13 @@ public class PersonUnitTest {
     }
     
     /*
-    @Test 
+    @Test Prueba Alberto
     public void whatever() {
         instance.fire();
     }
     */
-
-    @Test
+/*
+    @Test Prueba Isabel
     public void testCardiorespiratoryArrest() {
         try {
             LOG.info("Run query to find cardiorespiratory arrests. Rules are also fired");
@@ -77,4 +78,54 @@ public class PersonUnitTest {
             instance.close();
         }
     }  
+    */
+    /*@Test Prueba1 Martina
+    public void testCardiorespiratoryArrest() {
+        try {
+            LOG.info("Run query to find cardiorespiratory arrests. Rules are also fired");
+            instance.fire();
+            Set<Person> cardiorespiratoryArrest = personUnit.getCardiorespiratoryArrestpeople();
+            assertEquals(1, cardiorespiratoryArrest.size());
+            assertTrue(cardiorespiratoryArrest.contains(person1));
+            
+            // Realizar aserciones basadas en el contenido de person1
+            assertFalse(person1.isConscious()); 
+            assertFalse(person1.isBreathing());
+            assertEquals(Bleeding.NO, person1.getBleeding());
+            assertFalse(person1.isElectric_shock()); 
+            assertFalse(person1.isMajor_trauma());
+            assertFalse(person1.isSeizure()); 
+
+            // Finalmente, imprimir la cadena de prueba (testString)
+            System.out.println(personUnit.getTestString());
+        } finally {
+            instance.close();
+        }
+    }*/
+    
+        @Test
+        public void testCardiorespiratoryArrest() {
+        try {
+            LOG.info("Running query to find cardiorespiratory arrests. Rules are also fired");
+            instance.fire();
+
+            // Verificar que hay al menos una persona en paro cardiorrespiratorio
+            Set<Person> cardiorespiratoryArrest = personUnit.getCardiorespiratoryArrestpeople();
+            assertTrue("Expected at least one person in cardiorespiratory arrest", !cardiorespiratoryArrest.isEmpty());
+
+            // Realizar aserciones basadas en el contenido de person1 (primer elemento en cardiorespiratoryArrest)
+            Person person1 = cardiorespiratoryArrest.iterator().next();
+            assertFalse(person1.isConscious()); 
+            assertFalse(person1.isBreathing());
+            assertEquals(Bleeding.NO, person1.getBleeding());
+            assertFalse(person1.isElectric_shock()); 
+            assertFalse(person1.isMajor_trauma());
+            assertFalse(person1.isSeizure()); 
+
+            // Finalmente, imprimir la cadena de prueba (testString)
+            System.out.println(personUnit.getTestString());
+        } finally {
+            instance.close();
+        }
+    }
 }

@@ -8,6 +8,5 @@ package pojos;
  *
  * @author marty
  */
-public enum Dizzy {
-    
-}
+public enum Dizzy {A_LOT,MEDIUM, A_LITTLE}
+
