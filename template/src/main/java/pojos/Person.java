@@ -77,15 +77,15 @@ public class Person {
     }
     */
     
-    public boolean isConscious() {
+    public boolean getConscious() {
         return conscious;
     }
 
-    public Dizzy isDizzy() {
+    public Dizzy getDizzy() {
         return dizzy;
     }
 
-    public boolean isBreathing() {
+    public boolean getBreathing() {
         return breathing;
     }
 
@@ -93,43 +93,43 @@ public class Person {
         return bleeding;
     }
 
-    public EmitWords isEmit_words() {
+    public EmitWords getEmit_words() {
         return emit_words;
     }
 
-    public ChestPain isChest_pain() {
+    public ChestPain getChest_pain() {
         return chest_pain;
     }
 
-    public boolean isCough() {
+    public boolean getCough() {
         return cough;
     }
 
-    public boolean isSeizure() {
+    public boolean getSeizure() {
         return seizure;
     }
 
-    public boolean isPossible_poisoning() {
+    public boolean getPossible_poisoning() {
         return possible_poisoning;
     }
 
-    public boolean isElectric_shock() {
+    public boolean getElectric_shock() {
         return electric_shock;
     }
 
-    public boolean isMajor_trauma() {
+    public boolean getMajor_trauma() {
         return major_trauma;
     }
 
-    public boolean isCar_accident() {
+    public boolean getCar_accident() {
         return car_accident;
     }
 
-    public boolean isVomit() {
+    public boolean getVomit() {
         return vomit;
     }
 
-    public DifficultyBreathing isDifficulty_breathing() {
+    public DifficultyBreathing getDifficulty_breathing() {
         return difficulty_breathing;
     }
 

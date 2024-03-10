@@ -115,12 +115,12 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person1 (primer elemento en cardiorespiratoryArrest)
             Person person1 = cardiorespiratoryArrest.iterator().next();
-            assertFalse(person1.isConscious()); 
-            assertFalse(person1.isBreathing());
+            assertFalse(person1.getConscious()); 
+            assertFalse(person1.getBreathing());
             assertEquals(Bleeding.NO, person1.getBleeding());
-            assertFalse(person1.isElectric_shock()); 
-            assertFalse(person1.isMajor_trauma());
-            assertFalse(person1.isSeizure()); 
+            assertFalse(person1.getElectric_shock()); 
+            assertFalse(person1.getMajor_trauma());
+            assertFalse(person1.getSeizure()); 
 
             // Finalmente, imprimir la cadena de prueba (testString)
             System.out.println(personUnit.getTestString());

@@ -109,7 +109,7 @@ when
     $person : /people[conscious == true,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME || emit_words == EmitWords.NO,
+                     emit_words == EmitWords.SOME || emit_words == EmitWords.NONE,
                      cough == true]
 then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.BREATHING_PROBLEMS_CONSCIOUS)) }
@@ -121,7 +121,7 @@ when
     $person : /people[conscious == true,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.FEW_NO,
+                     emit_words == EmitWords.FEW || emit_words == EmitWords.NONE,
                      cough == false]
 then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.SEVERE_BREATHING_PROBLEMS_HEIMLICH)) }
@@ -191,8 +191,8 @@ rule "Intoxication Breathing Problems"
 when
     $person : /people[conscious == true,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
-                     difficultyBreathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME || emit_words == EmitWords.NO,
+                     difficulty_breathing == DifficultyBreathing.A_LOT,
+                     emit_words == EmitWords.SOME || emit_words == EmitWords.NONE,
                      cough == false,
                      possible_poisoning == true]
 then
@@ -204,8 +204,8 @@ rule "Allergic Reaction With Vomit"
 when
     $person : /people[conscious == true,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
-                     difficultyBreathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME || emit_words == EmitWords.NO,
+                     difficulty_breathing == DifficultyBreathing.A_LOT,
+                     emit_words == EmitWords.SOME || emit_words == EmitWords.NONE,
                      cough == false,
                      possible_poisoning == false,
                      vomit == true]
@@ -219,7 +219,7 @@ when
     $person : /people[conscious == true,
                      dizzy == Dizzy.A_LITTLE,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME || emit_words == EmitWords.NO,
+                     emit_words == EmitWords.SOME || emit_words == EmitWords.NONE,
                      cough == false,
                      possible_poisoning == false,
                      vomit == false]
