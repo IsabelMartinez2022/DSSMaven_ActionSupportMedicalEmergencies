@@ -13,14 +13,14 @@ import pojos.Person;
 
 public class ActionSupportMedicalEmergencies {
 
-   /* public static void main(String[] args) {
+    public static void main(String[] args) {
         System.out.println("prueba");
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
 
         execute(kc);
-    }*/
-/*
+    }
+
     public static void execute(KieContainer kc) {
         KieSession ksession = kc.newKieSession("MedicalEmergencyKS");
         Person p = new Person();
@@ -76,7 +76,7 @@ public class ActionSupportMedicalEmergencies {
         
         ksession.fireAllRules();
         ksession.dispose();
-    }*/
+    }
     /*
     public static void assignUrgency(Person p){
         Scanner scanner = new Scanner(System.in);
@@ -142,4 +142,5 @@ public class ActionSupportMedicalEmergencies {
             }
         }
     }*/
+}
 }

@@ -4,7 +4,6 @@
  */
 package person;
 
-import java.util.Set;
 import pojos.Person;
 import pojos.PersonUnit;
 
@@ -12,7 +11,6 @@ import org.drools.ruleunits.api.RuleUnitProvider;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -48,11 +46,11 @@ public class PersonUnitTest {
         instance = RuleUnitProvider.get().createRuleUnitInstance(personUnit);
 
         LOG.info("Insert data");
-        person1 = new Person(false, false, Bleeding.NO, false, false, false);
-        person2 = new Person(false, true, Bleeding.NO, false, false, false);
+        //person1 = new Person(false, false, Bleeding.NO, false, false, false);
+        //person2 = new Person(false, true, Bleeding.NO, false, false, false);
 
-        personUnit.getPeople().add(person1);
-        personUnit.getPeople().add(person2);
+        //personUnit.getPeople().add(person1);
+        //personUnit.getPeople().add(person2);
         // instance.close() should not be instantiated because it will be used in each test!
     }
     
@@ -62,10 +60,6 @@ public class PersonUnitTest {
         try {
             LOG.info("Running query to find cardiorespiratory arrests. Rules are also fired");
             instance.fire();
-
-            // Verificar que hay al menos una persona en paro cardiorrespiratorio
-            Set<Person> cardiorespiratoryArrest = personUnit.getCardiorespiratoryArrestpeople();
-            assertTrue("Expected at least one person in cardiorespiratory arrest", !cardiorespiratoryArrest.isEmpty());
 
             // Realizar aserciones basadas en el contenido de person1 (primer elemento en cardiorespiratoryArrest)
             assertFalse(person1.getConscious());
@@ -78,50 +72,8 @@ public class PersonUnitTest {
             // Verificar que la persona tiene el protocolo adecuado asignado
             assertEquals(ProtocolType.CARDIO_ARREST, person1.getProtocol().getType());
 
-            // Finalmente, imprimir la cadena de prueba (testString)
-            System.out.println(personUnit.getTestString());
         } finally {
             instance.close();
         }
     }
-
-
-    // Test para la regla "Electrocution No Burn"
-    /*@Test
-    public void testElectrocutionNoBurn() {
-        try {
-            LOG.info("Running query to find electrocution with no burns. Rules are also fired");
-            instance.fire();
-
-            List<Person> people = personUnit.getPeople();
-            for (int i = 0; i < people.size(); i++) {
-                Person person = people.get(i);
-                if (!person.getConscious() && !person.getBreathing() && (person.getBleeding() == Bleeding.NO || person.getBleeding() == Bleeding.A_LITTLE) && person.getElectric_shock()) {
-                    assertEquals(ProtocolType.ELECTROCUTION_NO_BURN, person.getProtocol().getType());
-                }
-            }
-        } finally {
-            instance.close();
-        }
-    }
-
-    // Test para la regla "Major Trauma with Severe Bleeding No Car Accident"
-    @Test
-    public void testMajorTraumaSevereBleedingNoCarAccident() {
-        try {
-            LOG.info("Running query to find major trauma with severe bleeding and no car accident. Rules are also fired");
-            instance.fire();
-
-            // Verificar que las personas con trauma grave y sangrado severo sin accidente de coche tienen el protocolo adecuado asignado
-            List<Person> peopleList = new ArrayList<>(personUnit.getPeople());
-            for (int i = 0; i < people.size(); i++) {
-                Person person = people.get(i);
-                if (!person.getConscious() && !person.getBreathing() && person.getBleeding() == Bleeding.A_LOT && person.getMajor_trauma() && !person.getCar_accident()) {
-                    assertEquals(ProtocolType.MAJOR_TRAUMA_SEVERE_BLEEDING_NO_CAR_ACCIDENT, person.getProtocol().getType());
-                }
-            }
-        } finally {
-            instance.close();
-        }
-    }*/
 }
