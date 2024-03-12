@@ -1,6 +1,5 @@
 package pojos;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -8,11 +7,9 @@ import java.util.Set;
 import org.drools.ruleunits.api.DataSource;
 import org.drools.ruleunits.api.DataStore;
 import org.drools.ruleunits.api.RuleUnitData;
-import pojos.Person;
-import pojos.ProtocolType;
 
 public class PersonUnit implements RuleUnitData {
-
+    
     private final DataStore<Person> people;
     private final Map<ProtocolType,Protocol> protocols;
    
@@ -24,13 +21,6 @@ public class PersonUnit implements RuleUnitData {
         this(DataSource.createStore());
     }
 
-    /* COnstructor Isabel
-    public PersonUnit(DataStore<Person> people) {
-        this.people = people;
-        this.protocols=new HashMap(); 
-        this.cardiorespiratoryArrestpeople= new HashSet<>();
-        this.testString = generateTestString();
-    }*/
     public PersonUnit(DataStore<Person> people) {
         this.people = people;
         this.protocols = Protocol.PROTOCOLS_MAP; // Utilizar directamente los protocolos definidos en Protocol

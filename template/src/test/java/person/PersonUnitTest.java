@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import org.junit.Before;
 import pojos.Bleeding;
+import pojos.ProtocolType;
 
 /**
  *
@@ -41,7 +42,6 @@ public class PersonUnitTest {
      */
     @Before
     public void setUp() {
-
         LOG.info("Creating RuleUnit");
         personUnit = new PersonUnit();
 
@@ -56,55 +56,9 @@ public class PersonUnitTest {
         // instance.close() should not be instantiated because it will be used in each test!
     }
     
-    /*
-    @Test Prueba Alberto
-    public void whatever() {
-        instance.fire();
-    }
-    */
-/*
-    @Test Prueba Isabel
+    // Test para la regla "Cardiorrespiratory Arrest"
+    @Test
     public void testCardiorespiratoryArrest() {
-        try {
-            LOG.info("Run query to find cardiorespiratory arrests. Rules are also fired");
-            instance.fire();
-            Set<Person> cardiorespiratoryArrest = personUnit.getCardiorespiratoryArrestpeople();
-            assertEquals(1, cardiorespiratoryArrest.size());
-            assertTrue(cardiorespiratoryArrest.contains(person1));
-            //assertTrue("contains protocol1", cardiorespiratoryArrest.get(0).getProtocol().equals(PROTOCOLS_MAP.get(ProtocolType.CARDIO_ARREST)));
-        
-            System.out.println(personUnit.getTestString());
-        } finally {
-            instance.close();
-        }
-    }  
-    */
-    /*@Test Prueba1 Martina
-    public void testCardiorespiratoryArrest() {
-        try {
-            LOG.info("Run query to find cardiorespiratory arrests. Rules are also fired");
-            instance.fire();
-            Set<Person> cardiorespiratoryArrest = personUnit.getCardiorespiratoryArrestpeople();
-            assertEquals(1, cardiorespiratoryArrest.size());
-            assertTrue(cardiorespiratoryArrest.contains(person1));
-            
-            // Realizar aserciones basadas en el contenido de person1
-            assertFalse(person1.isConscious()); 
-            assertFalse(person1.isBreathing());
-            assertEquals(Bleeding.NO, person1.getBleeding());
-            assertFalse(person1.isElectric_shock()); 
-            assertFalse(person1.isMajor_trauma());
-            assertFalse(person1.isSeizure()); 
-
-            // Finalmente, imprimir la cadena de prueba (testString)
-            System.out.println(personUnit.getTestString());
-        } finally {
-            instance.close();
-        }
-    }*/
-    
-        @Test
-        public void testCardiorespiratoryArrest() {
         try {
             LOG.info("Running query to find cardiorespiratory arrests. Rules are also fired");
             instance.fire();
@@ -114,13 +68,15 @@ public class PersonUnitTest {
             assertTrue("Expected at least one person in cardiorespiratory arrest", !cardiorespiratoryArrest.isEmpty());
 
             // Realizar aserciones basadas en el contenido de person1 (primer elemento en cardiorespiratoryArrest)
-            Person person1 = cardiorespiratoryArrest.iterator().next();
-            assertFalse(person1.getConscious()); 
+            assertFalse(person1.getConscious());
             assertFalse(person1.getBreathing());
             assertEquals(Bleeding.NO, person1.getBleeding());
-            assertFalse(person1.getElectric_shock()); 
+            assertFalse(person1.getElectric_shock());
             assertFalse(person1.getMajor_trauma());
-            assertFalse(person1.getSeizure()); 
+            assertFalse(person1.getSeizure());
+
+            // Verificar que la persona tiene el protocolo adecuado asignado
+            assertEquals(ProtocolType.CARDIO_ARREST, person1.getProtocol().getType());
 
             // Finalmente, imprimir la cadena de prueba (testString)
             System.out.println(personUnit.getTestString());
@@ -128,4 +84,44 @@ public class PersonUnitTest {
             instance.close();
         }
     }
+
+
+    // Test para la regla "Electrocution No Burn"
+    /*@Test
+    public void testElectrocutionNoBurn() {
+        try {
+            LOG.info("Running query to find electrocution with no burns. Rules are also fired");
+            instance.fire();
+
+            List<Person> people = personUnit.getPeople();
+            for (int i = 0; i < people.size(); i++) {
+                Person person = people.get(i);
+                if (!person.getConscious() && !person.getBreathing() && (person.getBleeding() == Bleeding.NO || person.getBleeding() == Bleeding.A_LITTLE) && person.getElectric_shock()) {
+                    assertEquals(ProtocolType.ELECTROCUTION_NO_BURN, person.getProtocol().getType());
+                }
+            }
+        } finally {
+            instance.close();
+        }
+    }
+
+    // Test para la regla "Major Trauma with Severe Bleeding No Car Accident"
+    @Test
+    public void testMajorTraumaSevereBleedingNoCarAccident() {
+        try {
+            LOG.info("Running query to find major trauma with severe bleeding and no car accident. Rules are also fired");
+            instance.fire();
+
+            // Verificar que las personas con trauma grave y sangrado severo sin accidente de coche tienen el protocolo adecuado asignado
+            List<Person> peopleList = new ArrayList<>(personUnit.getPeople());
+            for (int i = 0; i < people.size(); i++) {
+                Person person = people.get(i);
+                if (!person.getConscious() && !person.getBreathing() && person.getBleeding() == Bleeding.A_LOT && person.getMajor_trauma() && !person.getCar_accident()) {
+                    assertEquals(ProtocolType.MAJOR_TRAUMA_SEVERE_BLEEDING_NO_CAR_ACCIDENT, person.getProtocol().getType());
+                }
+            }
+        } finally {
+            instance.close();
+        }
+    }*/
 }

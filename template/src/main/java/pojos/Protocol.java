@@ -4,49 +4,54 @@
  */
 package pojos;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * @author maria
- */
 public class Protocol {
     private int id;
-    private ProtocolType protocolType;
+    public static final Map<ProtocolType, Protocol> PROTOCOLS_MAP = new HashMap<>();
+
+    private ProtocolType type;
     private List<Action> actions;
-    
-    public Protocol(ProtocolType protocolType, List<Action> actions){
-        this.protocolType=protocolType;
-        this.actions= actions;
+
+    public Protocol(ProtocolType type, List<Action> actions) {
+        this.type = type;
+        this.actions = actions;
     }
-    
-    public ProtocolType getProtocolType() {
-        return protocolType;
+
+    public ProtocolType getType() {
+        return type;
     }
 
     public List<Action> getActions() {
         return actions;
     }
-    
-    // Map ENUMNOMBREPROTOCOL-PROTOCOL // TODO CHECK UNMODIFIABLE
- 
-    public static final Map<ProtocolType, Protocol> PROTOCOLS_MAP =new HashMap();
+
     static {
-        
-        // OR ARRAYLIST???
-        List<Action> actions = new LinkedList();
-        
-        //EMERGENCY RESPONSE CARDIORESPIRATORY ARREST
-        actions.add(Action.call_112());
-        actions.add(Action.perform_CPR());
-        actions.add(Action.use_AED());
-        Protocol protocol1 = new Protocol(ProtocolType.CARDIO_ARREST,actions);
-        PROTOCOLS_MAP.put(ProtocolType.CARDIO_ARREST, protocol1);
+        List<Action> cardioArrestActions = new LinkedList<>();
+        cardioArrestActions.add(new Action(ActionType.CALL_112));
+        cardioArrestActions.add(new Action(ActionType.PERFORM_CPR));
+        cardioArrestActions.add(new Action(ActionType.USE_AED));
+        Protocol cardioArrestProtocol = new Protocol(ProtocolType.CARDIO_ARREST, cardioArrestActions);
+        PROTOCOLS_MAP.put(ProtocolType.CARDIO_ARREST, cardioArrestProtocol);
+
+        List<Action> electrocutionActions = new LinkedList<>();
+        electrocutionActions.add(new Action(ActionType.BURNS_PROCEDURE));
+        electrocutionActions.add(new Action(ActionType.CALL_112));
+        electrocutionActions.add(new Action(ActionType.PERFORM_CPR));
+        electrocutionActions.add(new Action(ActionType.USE_AED));
+        Protocol electrocutionProtocol = new Protocol(ProtocolType.ELECTROCUTION_NO_BURN, electrocutionActions);
+        PROTOCOLS_MAP.put(ProtocolType.ELECTROCUTION_NO_BURN, electrocutionProtocol);
+
+        List<Action> majorTraumaActions = new LinkedList<>();
+        majorTraumaActions.add(new Action(ActionType.CALL_112));
+        majorTraumaActions.add(new Action(ActionType.DO_NOT_MOVE));
+        majorTraumaActions.add(new Action(ActionType.PERFORM_CPR));
+        majorTraumaActions.add(new Action(ActionType.USE_AED));
+        Protocol majorTraumaProtocol = new Protocol(ProtocolType.MAJOR_TRAUMA_SEVERE_BLEEDING_NO_CAR_ACCIDENT, majorTraumaActions);
+        PROTOCOLS_MAP.put(ProtocolType.MAJOR_TRAUMA_SEVERE_BLEEDING_NO_CAR_ACCIDENT, majorTraumaProtocol);
     }
     
-
 }
