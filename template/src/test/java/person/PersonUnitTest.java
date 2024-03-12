@@ -70,7 +70,7 @@ public class PersonUnitTest {
             assertFalse(person1.getSeizure());
 
             // Verificar que la persona tiene el protocolo adecuado asignado
-            assertEquals(ProtocolType.CARDIO_ARREST, person1.getProtocol().getType());
+            assertEquals(ProtocolType.CARDIOARREST, person1.getProtocol().getType());
 
         } finally {
             instance.close();
