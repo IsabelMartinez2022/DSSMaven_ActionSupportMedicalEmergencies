@@ -17,7 +17,7 @@
 package pojos;
 unit PersonUnit; 
 
-//CHANGE NAMES
+// Rule 1
 rule "Cardiorespiratory arrest"
 dialect "java"
     when
@@ -57,7 +57,7 @@ then
 end
 
 // Rule 4
-rule "Cardiorespiratory arrest with major trauma but no car accident and bleeding"
+rule "Cardiorespiratory arrest and bleeding"
 when
     $person : /people[conscious == false,
                      breathing == false,
@@ -93,7 +93,7 @@ then
 end
 
 // Rule 7
-rule "Cardiorespiratory arrest with major trauma by car accident and bleeding"
+rule "Cardiorespiratory arrest by car accident and bleeding"
 when
     $person : /people[conscious == false,
                      breathing == false,
@@ -107,6 +107,7 @@ end
 rule "Choking: partial airway blockage"
 when
     $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
                      emit_words == EmitWords.SOME,
@@ -119,6 +120,7 @@ end
 rule "Choking: total airway blockage"
 when
     $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
                      emit_words == EmitWords.FEW || emit_words == EmitWords.NONE]
@@ -126,10 +128,17 @@ then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.TOTAL_CHOKING)) }
 end
 
-// Rules 10 is unspecified, so skipping to Rule 11
+// Rule 10
+rule "Heart attack"
+when
+    $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LOT]
+then
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.HEART_ATTACK)) }
+end
 
 // Rule 11
-rule "Conscious Breathing No Major Trauma Legs Up"
+rule "Fainting and no vomit"
 when
     $person : /people[conscious == false,
                      breathing == true,
@@ -137,11 +146,11 @@ when
                      major_trauma == false,
                      vomit == false]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CONS_BREATHING_NO_MAJ_TRAUMA_LEGS_UP)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.FAINTING)) }
 end
 
 // Rule 12
-rule "Conscious Breathing No Major Trauma Recovery Position"
+rule "Fainting and vomit"
 when
     $person : /people[conscious == false,
                      breathing == true,
@@ -149,31 +158,33 @@ when
                      major_trauma == false,
                      vomit == true]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CONS_BREATHING_NO_MAJ_TRAUMA_RECOVERY_POS)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.FAINTING_VOMIT)) }
 end
 
 // Rule 13
-rule "Dizziness Lay Down"
+rule "Dizziness"
 when
     $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LOT,
                      bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.DIZZINESS_LAY_DOWN)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.DIZZINESS)) }
 end
 
 // Rule 14
-rule "Conscious Severe Bleeding Pressure"
+rule "Severe bleeding while conscious"
 when
     $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LOT,
                      bleeding == Bleeding.A_LOT]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CONS_SEVERE_BLEEDING_PRESSURE)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CONS_SEVERE_BLEEDING)) }
 end
 
 // Rule 15
-rule "Seizure No Breathing"
+rule "Seizure"
 when
     $person : /people[conscious == false,
                      breathing == false,
@@ -182,64 +193,81 @@ when
                      major_trauma == false,
                      seizure == true]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.SEIZURE_NO_BREATHING)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.SEIZURE)) }
 end
 
 // Rule 16
-rule "Intoxication Breathing Problems"
+rule "Poisoning"
 when
     $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
                      emit_words == EmitWords.SOME,
                      cough == false,
                      possible_poisoning == true]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.INTOXICATION_BREATHING_PROBLEMS)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.POISONING)) }
 end
 
 // Rule 17
-rule "Allergic Reaction With Vomit"
+rule "Anaphylaxis without vomit"
 when
     $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME || emit_words == EmitWords.NONE,
-                     cough == false,
-                     possible_poisoning == false,
-                     vomit == true]
-then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.ALLERGIC_REACTION_WITH_VOMIT)) }
-end
-
-// Rule 18
-rule "Allergic Reaction Without Vomit"
-when
-    $person : /people[conscious == true,
-                     dizzy == Dizzy.A_LITTLE,
-                     difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME || emit_words == EmitWords.NONE,
+                     emit_words == EmitWords.SOME,
                      cough == false,
                      possible_poisoning == false,
                      vomit == false]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.ALLERGIC_REACTION_WITHOUT_VOMIT)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.ANAPHYLAXIS)) }
 end
 
-// Rules 19, 20 unspecified, so skipping to Rule 21
 
-// Rule 21
-rule "Dizzy With Breathing Problems"
+// Rule 18
+rule "Anaphylaxis with vomit"
 when
     $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
-                     difficulty_breathing == DifficultyBreathing.A_LITTLE || difficulty_breathing == DifficultyBreathing.NO]
+                     difficulty_breathing == DifficultyBreathing.A_LOT,
+                     emit_words == EmitWords.SOME,
+                     cough == false,
+                     possible_poisoning == false,
+                     vomit == true]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.DIZZY_WITH_BREATHING_PROBLEMS)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.ANAPHYLAXIS_VOMIT)) }
 end
 
-// Rule 26
-rule "Conscious Breathing No Bleeding Major Trauma No Car Accident"
+
+// Rule 19
+rule "Stroke"
+when
+    $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
+                     dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
+                     difficulty_breathing == DifficultyBreathing.A_LITTLE || difficulty_breathing == DifficultyBreathing.NO,
+                     communication_problems == true]
+then
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.STROKE)) }
+end
+
+// Rule 20
+rule "No medical emergency found"
+when
+    $person : /people[conscious == true,
+                     chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
+                     dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
+                     difficulty_breathing == DifficultyBreathing.A_LITTLE || difficulty_breathing == DifficultyBreathing.NO,
+                     communication_problems == false]
+then
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.NOEMERGENCYFOUND)) }
+end
+
+//Rule 21
+rule "Major trauma and a little/no bleeding"
 when
     $person : /people[conscious == false,
                      breathing == true,
@@ -247,5 +275,27 @@ when
                      major_trauma == true,
                      car_accident == false]
 then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CONS_BREATHING_NO_BLEEDING_MAJOR_TRAUMA_NO_CAR)) }
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.MAJOR_TRAUMA)) }
+end
+
+// Rule 22
+rule "Major trauma and bleeding"
+when
+    $person : /people[conscious == false,
+                     breathing == true,
+                     bleeding == Bleeding.A_LOT,
+                     car_accident == false]
+then
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.MAJOR_TRAUMA_BLEEDING)) }
+end
+
+// Rule 23
+rule "Major trauma by car accident and bleeding"
+when
+    $person : /people[conscious == false,
+                     breathing == true,
+                     bleeding == Bleeding.A_LOT,
+                     car_accident == true]
+then
+    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CAR_BLEEDING)) }
 end
