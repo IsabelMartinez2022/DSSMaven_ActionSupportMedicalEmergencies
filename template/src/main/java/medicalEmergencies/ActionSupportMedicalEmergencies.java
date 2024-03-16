@@ -6,6 +6,8 @@
 package medicalEmergencies;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.drools.ruleunits.api.RuleUnit;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import org.drools.ruleunits.api.RuleUnitProvider;
@@ -23,6 +25,7 @@ import pojos.PersonUnit;
 public class ActionSupportMedicalEmergencies {
 
     public static void main(String[] args) {
+        menu();
         PersonUnit personunit = new PersonUnit();
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
         
@@ -173,69 +176,35 @@ public class ActionSupportMedicalEmergencies {
         }
         return p;
     }
-    /*
-    public static void assignUrgency(Person p){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("It is conscious?");
-        boolean consciousAnswer = scanner.nextBoolean();
-        if (consciousAnswer) {
-            p.setUrgency(Urgency.MINOR);
-            System.out.println("It is dizzy?");
-            boolean dizzyAnswer = scanner.nextBoolean();
-            p.setDizzy(dizzyAnswer);
-            System.out.println("It is bleeding?");
-            boolean bleedingAnswer = scanner.nextBoolean();
-            p.setBleeding(bleedingAnswer);
-            System.out.println("It has breathing problems?");
-            boolean breathingPAnswer = scanner.nextBoolean();
-            p.setDifficulty_breathing(breathingPAnswer);
-            System.out.println("It emit words?");
-            boolean wordsAnswer = scanner.nextBoolean();
-            p.setEmit_words(wordsAnswer);
-            System.out.println("It is trying to cough?");
-            boolean coughAnswer = scanner.nextBoolean();
-            p.setCough(coughAnswer);
-            System.out.println("It is intoxicated?");
-            boolean intoxicationAnswer = scanner.nextBoolean();
-            p.setPossible_poisoning(intoxicationAnswer);
-            System.out.println("It is vomitting?");
-            boolean vomitAnswer = scanner.nextBoolean();
-            p.setVomit(vomitAnswer);
-        } else {
-            System.out.println("It is breathing? (true/false): ");
-            boolean breathingAnswer = scanner.nextBoolean();
-            if (breathingAnswer) {
-                p.setUrgency(Urgency.MEDIUM);
-                System.out.println("It is bleeding?");
-                boolean bleeding2Answer = scanner.nextBoolean();
-                p.setBleeding(bleeding2Answer);
-                System.out.println("It is a major trauma?");
-                boolean mtAnswer = scanner.nextBoolean();
-                p.setMajor_trauma(mtAnswer);
-                System.out.println("It just had a car accident?");
-                boolean carAnswer = scanner.nextBoolean();
-                p.setCar_accident(carAnswer);
-                System.out.println("It is vomitting?");
-                boolean vomitAnswer = scanner.nextBoolean();
-                p.setVomit(vomitAnswer);
-            } else {
-                p.setUrgency(Urgency.URGENT);
-                System.out.println("It is bleeding?");
-                boolean bleeding2Answer = scanner.nextBoolean();
-                p.setBleeding(bleeding2Answer);
-                System.out.println("It is a major trauma?");
-                boolean mtAnswer = scanner.nextBoolean();
-                p.setMajor_trauma(mtAnswer);
-                System.out.println("It just had a car accident?");
-                boolean carAnswer = scanner.nextBoolean();
-                p.setCar_accident(carAnswer);
-                System.out.println("It just had an electric shock?");
-                boolean electricAnswer = scanner.nextBoolean();
-                p.setVomit(electricAnswer);
-                System.out.println("It has seizures?");
-                boolean seizuresAnswer = scanner.nextBoolean();
-                p.setVomit(seizuresAnswer);
-            }
+public static void menu() {
+    Scanner scanner = new Scanner(System.in);
+        boolean exit = false;
+        try {
+            do {
+                System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                System.out.println("@@                                                                  @@");
+                System.out.println("@@                 Welcome.                                         @@");
+                System.out.println("@@                 1. Register                                      @@");
+                System.out.println("@@                 2. Login                                         @@");
+                System.out.println("@@                 0. Exit                                          @@");
+                System.out.println("@@                                                                  @@");
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                
+                System.out.println("Select an option: ");
+                int option = scanner.nextInt();
+                switch (option) {
+                    case 1:
+                        Utilities.Auxiliar.register();
+                        break;
+                    case 2:
+                        Utilities.Auxiliar.login();
+                        break;
+                    case 0:
+                        System.exit(0);
+                }
+            } while (true);
+        } catch (Exception ex) {
+            Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }*/
+    }
 }

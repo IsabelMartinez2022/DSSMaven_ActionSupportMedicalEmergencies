@@ -28,6 +28,8 @@ public class Person {
     private Boolean vomit; // boolean
     private DifficultyBreathing difficulty_breathing; // enum
     private Protocol protocol;
+    private String username;
+    private byte[] password;
     
     //TODO LATER (POSSIBLE ADDITIONAL FUNCTIONALITY)
     //public static enum Urgency {URGENT,MEDIUM,MINOR};??
@@ -54,6 +56,24 @@ public class Person {
     public Person(){
         
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public byte[] getPassword() {
+        return password;
+    }
+
+    public void setPassword(byte[] password) {
+        this.password = password;
+    }
+    
+    
 
     public Boolean getConscious() {
         return conscious;
