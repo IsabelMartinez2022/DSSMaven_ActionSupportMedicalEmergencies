@@ -6,76 +6,164 @@
 package medicalEmergencies;
 
 import java.util.Scanner;
+import org.drools.ruleunits.api.RuleUnitInstance;
+import org.drools.ruleunits.api.RuleUnitProvider;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import pojos.Bleeding;
+import pojos.DifficultyBreathing;
+import pojos.Dizzy;
+import pojos.EmitWords;
 import pojos.Person;
+import pojos.PersonUnit;
 
 public class ActionSupportMedicalEmergencies {
 
     public static void main(String[] args) {
-        System.out.println("prueba");
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-
-        execute(kc);
+        PersonUnit personunit = new PersonUnit();
+        RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
+        
+        Person p = execute();
     }
 
-    public static void execute(KieContainer kc) {
-        KieSession ksession = kc.newKieSession("MedicalEmergencyKS");
+    public static Person execute() {
         Person p = new Person();
-        //assignUrgency(p);
-        ksession.insert(p);
-        /*Person p1 = new Person(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false); //primera rama empezando por derecha
-        Person p2 = new Person(false, false, false, false, false, false, false, false, false, false, false, false, false, false, true);
-        Person p3 = new Person(false, false, false, false, false, false, false, false, false, false, true, false, false, false, false);
-        Person p4 = new Person(false, false, false, false, false, false, false, false, false, false, true, true, false, false, false);
-        Person p5 = new Person(false, false, false, false, false, false, false, false, false, true, false, false, false, false, false);
-        Person p6 = new Person(false, false, false, true, false, false, false, false, false, false, false, false, false, false, false);
-        Person p7 = new Person(false, false, false, true, false, false, false, false, false, false, true, false, false, false, false);
-        Person p8 = new Person(false, false, false, true, false, false, false, false, false, false, true, true, false, false, false);
-        Person p9 = new Person(false, false, true, false, false, false, false, false, false, false, false, false, false, false, false);
-        Person p10 = new Person(false, false, true, false, false, false, false, false, false, false, false, false, true, false, false);
-        Person p11 = new Person(false, false, true, false, false, false, false, false, false, false, true, false, false, false, false);
-        Person p12 = new Person(false, false, true, false, false, false, false, false, false, false, true, true, false, false, false);
-        Person p13 = new Person(false, false, true, true, false, false, false, false, false, false, false, false, false, false, false);
-        Person p14 = new Person(false, false, true, true, false, false, false, false, false, false, true, false, false, false, false);
-        Person p15 = new Person(false, false, true, true, false, false, false, false, false, false, true, true, false, false, false);
-        Person p16 = new Person(true, true, false, false, false, false, false, false, false, false, false, false, false, false, false);
-        Person p17 = new Person(true, true, false, true, false, false, false, false, false, false, false, false, false, false, false);
-        Person p18 = new Person(true, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
-        Person p19 = new Person(true, false, false, false, false, false, false, false, false, false, false, false, false, true, false);
-        Person p20 = new Person(true, false, false, false, true, false, true, false, false, false, false, false, false, true, false);
-        Person p21 = new Person(true, false, false, false, true, false, false, false, true, false, false, false, false, true, false);
-        Person p22 = new Person(true, false, false, false, true, false, false, false, false, false, false, false, false, true, false);
-        Person p23 = new Person(true, false, false, false, true, false, false, false, false, false, false, false, true, true, false);
-        
-        ksession.insert(p1);
-        ksession.insert(p2);
-        ksession.insert(p3);
-        ksession.insert(p4);
-        ksession.insert(p5);
-        ksession.insert(p6);
-        ksession.insert(p7);
-        ksession.insert(p8);
-        ksession.insert(p9);
-        ksession.insert(p10);
-        ksession.insert(p11);
-        ksession.insert(p12);
-        ksession.insert(p13);
-        ksession.insert(p14);
-        ksession.insert(p15);
-        ksession.insert(p16);
-        ksession.insert(p17);
-        ksession.insert(p18);
-        ksession.insert(p19);
-        ksession.insert(p20);
-        ksession.insert(p21);
-        ksession.insert(p22);
-        ksession.insert(p23);
-        
-        ksession.fireAllRules();
-        ksession.dispose();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("It is conscious? (true/false): ");
+        Boolean consciousAnswer = scanner.nextBoolean();
+        if(!consciousAnswer){
+            p.setConscious(consciousAnswer);
+            System.out.println("It is breathing? (true/false): ");
+            boolean breathingAnswer = scanner.nextBoolean();
+            if(!breathingAnswer){
+                p.setBreathing(breathingAnswer);
+                System.out.println("It is bleeding? (NO, A_LITTLE, A_LOT): ");
+                Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
+                if(bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO){
+                    p.setBleeding(bleeding);
+                    System.out.println("It just had an electric shock? (true/false):");
+                    Boolean electricAnswer = scanner.nextBoolean();
+                    if(!electricAnswer){
+                        p.setElectric_shock(electricAnswer);
+                        System.out.println("It is a major trauma? (true/false):");
+                        Boolean mtAnswer = scanner.nextBoolean();
+                        if(!mtAnswer){
+                            p.setMajor_trauma(mtAnswer);
+                            System.out.println("It has seizures? (true/false): ");
+                            Boolean seizuresAnswer = scanner.nextBoolean();
+                            if(!seizuresAnswer){
+                                p.setSeizure(seizuresAnswer);//RULE 1
+                            }else{
+                                p.setSeizure(seizuresAnswer);//RULE 15
+                            }
+                        }else{
+                            p.setMajor_trauma(mtAnswer);
+                            System.out.println("It just had a car accident?");
+                            Boolean carAnswer = scanner.nextBoolean();
+                            if(!carAnswer){
+                                p.setCar_accident(carAnswer);//RULE 3
+                            }else{
+                                p.setCar_accident(carAnswer);//RULE 6
+                            }
+                        }
+                    }else{
+                        p.setElectric_shock(electricAnswer);//RULE 2
+                    }
+                }else{
+                    p.setBleeding(bleeding);
+                    System.out.println("It just had a car accident?");
+                    Boolean carAnswer = scanner.nextBoolean();
+                    if(!carAnswer){
+                        p.setCar_accident(carAnswer);//RULE 4
+                    }else{
+                        p.setCar_accident(carAnswer);//RULE 7
+                    }
+                }
+            }else{
+                p.setBreathing(breathingAnswer);
+                System.out.println("It is bleeding? (NO, A_LITTLE, A_LOT): ");
+                Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
+                if(bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO){
+                    p.setBleeding(bleeding);
+                    System.out.println("It is a major trauma? (true/false):");
+                    Boolean mtAnswer = scanner.nextBoolean();
+                    if(mtAnswer){
+                        p.setMajor_trauma(mtAnswer);
+                        System.out.println("It just had a car accident?");
+                        Boolean carAnswer = scanner.nextBoolean();
+                        if(carAnswer){
+                            p.setCar_accident(carAnswer);//RULE 5
+                        }else{
+                            p.setCar_accident(carAnswer);//RULE 26
+                        }
+                    }else{
+                        p.setMajor_trauma(mtAnswer);
+                        System.out.println("It is vomitting?");
+                        Boolean vomitAnswer = scanner.nextBoolean();
+                        if(!vomitAnswer){
+                            p.setVomit(vomitAnswer);//RULE 11
+                        }else{
+                            p.setVomit(vomitAnswer);//RULE 12
+                        }
+                    }
+                }else{
+                    
+                }
+            }
+        }else{///////////////////////CONSCIOUS TRUE
+            p.setConscious(consciousAnswer);
+            System.out.println("It is dizzy? (NO, A_LOT, A_LITTLE): ");
+            Dizzy dizzyAnswer = Dizzy.valueOf(scanner.next().toUpperCase());
+            if(dizzyAnswer == Dizzy.A_LITTLE || dizzyAnswer == Dizzy.NO){
+                p.setDizzy(dizzyAnswer);
+                System.out.println("It has breathing problems?");
+                DifficultyBreathing diffbreathing = DifficultyBreathing.valueOf(scanner.next().toUpperCase());
+                if(diffbreathing == DifficultyBreathing.A_LOT){
+                    p.setDifficulty_breathing(diffbreathing);
+                    System.out.println("It emit words?");
+                    EmitWords wordsAnswer = EmitWords.valueOf(scanner.next().toUpperCase());
+                    if(wordsAnswer==EmitWords.SOME){
+                        p.setEmit_words(wordsAnswer);
+                        System.out.println("It is trying to cough?");
+                        Boolean cough = scanner.nextBoolean();
+                        if(cough){
+                            p.setCough(cough);//RULE 8
+                        }else{
+                            p.setCough(cough);
+                            System.out.println("It seems to be intoxicated? (true/false): ");
+                            Boolean intoxicationAnswer = scanner.nextBoolean();
+                            if(intoxicationAnswer){
+                                p.setPossible_poisoning(intoxicationAnswer);//RULE 16
+                            }else{
+                                p.setPossible_poisoning(intoxicationAnswer);
+                                System.out.println("It is vomitting?");
+                                Boolean vomitAnswer = scanner.nextBoolean();
+                                if(vomitAnswer){
+                                    p.setVomit(vomitAnswer);//RULE 17
+                                }else{
+                                    p.setVomit(vomitAnswer);//RULE 18
+                                }
+                            }
+                        }
+                    }else{
+                        p.setEmit_words(wordsAnswer);//RULE 9
+                    }
+                }else{
+                    p.setDifficulty_breathing(diffbreathing);//RULE 21
+                }
+            }else{
+                p.setDizzy(dizzyAnswer);
+                System.out.println("It is bleeding? (NO, A_LITTLE, A_LOT): ");
+                Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
+                if(bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO){
+                    p.setBleeding(bleeding);//RULE 13
+                }else{
+                    p.setBleeding(bleeding);//RULE 14
+                }
+            }
+        }
+        return p;
     }
     /*
     public static void assignUrgency(Person p){
@@ -142,5 +230,4 @@ public class ActionSupportMedicalEmergencies {
             }
         }
     }*/
-}
 }

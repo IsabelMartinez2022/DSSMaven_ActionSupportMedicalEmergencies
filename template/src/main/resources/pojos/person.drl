@@ -62,7 +62,6 @@ when
     $person : /people[conscious == false,
                      breathing == false,
                      bleeding == Bleeding.A_LOT,
-                     major_trauma == true,
                      car_accident == false]
 then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING)) }
@@ -99,7 +98,6 @@ when
     $person : /people[conscious == false,
                      breathing == false,
                      bleeding == Bleeding.A_LOT,
-                     major_trauma == true,
                      car_accident == true]
 then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_CAR_BLEEDING)) }
@@ -193,7 +191,7 @@ when
     $person : /people[conscious == true,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME || emit_words == EmitWords.NONE,
+                     emit_words == EmitWords.SOME,
                      cough == false,
                      possible_poisoning == true]
 then
@@ -234,47 +232,10 @@ end
 rule "Dizzy With Breathing Problems"
 when
     $person : /people[conscious == true,
-                     dizzy == Dizzy.A_LITTLE,
+                     dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LITTLE || difficulty_breathing == DifficultyBreathing.NO]
 then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.DIZZY_WITH_BREATHING_PROBLEMS)) }
-end
-
-// Rule 23
-rule "Major Trauma Car Accident No Breathing"
-when
-    $person : /people[conscious == false,
-                     breathing == false,
-                     bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO,
-                     electric_shock == false,
-                     major_trauma == true,
-                     car_accident == true]
-then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.MAJOR_TRAUMA_CAR_ACCIDENT_NO_BREATHING)) }
-end
-
-// Rule 24
-rule "Major Trauma No Car Accident No Breathing"
-when
-    $person : /people[conscious == false,
-                     breathing == false,
-                     bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO,
-                     electric_shock == false,
-                     major_trauma == true,
-                     car_accident == false]
-then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.MAJOR_TRAUMA_NO_CAR_ACCIDENT_NO_BREATHING)) }
-end
-
-// Rule 25
-rule "Severe Bleeding No Major Trauma"
-when
-    $person : /people[conscious == false,
-                     breathing == false,
-                     bleeding == Bleeding.A_LOT,
-                     major_trauma == false]
-then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.SEVERE_BLEEDING_NO_MAJOR_TRAUMA)) }
 end
 
 // Rule 26
@@ -287,15 +248,4 @@ when
                      car_accident == false]
 then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CONS_BREATHING_NO_BLEEDING_MAJOR_TRAUMA_NO_CAR)) }
-end
-
-// Rule 27
-rule "Conscious Breathing Severe Bleeding No Major Trauma"
-when
-    $person : /people[conscious == false,
-                     breathing == true,
-                     bleeding == Bleeding.A_LOT,
-                     major_trauma == false]
-then
-    modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CONS_BREATHING_SEVERE_BLEEDING_NO_MAJOR_TRAUMA)) }
 end

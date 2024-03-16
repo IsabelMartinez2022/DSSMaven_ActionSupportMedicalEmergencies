@@ -52,6 +52,7 @@ public class Person {
     }
 
     public Person(){
+        
     }
 
     public Boolean getConscious() {
