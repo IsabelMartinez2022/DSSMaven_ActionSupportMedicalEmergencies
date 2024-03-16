@@ -45,7 +45,7 @@ public class ActionSupportMedicalEmergencies {
         Boolean consciousAnswer = scanner.nextBoolean();
         if(!consciousAnswer){
             p.setConscious(consciousAnswer);
-            System.out.println("It is breathing? (true/false): ");
+            System.out.println("It is breathing? (true/false): "); //TODO ADD UNABLE
             boolean breathingAnswer = scanner.nextBoolean();
             if(!breathingAnswer){
                 p.setBreathing(breathingAnswer);
@@ -148,7 +148,7 @@ public class ActionSupportMedicalEmergencies {
                                 p.setPossible_poisoning(intoxicationAnswer);//RULE 16
                             }else{
                                 p.setPossible_poisoning(intoxicationAnswer);
-                                System.out.println("It is vomitting?");
+                                System.out.println("It is vomiting?");
                                 Boolean vomitAnswer = scanner.nextBoolean();
                                 if(vomitAnswer){
                                     p.setVomit(vomitAnswer);//RULE 17
