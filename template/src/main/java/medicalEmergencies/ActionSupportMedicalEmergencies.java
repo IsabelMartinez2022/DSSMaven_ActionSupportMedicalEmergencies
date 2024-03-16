@@ -6,8 +6,10 @@
 package medicalEmergencies;
 
 import java.util.Scanner;
+import org.drools.ruleunits.api.RuleUnit;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import org.drools.ruleunits.api.RuleUnitProvider;
+import org.drools.ruleunits.api.RuleUnits;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -25,6 +27,12 @@ public class ActionSupportMedicalEmergencies {
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
         
         Person p = execute();
+        personunit.getPeople().add(p);
+        // Ejecutar las reglas sobre la instancia
+        instance.fire();
+
+        // No olvides cerrar la instancia al final para liberar recursos
+        instance.close();
     }
 
     public static Person execute() {
