@@ -18,7 +18,7 @@ public class Person {
     private Boolean breathing; // boolean
     private Bleeding bleeding; // enum
     private EmitWords emit_words; // enum
-    private ChestPain chest_pain; // enum //
+    private ChestPain chest_pain; // enum 
     private Boolean cough; // boolean
     private Boolean seizure; // boolean
     private Boolean possible_poisoning; // boolean
@@ -27,6 +27,7 @@ public class Person {
     private Boolean car_accident; // boolean
     private Boolean vomit; // boolean
     private DifficultyBreathing difficulty_breathing; // enum
+    private Boolean communication_problems;
     private Protocol protocol;
     private String username;
     private byte[] password;
@@ -36,7 +37,7 @@ public class Person {
    // private Urgency urgency;
    //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
 
-    public Person(Boolean conscious, Dizzy dizzy, Boolean breathing, Bleeding bleeding, EmitWords emit_words, ChestPain chest_pain, Boolean cough, Boolean seizure, Boolean possible_poisoning, Boolean electric_shock, Boolean major_trauma, Boolean car_accident, Boolean vomit, DifficultyBreathing difficulty_breathing) {
+    public Person(Boolean conscious, Dizzy dizzy, Boolean breathing, Bleeding bleeding, EmitWords emit_words, ChestPain chest_pain, Boolean cough, Boolean seizure, Boolean possible_poisoning, Boolean electric_shock, Boolean major_trauma, Boolean car_accident, Boolean vomit, DifficultyBreathing difficulty_breathing, Boolean communication_problems) {
         this.conscious = conscious;
         this.dizzy = dizzy;
         this.breathing = breathing;
@@ -51,6 +52,7 @@ public class Person {
         this.car_accident = car_accident;
         this.vomit = vomit;
         this.difficulty_breathing = difficulty_breathing;
+        this.communication_problems=communication_problems;
     }
 
     public Person(){
@@ -186,6 +188,14 @@ public class Person {
     public void setDifficulty_breathing(DifficultyBreathing difficulty_breathing) {
         this.difficulty_breathing = difficulty_breathing;
     }
+    
+    public Boolean getCommunication_problems(){
+        return communication_problems;
+    }
+    
+    public void setCommunication_problems(Boolean communication_problems){
+        this.communication_problems=communication_problems;
+    }
 
     public Protocol getProtocol() {
         return protocol;
@@ -197,7 +207,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "conscious=" + conscious + ", dizzy=" + dizzy + ", breathing=" + breathing + ", bleeding=" + bleeding + ", emit_words=" + emit_words + ", chest_pain=" + chest_pain + ", cough=" + cough + ", seizure=" + seizure + ", possible_poisoning=" + possible_poisoning + ", electric_shock=" + electric_shock + ", major_trauma=" + major_trauma + ", car_accident=" + car_accident + ", vomit=" + vomit + ", difficulty_breathing=" + difficulty_breathing + ", protocol=" + protocol + '}';
+        return "Person{" + "conscious=" + conscious + ", dizzy=" + dizzy + ", breathing=" + breathing + ", bleeding=" + bleeding + ", emit_words=" + emit_words + ", chest_pain=" + chest_pain + ", cough=" + cough + ", seizure=" + seizure + ", possible_poisoning=" + possible_poisoning + ", electric_shock=" + electric_shock + ", major_trauma=" + major_trauma + ", car_accident=" + car_accident + ", vomit=" + vomit + ", difficulty_breathing=" + difficulty_breathing + ", communication_problems"+ communication_problems+ ", protocol=" +protocol + '}';
     }
     
     
