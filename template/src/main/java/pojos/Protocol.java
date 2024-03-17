@@ -12,7 +12,6 @@ import java.util.Map;
 public class Protocol {
     private int id;
     public static final Map<ProtocolType, Protocol> PROTOCOLS_MAP = new HashMap<>();
-
     private ProtocolType type;
     private List<Action> actions;
 

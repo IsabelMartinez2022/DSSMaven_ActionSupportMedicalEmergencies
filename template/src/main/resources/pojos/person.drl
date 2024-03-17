@@ -29,7 +29,6 @@ dialect "java"
             seizure == false]
     then 
         modify($person) {setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST))}
-        cardiorespiratoryArrestpeople.add($person);
 end
 
 // Rule 2
