@@ -19,6 +19,8 @@ import pojos.Person;
  */
 public class Auxiliar {
     
+    
+    
     public static void register() throws SQLException {
         try {
             Scanner scanner = new Scanner(System.in);

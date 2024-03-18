@@ -5,6 +5,7 @@
 
 package medicalEmergencies;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,19 +26,53 @@ import pojos.PersonUnit;
 public class ActionSupportMedicalEmergencies {
 
     public static void main(String[] args) {
-        menu();
         PersonUnit personunit = new PersonUnit();
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
         
-        Person p = execute();
-        personunit.getPeople().add(p);
-        // Ejecutar las reglas sobre la instancia
-        instance.fire();
+        Person p = null;
+        
+        try {
+            do{
+                int option = menu();
+                switch (option) {
+                    case 1:{//REGISTER
+                        Utilities.Auxiliar.register();
+                        p = execute();
+                        personunit.getPeople().add(p);
+                        // Ejecutar las reglas sobre la instancia
+                        instance.fire();
+                        break;
+                    }
+                    case 2:{//LOG IN
+                        Utilities.Auxiliar.login();
+                        p = execute();
+                        personunit.getPeople().add(p);
+                        // Ejecutar las reglas sobre la instancia
+                        instance.fire();
+                        break;
+                    }
+                    case 0:{//CLOSE
+                        // No olvides cerrar la instancia al final para liberar recursos
+                        instance.close();
+                        System.exit(0);
+                    }
 
-        // No olvides cerrar la instancia al final para liberar recursos
-        instance.close();
+                }
+            }while(true);
+            
+            /*Person p = execute();
+            personunit.getPeople().add(p);
+            // Ejecutar las reglas sobre la instancia
+            instance.fire();*/
+
+            /*// No olvides cerrar la instancia al final para liberar recursos
+            instance.close();*/
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
+        
     public static Person execute() {
         Person p = new Person();
         Scanner scanner = new Scanner(System.in);
@@ -176,10 +211,11 @@ public class ActionSupportMedicalEmergencies {
         }
         return p;
     }
-public static void menu() {
+public static int menu() {
     Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
-        try {
+        //boolean exit = false;
+        int option = -1;
+        //try {
             do {
                 System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 System.out.println("@@                                                                  @@");
@@ -191,8 +227,14 @@ public static void menu() {
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 
                 System.out.println("Select an option: ");
-                int option = scanner.nextInt();
-                switch (option) {
+                
+                try{
+                    option = scanner.nextInt();
+                } catch (Exception ex) {
+                    Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                /*switch (option) {
                     case 1:
                         Utilities.Auxiliar.register();
                         break;
@@ -201,10 +243,11 @@ public static void menu() {
                         break;
                     case 0:
                         System.exit(0);
-                }
-            } while (true);
-        } catch (Exception ex) {
+                }*/
+                return option;
+            } while ((option<0 || option>2));
+        /*} catch (Exception ex) {
             Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 }
