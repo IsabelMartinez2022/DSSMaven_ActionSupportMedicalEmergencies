@@ -24,6 +24,7 @@ import pojos.DifficultyBreathing;
 import pojos.Dizzy;
 import pojos.Protocol;
 import pojos.ProtocolType;
+import pojos.Breathing;
 
 /**
  *
@@ -58,7 +59,7 @@ public class PersonUnitTest {
         // Crear una instancia de Person
         Person person = new Person();
         person.setConscious(false);
-        person.setBreathing(false);
+        person.setBreathing(Breathing.NO);
         person.setBleeding(Bleeding.NO);
         person.setElectric_shock(false);
         person.setMajor_trauma(false);
@@ -72,7 +73,7 @@ public class PersonUnitTest {
 
         // Realizar aserciones basadas en el contenido de person
         assertFalse(person.getConscious());
-        assertFalse(person.getBreathing());
+        assertEquals(Breathing.NO, person.getBreathing());
         assertEquals(Bleeding.NO, person.getBleeding());
         assertFalse(person.getElectric_shock());
         assertFalse(person.getMajor_trauma());
@@ -95,7 +96,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(false);
+            person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.NO);
             person.setElectric_shock(true);
             personUnit.getPeople().add(person);
@@ -107,7 +108,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertFalse(person.getBreathing());
+            assertEquals(Breathing.NO, person.getBreathing());
             assertEquals(Bleeding.NO, person.getBleeding());
             assertTrue(person.getElectric_shock());
 
@@ -128,7 +129,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(false);
+            person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.NO);
             person.setElectric_shock(false);
             person.setMajor_trauma(true); 
@@ -142,7 +143,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertFalse(person.getBreathing());
+            assertEquals(Breathing.NO,person.getBreathing());
             assertEquals(Bleeding.NO, person.getBleeding());
             assertFalse(person.getElectric_shock());
             assertTrue(person.getMajor_trauma()); 
@@ -165,7 +166,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(false);
+            person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.A_LOT);
             person.setCar_accident(false);
  
@@ -178,7 +179,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertFalse(person.getBreathing());
+            assertEquals(Breathing.NO,person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding()); 
             assertFalse(person.getCar_accident());
 
@@ -199,7 +200,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(true); 
+            person.setBreathing(Breathing.YES); 
             person.setBleeding(Bleeding.NO);
             person.setMajor_trauma(true); 
             person.setCar_accident(true); 
@@ -212,7 +213,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertTrue(person.getBreathing()); 
+            assertEquals(Breathing.YES, person.getBreathing()); 
             assertEquals(Bleeding.NO, person.getBleeding());
             assertTrue(person.getMajor_trauma()); 
             assertTrue(person.getCar_accident());
@@ -234,7 +235,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(false);
+            person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.A_LITTLE); // Opcional, pero si se establece, debe ser Bleeding.A_LITTLE o Bleeding.NO
             person.setElectric_shock(false);
             person.setMajor_trauma(true);
@@ -248,7 +249,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertFalse(person.getBreathing());
+            assertEquals(Breathing.NO, person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding()); // Opcional, pero si se establece, debe ser Bleeding.A_LITTLE o Bleeding.NO
             assertFalse(person.getElectric_shock());
             assertTrue(person.getMajor_trauma());
@@ -271,7 +272,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(false);
+            person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.A_LOT);
             person.setCar_accident(true);
             personUnit.getPeople().add(person);
@@ -283,7 +284,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertFalse(person.getBreathing());
+            assertEquals(Breathing.NO, person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding());
             assertTrue(person.getCar_accident());
 
@@ -405,7 +406,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(true);
+            person.setBreathing(Breathing.YES);
             person.setBleeding(Bleeding.A_LITTLE); 
             person.setMajor_trauma(false);
             person.setVomit(false);
@@ -418,7 +419,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertTrue(person.getBreathing());
+            assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding()); 
             assertFalse(person.getMajor_trauma());
             assertFalse(person.getVomit());
@@ -440,7 +441,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(true);
+            person.setBreathing(Breathing.YES);
             person.setBleeding(Bleeding.A_LITTLE); 
             person.setMajor_trauma(false);
             person.setVomit(true);
@@ -453,7 +454,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertTrue(person.getBreathing());
+            assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding()); 
             assertFalse(person.getMajor_trauma());
             assertTrue(person.getVomit());
@@ -541,7 +542,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(false);
+            person.setBreathing(Breathing.UNABLE_TO_CHECK);
             person.setBleeding(Bleeding.A_LITTLE);
             person.setElectric_shock(false);
             person.setMajor_trauma(false);
@@ -555,7 +556,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertFalse(person.getBreathing());
+            assertEquals(Breathing.UNABLE_TO_CHECK,person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding());
             assertFalse(person.getElectric_shock());
             assertFalse(person.getMajor_trauma());
@@ -769,7 +770,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(true);
+            person.setBreathing(Breathing.YES);
             person.setBleeding(Bleeding.A_LITTLE);
             person.setMajor_trauma(true);
             person.setCar_accident(false);
@@ -782,7 +783,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertTrue(person.getBreathing());
+            assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding()); 
             assertTrue(person.getMajor_trauma());
             assertFalse(person.getCar_accident());
@@ -804,7 +805,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(true);
+            person.setBreathing(Breathing.YES);
             person.setBleeding(Bleeding.A_LOT);
             person.setCar_accident(false);
             personUnit.getPeople().add(person);
@@ -816,7 +817,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertTrue(person.getBreathing());
+            assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding());
             assertFalse(person.getCar_accident());
 
@@ -837,7 +838,7 @@ public class PersonUnitTest {
             // Crear una instancia de Person
             Person person = new Person();
             person.setConscious(false);
-            person.setBreathing(true);
+            person.setBreathing(Breathing.YES);
             person.setBleeding(Bleeding.A_LOT);
             person.setCar_accident(true);
             personUnit.getPeople().add(person);
@@ -849,7 +850,7 @@ public class PersonUnitTest {
 
             // Realizar aserciones basadas en el contenido de person
             assertFalse(person.getConscious());
-            assertTrue(person.getBreathing());
+            assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding());
             assertTrue(person.getCar_accident());
 

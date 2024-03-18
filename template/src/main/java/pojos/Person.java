@@ -15,7 +15,7 @@ public class Person {
     
     private Boolean conscious; // boolean
     private Dizzy dizzy; // enum
-    private Boolean breathing; // boolean
+    private Breathing breathing; // boolean
     private Bleeding bleeding; // enum
     private Boolean emit_words; // enum
     private ChestPain chest_pain; // enum 
@@ -37,7 +37,7 @@ public class Person {
    // private Urgency urgency;
    //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
 
-    public Person(Boolean conscious, Dizzy dizzy, Boolean breathing, Bleeding bleeding, Boolean emit_words, ChestPain chest_pain, Boolean cough, Boolean seizure, Boolean possible_poisoning, Boolean electric_shock, Boolean major_trauma, Boolean car_accident, Boolean vomit, DifficultyBreathing difficulty_breathing, Boolean communication_problems) {
+    public Person(Boolean conscious, Dizzy dizzy, Breathing breathing, Bleeding bleeding, Boolean emit_words, ChestPain chest_pain, Boolean cough, Boolean seizure, Boolean possible_poisoning, Boolean electric_shock, Boolean major_trauma, Boolean car_accident, Boolean vomit, DifficultyBreathing difficulty_breathing, Boolean communication_problems) {
         this.conscious = conscious;
         this.dizzy = dizzy;
         this.breathing = breathing;
@@ -93,11 +93,11 @@ public class Person {
         this.dizzy = dizzy;
     }
 
-    public Boolean getBreathing() {
+    public Breathing getBreathing() {
         return breathing;
     }
 
-    public void setBreathing(Boolean breathing) {
+    public void setBreathing(Breathing breathing) {
         this.breathing = breathing;
     }
 

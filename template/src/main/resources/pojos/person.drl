@@ -22,7 +22,7 @@ rule "Cardiorespiratory arrest"
 dialect "java"
     when
         $person : /people[conscious == false,
-            breathing == false,
+            breathing == Breathing.NO|| breathing== Breathing.UNABLE_TO_CHECK,
             bleeding== Bleeding.A_LITTLE || bleeding== Bleeding.NO,
             electric_shock == false,
             major_trauma == false,
@@ -35,7 +35,7 @@ end
 rule "Cardiorespiratory arrest by electric shock"
 when
     $person : /people[conscious == false,
-                     breathing == false,
+                     breathing == Breathing.NO|| breathing== Breathing.UNABLE_TO_CHECK,
                      bleeding== Bleeding.A_LITTLE || bleeding== Bleeding.NO,
                      electric_shock == true]
 then
@@ -46,7 +46,7 @@ end
 rule "Cardiorespiratory arrest with major trauma but no car accident and a little/no bleeding"
 when
     $person : /people[conscious == false,
-                     breathing == false,
+                     breathing == Breathing.NO|| breathing== Breathing.UNABLE_TO_CHECK,
                      bleeding== Bleeding.A_LITTLE || bleeding== Bleeding.NO,
                      electric_shock == false,
                      major_trauma == true,
@@ -59,7 +59,7 @@ end
 rule "Cardiorespiratory arrest and bleeding"
 when
     $person : /people[conscious == false,
-                     breathing == false,
+                     breathing == Breathing.NO|| breathing== Breathing.UNABLE_TO_CHECK,
                      bleeding == Bleeding.A_LOT,
                      car_accident == false]
 then
@@ -70,7 +70,7 @@ end
 rule "Major trauma by car accident and a little/no bleeding"
 when
     $person : /people[conscious == false,
-                     breathing == true,
+                     breathing == Breathing.YES,
                      bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO,
                      major_trauma == true,
                      car_accident == true]
@@ -82,7 +82,7 @@ end
 rule "Cardiorespiratory arrest with major trauma by car accident and a little/no bleeding"
 when
     $person : /people[conscious == false,
-                     breathing == false,
+                     breathing == Breathing.NO|| breathing== Breathing.UNABLE_TO_CHECK,
                      bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO,
                      electric_shock== false,
                      major_trauma == true,
@@ -95,7 +95,7 @@ end
 rule "Cardiorespiratory arrest by car accident and bleeding"
 when
     $person : /people[conscious == false,
-                     breathing == false,
+                     breathing == Breathing.NO|| breathing== Breathing.UNABLE_TO_CHECK,
                      bleeding == Bleeding.A_LOT,
                      car_accident == true]
 then
@@ -140,7 +140,7 @@ end
 rule "Fainting and no vomit"
 when
     $person : /people[conscious == false,
-                     breathing == true,
+                     breathing == Breathing.YES,
                      bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO,
                      major_trauma == false,
                      vomit == false]
@@ -152,7 +152,7 @@ end
 rule "Fainting and vomit"
 when
     $person : /people[conscious == false,
-                     breathing == true,
+                     breathing == Breathing.YES,
                      bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO,
                      major_trauma == false,
                      vomit == true]
@@ -186,7 +186,7 @@ end
 rule "Seizure"
 when
     $person : /people[conscious == false,
-                     breathing == false,
+                     breathing == Breathing.NO|| breathing== Breathing.UNABLE_TO_CHECK,
                      bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO,
                      electric_shock == false,
                      major_trauma == false,
@@ -269,7 +269,7 @@ end
 rule "Major trauma and a little/no bleeding"
 when
     $person : /people[conscious == false,
-                     breathing == true,
+                     breathing == Breathing.YES,
                      bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO,
                      major_trauma == true,
                      car_accident == false]
@@ -281,7 +281,7 @@ end
 rule "Major trauma and bleeding"
 when
     $person : /people[conscious == false,
-                     breathing == true,
+                     breathing == Breathing.YES,
                      bleeding == Bleeding.A_LOT,
                      car_accident == false]
 then
@@ -292,7 +292,7 @@ end
 rule "Major trauma by car accident and bleeding"
 when
     $person : /people[conscious == false,
-                     breathing == true,
+                     breathing == Breathing.YES,
                      bleeding == Bleeding.A_LOT,
                      car_accident == true]
 then
