@@ -15,9 +15,9 @@ public class Person {
     
     private Boolean conscious; // boolean
     private Dizzy dizzy; // enum
-    private Breathing breathing; // boolean
+    private Breathing breathing; // enum
     private Bleeding bleeding; // enum
-    private Boolean emit_words; // enum
+    private Boolean emit_words; // boolean
     private ChestPain chest_pain; // enum 
     private Boolean cough; // boolean
     private Boolean seizure; // boolean
@@ -73,9 +73,7 @@ public class Person {
 
     public void setPassword(byte[] password) {
         this.password = password;
-    }
-    
-    
+    }  
 
     public Boolean getConscious() {
         return conscious;

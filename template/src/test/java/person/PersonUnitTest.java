@@ -88,6 +88,43 @@ public class PersonUnitTest {
     }
     
     @Test
+    public void testCardiorespiratoryArrestBad() {
+    try {
+        LOG.info("Running query to find cardiorespiratory arrests. Rules are also fired");
+        instance.fire();
+        
+        // Crear una instancia de Person
+        Person person = new Person();
+        person.setConscious(true); //debería ser false
+        person.setBreathing(Breathing.NO);
+        person.setBleeding(Bleeding.A_LOT); //debería ser No o A_Little
+        person.setElectric_shock(false);
+        person.setMajor_trauma(true); //debería ser false
+        person.setSeizure(false);
+        personUnit.getPeople().add(person);
+        
+        // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio
+        Protocol cardioArrestProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST);
+        // Asignar el protocolo a la persona
+        person.setProtocol(cardioArrestProtocol);
+
+        // Realizar aserciones basadas en el contenido de person
+        assertFalse(person.getConscious());
+        assertEquals(Breathing.NO, person.getBreathing());
+        assertEquals(Bleeding.NO, person.getBleeding());
+        assertFalse(person.getElectric_shock());
+        assertFalse(person.getMajor_trauma());
+        assertFalse(person.getSeizure());
+
+        // Verificar que la persona tiene el protocolo adecuado asignado
+        assertEquals(ProtocolType.CARDIOARREST, person.getProtocol().getType());
+
+        } finally {
+            instance.close();
+        }
+    }
+    
+    @Test
     public void testCardiorespiratoryArrestByElectricShock() {
         try {
             LOG.info("Running query to find cardiorespiratory arrests by electric shock. Rules are also fired");
@@ -99,6 +136,39 @@ public class PersonUnitTest {
             person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.NO);
             person.setElectric_shock(true);
+            personUnit.getPeople().add(person);
+
+            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio por electrocución
+            Protocol cardioArrestElectrocutionProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_ELECTROCUTION);
+            // Asignar el protocolo a la persona
+            person.setProtocol(cardioArrestElectrocutionProtocol);
+
+            // Realizar aserciones basadas en el contenido de person
+            assertFalse(person.getConscious());
+            assertEquals(Breathing.NO, person.getBreathing());
+            assertEquals(Bleeding.NO, person.getBleeding());
+            assertTrue(person.getElectric_shock());
+
+            // Verificar que la persona tiene el protocolo adecuado asignado
+            assertEquals(ProtocolType.CARDIOARREST_ELECTROCUTION, person.getProtocol().getType());
+
+        } finally {
+            instance.close();
+        }
+    }
+    
+    @Test
+    public void testCardiorespiratoryArrestByElectricShockBad() {
+        try {
+            LOG.info("Running query to find cardiorespiratory arrests by electric shock. Rules are also fired");
+            instance.fire();
+
+            // Crear una instancia de Person
+            Person person = new Person();
+            person.setConscious(false);
+            person.setBreathing(Breathing.NO);
+            person.setBleeding(Bleeding.A_LOT); //debería ser No o A_Litle
+            person.setElectric_shock(false); //debería ser true
             personUnit.getPeople().add(person);
 
             // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio por electrocución
@@ -169,6 +239,40 @@ public class PersonUnitTest {
             person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.A_LOT);
             person.setCar_accident(false);
+ 
+            personUnit.getPeople().add(person);
+
+            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio y sangrado
+            Protocol cardioArrestBleedingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING);
+            // Asignar el protocolo a la persona
+            person.setProtocol(cardioArrestBleedingProtocol);
+
+            // Realizar aserciones basadas en el contenido de person
+            assertFalse(person.getConscious());
+            assertEquals(Breathing.NO,person.getBreathing());
+            assertEquals(Bleeding.A_LOT, person.getBleeding()); 
+            assertFalse(person.getCar_accident());
+
+            // Verificar que la persona tiene el protocolo adecuado asignado
+            assertEquals(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING, person.getProtocol().getType());
+
+        } finally {
+            instance.close();
+        }
+    }
+    
+    @Test
+    public void testCardiorespiratoryArrestAndBleedingBad() {
+        try {
+            LOG.info("Running query to find cardiorespiratory arrests and bleeding. Rules are also fired");
+            instance.fire();
+
+            // Crear una instancia de Person
+            Person person = new Person();
+            person.setConscious(true); //debería ser false
+            person.setBreathing(Breathing.NO);
+            person.setBleeding(Bleeding.A_LOT);
+            person.setCar_accident(true);  //debería ser false
  
             personUnit.getPeople().add(person);
 
@@ -264,6 +368,44 @@ public class PersonUnitTest {
     }
 
     @Test
+    public void testCardiorespiratoryArrestCarAccidentBad() {
+        try {
+            LOG.info("Running query to find cardiorespiratory arrest with major trauma by car accident. Rules are also fired");
+            instance.fire();
+
+            // Crear una instancia de Person
+            Person person = new Person();
+            person.setConscious(false);
+            person.setBreathing(Breathing.NO);
+            person.setBleeding(Bleeding.A_LITTLE); 
+            person.setElectric_shock(true); //debería ser false
+            person.setMajor_trauma(false); //debería ser true
+            person.setCar_accident(false); //debería ser true
+            personUnit.getPeople().add(person);
+
+            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio con trauma mayor por accidente automovilístico
+            Protocol cardioArrestCarProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_CAR);
+            // Asignar el protocolo a la persona
+            person.setProtocol(cardioArrestCarProtocol);
+
+            // Realizar aserciones basadas en el contenido de person
+            assertFalse(person.getConscious());
+            assertEquals(Breathing.NO, person.getBreathing());
+            assertEquals(Bleeding.A_LITTLE, person.getBleeding()); // Opcional, pero si se establece, debe ser Bleeding.A_LITTLE o Bleeding.NO
+            assertFalse(person.getElectric_shock());
+            assertTrue(person.getMajor_trauma());
+            assertTrue(person.getCar_accident());
+
+            // Verificar que la persona tiene el protocolo adecuado asignado
+            assertEquals(ProtocolType.CARDIOARREST_CAR, person.getProtocol().getType());
+
+        } finally {
+            instance.close();
+        }
+    }
+
+    
+    @Test
     public void testCardiorespiratoryArrestCarAccidentBleeding() {
         try {
             LOG.info("Running query to find cardiorespiratory arrest by car accident and bleeding. Rules are also fired");
@@ -323,6 +465,43 @@ public class PersonUnitTest {
             assertEquals(Dizzy.NO, person.getDizzy());
             assertEquals(DifficultyBreathing.A_LOT, person.getDifficulty_breathing());
             assertTrue( person.getEmit_words());
+            assertTrue(person.getCough());
+
+            // Verificar que la persona tiene el protocolo adecuado asignado
+            assertEquals(ProtocolType.PARTIAL_CHOKING, person.getProtocol().getType());
+
+        } finally {
+            instance.close();
+        }
+    }
+    
+    @Test
+    public void testPartialChokingBad() {
+        try {
+            LOG.info("Running query to find partial airway blockage. Rules are also fired");
+            instance.fire();
+
+            // Crear una instancia de Person
+            Person person = new Person();
+            person.setConscious(true);
+            person.setChest_pain(ChestPain.NO);
+            person.setDizzy(Dizzy.A_LOT); //deberia ser NO o A_Little
+            person.setDifficulty_breathing(DifficultyBreathing.A_LOT);
+            person.setEmit_words(false); //debería ser true
+            person.setCough(false); //debería ser true
+            personUnit.getPeople().add(person);
+
+            // Obtener el protocolo adecuado para la emergencia de obstrucción parcial de las vías respiratorias
+            Protocol partialChokingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.PARTIAL_CHOKING);
+            // Asignar el protocolo a la persona
+            person.setProtocol(partialChokingProtocol);
+
+            // Realizar aserciones basadas en el contenido de person
+            assertTrue(person.getConscious());
+            assertEquals(ChestPain.NO, person.getChest_pain());
+            assertEquals(Dizzy.NO, person.getDizzy());
+            assertEquals(DifficultyBreathing.A_LOT, person.getDifficulty_breathing());
+            assertTrue(person.getEmit_words());
             assertTrue(person.getCough());
 
             // Verificar que la persona tiene el protocolo adecuado asignado

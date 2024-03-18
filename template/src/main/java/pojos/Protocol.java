@@ -212,6 +212,12 @@ public class Protocol {
         carBleedingActions.add(new Action(ActionType.APPLY_PRESSURE));
         Protocol carBleedingProtocol = new Protocol(ProtocolType.CAR_BLEEDING, carBleedingActions);
         PROTOCOLS_MAP.put(ProtocolType.CAR_BLEEDING, carBleedingProtocol);
+        
+        //Solo para llamar al 112
+        List<Action> call112Action = new LinkedList<>();
+        call112Action.add(new Action(ActionType.CALL_112));
+        Protocol call112Protocol = new Protocol(ProtocolType.CALL_112, call112Action);
+        PROTOCOLS_MAP.put(ProtocolType.CALL_112, call112Protocol);
     }
     
 }

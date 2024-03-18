@@ -232,7 +232,7 @@ when
                      chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.YES,
+                     emit_words == true,
                      cough == false,
                      possible_poisoning == false,
                      vomit == true]
