@@ -21,10 +21,12 @@ public class Auxiliar {
     
     
     
-    public static void register() throws SQLException {
+    //public static void register() throws SQLException {
+    public static Person register() throws SQLException {
+        Person p = null;
         try {
             Scanner scanner = new Scanner(System.in);
-            Person p = new Person();
+            p = new Person();
 
             System.out.println("Let's proceed with the registration:");
 
@@ -40,10 +42,14 @@ public class Auxiliar {
             md.update(password.getBytes());
             byte[] hash = md.digest();
             p.setPassword(hash);
+            
+            //return p;
 
-    }catch (NoSuchAlgorithmException ex) {
+        }catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return p;
     }
     //PARA HACER LOG IN NECESITAMOS UNA ABSE DE DATOS
     public static Person login() {

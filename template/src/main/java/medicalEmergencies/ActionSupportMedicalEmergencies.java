@@ -36,19 +36,21 @@ public class ActionSupportMedicalEmergencies {
                 int option = menu();
                 switch (option) {
                     case 1:{//REGISTER
-                        Utilities.Auxiliar.register();
-                        p = execute();
+                        //Utilities.Auxiliar.register();
+                        p = Utilities.Auxiliar.register();
+                        //p = execute();
+                        p = execute(p); //Since we need the same person to be register and to introduce the data
                         personunit.getPeople().add(p);
                         // Ejecutar las reglas sobre la instancia
                         instance.fire();
                         break;
                     }
                     case 2:{//LOG IN
-                        Utilities.Auxiliar.login();
+                        /*Utilities.Auxiliar.login();
                         p = execute();
                         personunit.getPeople().add(p);
                         // Ejecutar las reglas sobre la instancia
-                        instance.fire();
+                        instance.fire();*/
                         break;
                     }
                     case 0:{//CLOSE
@@ -73,8 +75,9 @@ public class ActionSupportMedicalEmergencies {
         }
     }
         
-    public static Person execute() {
-        Person p = new Person();
+    //public static Person execute() {
+    public static Person execute(Person p) {
+        //Person p = new Person();
         Scanner scanner = new Scanner(System.in);
         System.out.println("It is conscious? (true/false): ");
         Boolean consciousAnswer = scanner.nextBoolean();
