@@ -22,7 +22,6 @@ import pojos.Bleeding;
 import pojos.ChestPain;
 import pojos.DifficultyBreathing;
 import pojos.Dizzy;
-import pojos.EmitWords;
 import pojos.Protocol;
 import pojos.ProtocolType;
 
@@ -308,7 +307,7 @@ public class PersonUnitTest {
             person.setChest_pain(ChestPain.NO);
             person.setDizzy(Dizzy.NO);
             person.setDifficulty_breathing(DifficultyBreathing.A_LOT);
-            person.setEmit_words(EmitWords.SOME);
+            person.setEmit_words(true);
             person.setCough(true);
             personUnit.getPeople().add(person);
 
@@ -322,7 +321,7 @@ public class PersonUnitTest {
             assertEquals(ChestPain.NO, person.getChest_pain());
             assertEquals(Dizzy.NO, person.getDizzy());
             assertEquals(DifficultyBreathing.A_LOT, person.getDifficulty_breathing());
-            assertEquals(EmitWords.SOME, person.getEmit_words());
+            assertTrue( person.getEmit_words());
             assertTrue(person.getCough());
 
             // Verificar que la persona tiene el protocolo adecuado asignado
@@ -345,7 +344,7 @@ public class PersonUnitTest {
             person.setChest_pain(ChestPain.NO);
             person.setDizzy(Dizzy.NO);
             person.setDifficulty_breathing(DifficultyBreathing.A_LOT);
-            person.setEmit_words(EmitWords.NONE);
+            person.setEmit_words(false);
             personUnit.getPeople().add(person);
 
             // Obtener el protocolo adecuado para la emergencia de obstrucción total de las vías respiratorias
@@ -358,7 +357,7 @@ public class PersonUnitTest {
             assertEquals(ChestPain.NO, person.getChest_pain());
             assertEquals(Dizzy.NO, person.getDizzy());
             assertEquals(DifficultyBreathing.A_LOT, person.getDifficulty_breathing());
-            assertEquals(EmitWords.NONE, person.getEmit_words());
+            assertFalse(person.getEmit_words());
 
             // Verificar que la persona tiene el protocolo adecuado asignado
             assertEquals(ProtocolType.TOTAL_CHOKING, person.getProtocol().getType());
@@ -582,7 +581,7 @@ public class PersonUnitTest {
             person.setChest_pain(ChestPain.A_LITTLE);
             person.setDizzy(Dizzy.A_LITTLE); 
             person.setDifficulty_breathing(DifficultyBreathing.A_LOT);
-            person.setEmit_words(EmitWords.SOME);
+            person.setEmit_words(true);
             person.setCough(false);
             person.setPossible_poisoning(true);
             personUnit.getPeople().add(person);
@@ -597,7 +596,7 @@ public class PersonUnitTest {
             assertEquals(ChestPain.A_LITTLE, person.getChest_pain()); 
             assertEquals(Dizzy.A_LITTLE, person.getDizzy()); 
             assertEquals(DifficultyBreathing.A_LOT, person.getDifficulty_breathing());
-            assertEquals(EmitWords.SOME, person.getEmit_words());
+            assertTrue(person.getEmit_words());
             assertFalse(person.getCough());
             assertTrue(person.getPossible_poisoning());
 
@@ -621,7 +620,7 @@ public class PersonUnitTest {
             person.setChest_pain(ChestPain.A_LITTLE);
             person.setDizzy(Dizzy.A_LITTLE); 
             person.setDifficulty_breathing(DifficultyBreathing.A_LOT);
-            person.setEmit_words(EmitWords.SOME);
+            person.setEmit_words(true);
             person.setCough(false);
             person.setPossible_poisoning(false);
             person.setVomit(false);
@@ -637,7 +636,7 @@ public class PersonUnitTest {
             assertEquals(ChestPain.A_LITTLE, person.getChest_pain()); 
             assertEquals(Dizzy.A_LITTLE, person.getDizzy());
             assertEquals(DifficultyBreathing.A_LOT, person.getDifficulty_breathing());
-            assertEquals(EmitWords.SOME, person.getEmit_words());
+            assertTrue(person.getEmit_words());
             assertFalse(person.getCough());
             assertFalse(person.getPossible_poisoning());
             assertFalse(person.getVomit());
@@ -662,7 +661,7 @@ public class PersonUnitTest {
             person.setChest_pain(ChestPain.A_LITTLE); 
             person.setDizzy(Dizzy.A_LITTLE); 
             person.setDifficulty_breathing(DifficultyBreathing.A_LOT);
-            person.setEmit_words(EmitWords.SOME);
+            person.setEmit_words(true);
             person.setCough(false);
             person.setPossible_poisoning(false);
             person.setVomit(true);
@@ -678,7 +677,7 @@ public class PersonUnitTest {
             assertEquals(ChestPain.A_LITTLE, person.getChest_pain()); 
             assertEquals(Dizzy.A_LITTLE, person.getDizzy()); 
             assertEquals(DifficultyBreathing.A_LOT, person.getDifficulty_breathing());
-            assertEquals(EmitWords.SOME, person.getEmit_words());
+            assertTrue(person.getEmit_words());
             assertFalse(person.getCough());
             assertFalse(person.getPossible_poisoning());
             assertTrue(person.getVomit());

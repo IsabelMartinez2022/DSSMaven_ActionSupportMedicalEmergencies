@@ -19,7 +19,6 @@ import org.kie.api.runtime.KieSession;
 import pojos.Bleeding;
 import pojos.DifficultyBreathing;
 import pojos.Dizzy;
-import pojos.EmitWords;
 import pojos.Person;
 import pojos.PersonUnit;
 
@@ -76,9 +75,10 @@ public class ActionSupportMedicalEmergencies {
     }
         
     //public static Person execute() {
+    
     public static Person execute(Person p) {
         Scanner scanner = new Scanner(System.in);
-        
+        /*
         //Person p = new Person();
         System.out.println("It is conscious? (true/false): ");
         Boolean consciousAnswer = scanner.nextBoolean();
@@ -212,7 +212,7 @@ public class ActionSupportMedicalEmergencies {
                     p.setBleeding(bleeding);//RULE 14
                 }
             }
-        }
+        }*/
         return p;
     }
 public static int menu() {

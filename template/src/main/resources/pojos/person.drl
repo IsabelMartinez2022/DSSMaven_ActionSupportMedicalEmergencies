@@ -109,7 +109,7 @@ when
                      chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME,
+                     emit_words == true,
                      cough == true]
 then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.PARTIAL_CHOKING)) }
@@ -122,7 +122,7 @@ when
                      chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.FEW || emit_words == EmitWords.NONE]
+                     emit_words == false]
 then
     modify($person) { setProtocol(Protocol.PROTOCOLS_MAP.get(ProtocolType.TOTAL_CHOKING)) }
 end
@@ -202,7 +202,7 @@ when
                      chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME,
+                     emit_words == true,
                      cough == false,
                      possible_poisoning == true]
 then
@@ -216,7 +216,7 @@ when
                      chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME,
+                     emit_words == true,
                      cough == false,
                      possible_poisoning == false,
                      vomit == false]
@@ -232,7 +232,7 @@ when
                      chest_pain == ChestPain.A_LITTLE|| chest_pain == ChestPain.NO,
                      dizzy == Dizzy.A_LITTLE || dizzy == Dizzy.NO,
                      difficulty_breathing == DifficultyBreathing.A_LOT,
-                     emit_words == EmitWords.SOME,
+                     emit_words == EmitWords.YES,
                      cough == false,
                      possible_poisoning == false,
                      vomit == true]
