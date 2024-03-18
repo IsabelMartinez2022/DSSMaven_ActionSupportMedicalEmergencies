@@ -77,8 +77,9 @@ public class ActionSupportMedicalEmergencies {
         
     //public static Person execute() {
     public static Person execute(Person p) {
-        //Person p = new Person();
         Scanner scanner = new Scanner(System.in);
+        
+        //Person p = new Person();
         System.out.println("It is conscious? (true/false): ");
         Boolean consciousAnswer = scanner.nextBoolean();
         if(!consciousAnswer){
