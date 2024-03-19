@@ -11,9 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import org.drools.ruleunits.api.RuleUnitProvider;
-import pojos.ActionType;
 import pojos.Bleeding;
 import pojos.Breathing;
+import pojos.ChestPain;
 import pojos.DifficultyBreathing;
 import pojos.Dizzy;
 import pojos.Person;
@@ -26,27 +26,26 @@ public class ActionSupportMedicalEmergencies {
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
         
         Person p = null;
+        //User u = null;
         
         try {
             do{
                 int option = menu();
                 switch (option) {
                     case 1:{//REGISTER
-                        //Utilities.Auxiliar.register();
-                        p = Utilities.Auxiliar.register();
-                        //p = execute();
-                        p = execute(p); //Since we need the same person to be register and to introduce the data
-                        personunit.getPeople().add(p);
-                        // Ejecutar las reglas sobre la instancia
-                        instance.fire();
+                        //u =  Utilities.Auxiliar.register();
+                        Utilities.Auxiliar.register();
                         break;
                     }
                     case 2:{//LOG IN
-                        /*Utilities.Auxiliar.login();
+                        Utilities.Auxiliar.login();
+                        //int option2 = menulogin();
                         p = execute();
                         personunit.getPeople().add(p);
                         // Ejecutar las reglas sobre la instancia
-                        instance.fire();*/
+                        instance.fire();
+                        instance.close();
+                        System.out.print();
                         break;
                     }
                     case 0:{//CLOSE
@@ -58,163 +57,62 @@ public class ActionSupportMedicalEmergencies {
                 }
             }while(true);
             
-            /*Person p = execute();
-            personunit.getPeople().add(p);
-            // Ejecutar las reglas sobre la instancia
-            instance.fire();*/
-
-            /*// No olvides cerrar la instancia al final para liberar recursos
-            instance.close();*/
-            
         } catch (SQLException ex) {
             Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
         
-    //public static Person execute() {
-    
-    public static Person execute(Person p) {
+    public static Person execute() {
         Scanner scanner = new Scanner(System.in);
-        Breathing breathingAnswer = null;
-        
-        //Person p = new Person();
-        System.out.println("It is conscious? (true/false): ");
+        Person p = new Person();
+        System.out.println("Is the person conscious? (true/false): ");
         Boolean consciousAnswer = scanner.nextBoolean();
-        if(!consciousAnswer){
-            p.setConscious(consciousAnswer);
-            System.out.println("It is breathing? (NO,UNABLE_TO_CHECK, YES): "); 
-            breathingAnswer = Breathing.valueOf(scanner.next().toUpperCase());
-                if(breathingAnswer == Breathing.NO) {
+        p.setConscious(consciousAnswer);
+        System.out.println("Is the person breathing? (NO,UNABLE_TO_CHECK, YES): "); 
+        Breathing breathingAnswer = Breathing.valueOf(scanner.next().toUpperCase());
+        p.setBreathing(breathingAnswer);
+            //if(!consciousAnswer && breathingAnswer == Breathing.NO) {
                     /*p.getProtocol().getType().CALL_112; //acaba directamente la ejecución de la aplicación 
                     return ; //acaba directamente la ejecución de la aplicación */
-                }
-                if(breathingAnswer != Breathing.NO) {
-                    p.setBreathing(breathingAnswer);
-                    System.out.println("It is bleeding? (NO, A_LITTLE, A_LOT): ");
-                    Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
-                    if(bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO){
-                        p.setBleeding(bleeding);
-                        System.out.println("It just had an electric shock? (true/false): ");
-                        Boolean electricAnswer = scanner.nextBoolean();
-                        if(!electricAnswer){
-                            p.setElectric_shock(electricAnswer);
-                            System.out.println("It is a major trauma? (true/false): ");
-                            Boolean mtAnswer = scanner.nextBoolean();
-                            if(!mtAnswer){
-                                p.setMajor_trauma(mtAnswer);
-                                System.out.println("It has seizures? (true/false): ");
-                                Boolean seizuresAnswer = scanner.nextBoolean();
-                                    if(!seizuresAnswer){
-                                        p.setSeizure(seizuresAnswer);//RULE 1
-                                    } else {
-                                        p.setSeizure(seizuresAnswer);//RULE 15
-                                    }
-                                } else {
-                                    p.setMajor_trauma(mtAnswer);
-                                    System.out.println("It just had a car accident? (true/false): ");
-                                    Boolean carAnswer = scanner.nextBoolean();
-                                    if(!carAnswer){
-                                        p.setCar_accident(carAnswer);//RULE 3
-                                    } else {
-                                        p.setCar_accident(carAnswer);//RULE 6
-                                    }
-                                }
-                            } else {
-                                p.setElectric_shock(electricAnswer);//RULE 2
-                            }
-                    } else {
-                        p.setBleeding(bleeding);
-                        System.out.println("It just had a car accident? (true/false): ");
-                        Boolean carAnswer = scanner.nextBoolean();
-                        if(!carAnswer){
-                            p.setCar_accident(carAnswer);//RULE 4
-                        } else {
-                            p.setCar_accident(carAnswer);//RULE 7
-                        }
-                    } 
-            } else {
-                    p.setBreathing(breathingAnswer);
-                    System.out.println("It is bleeding? (NO, A_LITTLE, A_LOT): ");
-                    Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
-                    if(bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO){
-                        p.setBleeding(bleeding);
-                        System.out.println("It is a major trauma? (true/false):");
-                        Boolean mtAnswer = scanner.nextBoolean();
-                        if(mtAnswer){
-                            p.setMajor_trauma(mtAnswer);
-                            System.out.println("It just had a car accident? (true/false): ");
-                            Boolean carAnswer = scanner.nextBoolean();
-                            if(carAnswer){
-                                p.setCar_accident(carAnswer);//RULE 5
-                            }else{
-                                p.setCar_accident(carAnswer);//RULE 26
-                            }
-                        }else{
-                            p.setMajor_trauma(mtAnswer);
-                            System.out.println("It is vomitting? (true/false): ");
-                            Boolean vomitAnswer = scanner.nextBoolean();
-                            if(!vomitAnswer){
-                                p.setVomit(vomitAnswer);//RULE 11
-                            }else{
-                                p.setVomit(vomitAnswer);//RULE 12
-                            }
-                        }
-                    }else{
-
-                    }
-                }
-            } else { //CONSCIOUS TRUE
-                p.setConscious(consciousAnswer);
-                System.out.println("It is dizzy? (NO, A_LOT, A_LITTLE): ");
-                Dizzy dizzyAnswer = Dizzy.valueOf(scanner.next().toUpperCase());
-                if(dizzyAnswer == Dizzy.A_LITTLE || dizzyAnswer == Dizzy.NO){
-                    p.setDizzy(dizzyAnswer);
-                    System.out.println("It has breathing problems? (NO, UNABLE_TO_CHECK, YES): ");
-                    DifficultyBreathing diffbreathing = DifficultyBreathing.valueOf(scanner.next().toUpperCase());
-                    if(diffbreathing == DifficultyBreathing.A_LOT){
-                        p.setDifficulty_breathing(diffbreathing);
-                        System.out.println("It emit words? (true/false): ");
-                        Boolean wordsAnswer = scanner.nextBoolean();
-                        if(wordsAnswer){
-                            p.setEmit_words(wordsAnswer);
-                            System.out.println("It is trying to cough? (true/false): ");
-                            Boolean cough = scanner.nextBoolean();
-                            if(cough){
-                                p.setCough(cough);//RULE 8
-                            }else{
-                                p.setCough(cough);
-                                System.out.println("It seems to be intoxicated? (true/false): ");
-                                Boolean intoxicationAnswer = scanner.nextBoolean();
-                                if(intoxicationAnswer){
-                                    p.setPossible_poisoning(intoxicationAnswer);//RULE 16
-                                }else{
-                                    p.setPossible_poisoning(intoxicationAnswer);
-                                    System.out.println("It is vomiting?");
-                                    Boolean vomitAnswer = scanner.nextBoolean();
-                                    if(vomitAnswer){
-                                        p.setVomit(vomitAnswer);//RULE 17
-                                    }else{
-                                        p.setVomit(vomitAnswer);//RULE 18
-                                    }
-                                }
-                            }
-                        }else{
-                            p.setEmit_words(wordsAnswer);//RULE 9
-                        }
-                    }else{
-                        p.setDifficulty_breathing(diffbreathing);//RULE 21
-                    }
-                }else{
-                    p.setDizzy(dizzyAnswer);
-                    System.out.println("It is bleeding? (NO, A_LITTLE, A_LOT): ");
-                    Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
-                    if(bleeding == Bleeding.A_LITTLE || bleeding == Bleeding.NO){
-                        p.setBleeding(bleeding);//RULE 13
-                    }else{
-                        p.setBleeding(bleeding);//RULE 14
-                    }
-                }
-            }
+        System.out.println("Is the person bleeding? (NO, A_LITTLE, A_LOT): ");
+        Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
+        p.setBleeding(bleeding);
+        System.out.println("Has the person just had an electric shock? (true/false): ");
+        Boolean electricAnswer = scanner.nextBoolean();
+        p.setElectric_shock(electricAnswer);
+        System.out.println("Has the person just suffered a major trauma? (true/false): ");
+        Boolean mtAnswer = scanner.nextBoolean();
+        p.setMajor_trauma(mtAnswer);
+        System.out.println("Is the person having seizures? (true/false): ");
+        Boolean seizuresAnswer = scanner.nextBoolean();
+        p.setSeizure(seizuresAnswer);
+        System.out.println("Has the person just had a car accident? (true/false): ");
+        Boolean carAnswer = scanner.nextBoolean();
+        p.setCar_accident(carAnswer);
+        System.out.println("Is the person vomiting? (true/false): ");
+        Boolean vomitAnswer = scanner.nextBoolean();
+        p.setVomit(vomitAnswer);
+        System.out.println("Does the person have chest pain? (A_LOT, A_LITTLE, NO): ");
+        ChestPain chestPainAnswer = ChestPain.valueOf(scanner.next().toUpperCase());
+        p.setChest_pain(chestPainAnswer);
+        System.out.println("Is the person dizzy? (A_LOT, A_LITTLE, NO): ");
+        Dizzy dizzyAnswer = Dizzy.valueOf(scanner.next().toUpperCase());
+        p.setDizzy(dizzyAnswer);
+        System.out.println("Does the person have any difficulty breathing? (A_LOT, A_LITTLE, NO): ");
+        DifficultyBreathing diffbreathing = DifficultyBreathing.valueOf(scanner.next().toUpperCase());
+        p.setDifficulty_breathing(diffbreathing);
+        System.out.println("Does the person have any communication problems? (true/false): ");
+        Boolean communicationProblemsAnswer = scanner.nextBoolean();
+        p.setCommunication_problems(communicationProblemsAnswer);
+        System.out.println("Is the person emitting words? (true/false): ");
+        Boolean wordsAnswer = scanner.nextBoolean();
+        p.setEmit_words(wordsAnswer);
+        System.out.println("Is the person trying to cough? (true/false): ");
+        Boolean cough = scanner.nextBoolean();
+        p.setCough(cough);
+        System.out.println("Could the person be intoxicated? (true/false): ");
+        Boolean intoxicationAnswer = scanner.nextBoolean();
+        p.setPossible_poisoning(intoxicationAnswer);
         return p;
     }
         
@@ -258,4 +156,9 @@ public class ActionSupportMedicalEmergencies {
             Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
         }*/
     }
+    
+    /*public static void menulogin(){
+
+    }*/
+    
 }

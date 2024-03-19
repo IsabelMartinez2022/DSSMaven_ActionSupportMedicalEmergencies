@@ -19,10 +19,7 @@ import pojos.Person;
  */
 public class Auxiliar {
     
-    
-    
-    //public static void register() throws SQLException {
-    public static Person register() throws SQLException {
+    public static void register() throws SQLException {
         Person p = null;
         try {
             Scanner scanner = new Scanner(System.in);
@@ -48,8 +45,7 @@ public class Auxiliar {
         }catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return p;
+
     }
     //PARA HACER LOG IN NECESITAMOS UNA ABSE DE DATOS
     public static Person login() {
