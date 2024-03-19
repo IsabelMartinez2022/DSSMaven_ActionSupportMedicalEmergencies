@@ -12,6 +12,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pojos.Person;
+import pojos.User;
 
 /**
  *
@@ -20,10 +21,10 @@ import pojos.Person;
 public class Auxiliar {
     
     public static void register() throws SQLException {
-        Person p = null;
+        User u = null;
         try {
             Scanner scanner = new Scanner(System.in);
-            p = new Person();
+            u = new User();
 
             System.out.println("Let's proceed with the registration:");
 
@@ -31,14 +32,14 @@ public class Auxiliar {
 
             System.out.print("Username:");
             username = scanner.nextLine();
-            p.setUsername(username);
+            u.setUsername(username);
 
             System.out.print("password:");
             password = scanner.nextLine();
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
             byte[] hash = md.digest();
-            p.setPassword(hash);
+            u.setPassword(hash);
             
             //return p;
 
