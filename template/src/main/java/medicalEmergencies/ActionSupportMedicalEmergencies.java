@@ -45,7 +45,7 @@ public class ActionSupportMedicalEmergencies {
                         // Ejecutar las reglas sobre la instancia
                         instance.fire();
                         instance.close();
-                        System.out.print();
+                        System.out.println(p.getProtocol().toString());
                         break;
                     }
                     case 0:{//CLOSE

@@ -18,4 +18,9 @@ public class Action {
     public ActionType getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "Action{" + "type=" + type + '}';
+    }   
 }
