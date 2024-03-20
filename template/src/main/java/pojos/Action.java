@@ -21,6 +21,8 @@ public class Action {
 
     @Override
     public String toString() {
-        return "Action{" + "type=" + type + '}';
+        //return "Action{" + "type=" + type + '}';
+        return "Action{" + "type=" + type + "info="+ type.getInstruction() +'}';
+
     }   
 }

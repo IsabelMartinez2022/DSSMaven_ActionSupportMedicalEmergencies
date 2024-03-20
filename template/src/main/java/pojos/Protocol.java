@@ -217,28 +217,21 @@ public class Protocol {
        
     }
 
-    public String actionString(){
-        /*for (Action action : this.actions);
-            System.out.println();*/
-        
+    public String actionString(){       
         String info = "";
-        //System.out.println("PROTOCOLS_MAP.entrySet(): "+PROTOCOLS_MAP.entrySet().toString());
         
         for (Map.Entry<ProtocolType, Protocol> entry : PROTOCOLS_MAP.entrySet()) {
-            //System.out.println("ENTRY KEY: "+entry.getKey().toString()); //IMPRIME BIEN
+            //System.out.println("ENTRY KEY: "+entry.getKey().toString()); //IMPRIME BIEN --> son las Keys
             //System.out.println("ENTRY VALUE: "+entry.getValue().toString()); //MAL --> Con est redirijo otra vez al tostring del protocol que vuelve a esta funcion --> errores
-            //System.out.println("ENTRY VALUE: "+entry.getValue().getActions()); //IMPRIME BIEN
+            //System.out.println("ENTRY VALUE: "+entry.getValue().getActions()); //IMPRIME BIEN --> son las actions
             //LOS 2 SOUT IMPRIMEN TODOS LOS PROTOCOLOS!!
             
             if(entry.getKey() == this.type){
-                //System.out.println("[Key] : " + entry.getKey() + " [Value] : " + entry.getValue());
-                info = info + /*"[Key] : " + entry.getKey().toString() +*/ " [Value] : " + entry.getValue().getActions() + "\n";
+                //info = info + /*"[Key] : " + entry.getKey().toString() +*/ " [Value] : " + entry.getValue().getActions() + "\n";
+                info = info + entry.getValue().getActions() + "\n";
             }
         }
 
-    	//System.out.println("INFOSTRING:\n"+info);
-        
-        //String info = "INFO";
         return info;
     }
     

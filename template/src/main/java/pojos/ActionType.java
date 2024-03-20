@@ -42,4 +42,10 @@ public enum ActionType {
     public String getInstruction() {
         return instruction;
     }
+
+    /*@Override
+    public String toString() {
+        return "ActionType{" + "instruction=" + instruction + '}';
+    }*/
+    
 }
