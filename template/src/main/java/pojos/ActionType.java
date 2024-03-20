@@ -4,11 +4,14 @@
  */
 package pojos;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  *
  * @author marty
  */
-public enum ActionType {
+public enum ActionType implements Serializable{
     NO_EMERGENCY("No medical emergency was found. In case of doubt, call the emergency services and remain nearby to provide assistance if needed"),
     CALL_112("Call the emergency services (112) and remain nearby to provide assistance if needed"),
     PERFORM_CPR("Perform CPR. Kneel beside the person. Place the person on their back on a firm, flat surface. Give 30 chest compressions. Hand position: Two hands centered on the chest. Body position: Shoulders directly over hands; elbows locked. Depth: At least 2 inches. Rate: 100 to 120 per minute. Give 2 breaths. Open the airway to a past-neutral position using the head-tilt/chin-lift technique. Pinch the nose shut, take a normal breath, and make complete seal over the person’s mouth with your mouth.. Continue giving sets of 30 chest compressions and 2 breaths. Use an AED as soon as one is available! Minimize interruptions to chest compressions to less than 10 seconds"),
@@ -33,7 +36,10 @@ public enum ActionType {
     AUTO_INJECTOR("Ask if the person has any auto-injector and help them search for it and use it. Ensure the person is lying down or seated in a comfortable position. Expose the outer thigh (upper leg) where the injection will be administered. Press down firmly until you hear or feel a click"),
     AMBULANCE("Ask for ambulance");
     
+    private static final long serialVersionUID = 5L;
+    private int id;
     private final String instruction;
+    //private final List<Action> actions;
 
     ActionType(String instruction) {
         this.instruction = instruction;

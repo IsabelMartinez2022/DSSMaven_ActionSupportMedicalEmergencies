@@ -4,32 +4,34 @@
  */
 package pojos;
 
+import java.io.Serializable;
 import static pojos.Protocol.PROTOCOLS_MAP;
-import pojos.ProtocolType;
 
 /**
  *
  * @author marty
  */
-public class Person {
+public class Person implements Serializable{
     
-    private Boolean conscious; // boolean
-    private Dizzy dizzy; // enum
-    private Breathing breathing; // enum
-    private Bleeding bleeding; // enum
-    private Boolean emit_words; // boolean
-    private ChestPain chest_pain; // enum 
-    private Boolean cough; // boolean
-    private Boolean seizure; // boolean
-    private Boolean possible_poisoning; // boolean
-    private Boolean electric_shock; // boolean
-    private Boolean major_trauma; // boolean
-    private Boolean car_accident; // boolean
-    private Boolean vomit; // boolean
-    private DifficultyBreathing difficulty_breathing; // enum
+    private static final long serialVersionUID = 1L;
+    private int id;
+    private Boolean conscious;
+    private Dizzy dizzy; 
+    private Breathing breathing; 
+    private Bleeding bleeding; 
+    private Boolean emit_words; 
+    private ChestPain chest_pain;  
+    private Boolean cough; 
+    private Boolean seizure; 
+    private Boolean possible_poisoning; 
+    private Boolean electric_shock; 
+    private Boolean major_trauma; 
+    private Boolean car_accident; 
+    private Boolean vomit; // 
+    private DifficultyBreathing difficulty_breathing; 
     private Boolean communication_problems;
-    private Protocol protocol;
-    private int userId;
+    private Protocol protocol; //Many to one relationship
+    private User user; //Many to one relationship
     
     //TODO LATER (POSSIBLE ADDITIONAL FUNCTIONALITY)
     //public static enum Urgency {URGENT,MEDIUM,MINOR};??
@@ -54,8 +56,7 @@ public class Person {
         this.communication_problems=communication_problems;
     }
 
-    public Person(){
-        
+    public Person(){  
     } 
 
     public Boolean getConscious() {
@@ -186,6 +187,14 @@ public class Person {
         this.protocol = protocol;
     }
 
+    public User getUser(){
+        return user;
+    }
+    
+    public void setUser(User user){
+        this.user= user;
+    }
+    
     @Override
     public String toString() {
         return "Person{" + "conscious=" + conscious + ", dizzy=" + dizzy + ", breathing=" + breathing + ", bleeding=" + bleeding + ", emit_words=" + emit_words + ", chest_pain=" + chest_pain + ", cough=" + cough + ", seizure=" + seizure + ", possible_poisoning=" + possible_poisoning + ", electric_shock=" + electric_shock + ", major_trauma=" + major_trauma + ", car_accident=" + car_accident + ", vomit=" + vomit + ", difficulty_breathing=" + difficulty_breathing + ", communication_problems"+ communication_problems+ ", protocol=" +protocol + '}';

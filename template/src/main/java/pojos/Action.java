@@ -4,14 +4,21 @@
  */
 package pojos;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  *
  * @author isama
  */
-public class Action {
-    private final ActionType type;
+public class Action implements Serializable {
+    
+    private static final long serialVersionUID = 4L;
+    private int id;
+    private final ActionType type; // Many to one relationship
+    private List<Protocol> protocols; // Many to many relationship
 
-    public Action(ActionType type) {
+    public Action(ActionType type, List<Protocol> protocols) {
         this.type = type;
     }
 
@@ -19,6 +26,10 @@ public class Action {
         return type;
     }
 
+    public List<Protocol> getProtocols() {
+        return protocols;
+    }
+    
     @Override
     public String toString() {
         //return "Action{" + "type=" + type + '}';

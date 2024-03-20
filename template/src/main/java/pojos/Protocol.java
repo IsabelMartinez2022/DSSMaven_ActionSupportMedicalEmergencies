@@ -4,6 +4,7 @@
  */
 package pojos;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,11 +12,13 @@ import java.util.Map;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import org.drools.ruleunits.api.RuleUnitProvider;
 
-public class Protocol {
+public class Protocol implements Serializable{
+    
+    private static final long serialVersionUID = 3L;
     private int id;
     public static final Map<ProtocolType, Protocol> PROTOCOLS_MAP = new HashMap<>();
     private ProtocolType type;
-    private List<Action> actions;
+    private List<Action> actions; //Many to many relationship
 
     public Protocol(ProtocolType type, List<Action> actions) {
         this.type = type;
@@ -248,6 +251,8 @@ public class Protocol {
     public String toString() {
         return "\nProtocol{\n" + "\tid=" + this.id + "\n\ttype: " + this.type + "\n\tActions: " + actionString() + '}';
     }
+    
+    //TODO hashCode()
     
     //MAIN TO TRY PROTOCOL WITHOUT HAVING TO INPUT ALL THE DATA AND RUNNING OUR MENU
     public static void main(String[] args) {
