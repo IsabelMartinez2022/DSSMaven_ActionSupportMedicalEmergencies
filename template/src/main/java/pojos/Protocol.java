@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import org.drools.ruleunits.api.RuleUnitInstance;
+import org.drools.ruleunits.api.RuleUnitProvider;
 
 public class Protocol {
     private int id;
@@ -216,8 +218,28 @@ public class Protocol {
     }
 
     public String actionString(){
-        for (Action action : this.actions);
-            System.out.println();
+        /*for (Action action : this.actions);
+            System.out.println();*/
+        
+        String info = "";
+        //System.out.println("PROTOCOLS_MAP.entrySet(): "+PROTOCOLS_MAP.entrySet().toString());
+        
+        for (Map.Entry<ProtocolType, Protocol> entry : PROTOCOLS_MAP.entrySet()) {
+            //System.out.println("ENTRY KEY: "+entry.getKey().toString()); //IMPRIME BIEN
+            //System.out.println("ENTRY VALUE: "+entry.getValue().toString()); //MAL --> Con est redirijo otra vez al tostring del protocol que vuelve a esta funcion --> errores
+            //System.out.println("ENTRY VALUE: "+entry.getValue().getActions()); //IMPRIME BIEN
+            //LOS 2 SOUT IMPRIMEN TODOS LOS PROTOCOLOS!!
+            
+            if(entry.getKey() == this.type){
+                //System.out.println("[Key] : " + entry.getKey() + " [Value] : " + entry.getValue());
+                info = info + /*"[Key] : " + entry.getKey().toString() +*/ " [Value] : " + entry.getValue().getActions() + "\n";
+            }
+        }
+
+    	//System.out.println("INFOSTRING:\n"+info);
+        
+        //String info = "INFO";
+        return info;
     }
     
     @Override
@@ -225,4 +247,34 @@ public class Protocol {
         return "Protocol{" + "id=" + id + ", type=" + type + ", actions=" + actionString() + '}';
     }
     
+    
+    public static void main(String[] args) {
+        
+        PersonUnit personunit = new PersonUnit();
+        RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
+                
+        Person person = new Person();
+        
+        person.setConscious(false);
+        person.setBreathing(Breathing.NO);
+        person.setBleeding(Bleeding.NO);
+        person.setElectric_shock(false);
+        person.setMajor_trauma(false);
+        person.setSeizure(false);
+        personunit.getPeople().add(person);
+        
+        // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio
+        Protocol cardioArrestProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST);
+        // Asignar el protocolo a la persona
+        person.setProtocol(cardioArrestProtocol);
+        
+        personunit.getPeople().add(person);
+        // Ejecutar las reglas sobre la instancia
+        instance.fire();
+        instance.close();
+        System.out.println(person.getProtocol().toString());
+        
+    }
+    
 }
+
