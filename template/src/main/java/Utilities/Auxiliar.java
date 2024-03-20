@@ -5,6 +5,8 @@
 package Utilities;
 
 import java.io.IOException;
+import java.util.Scanner;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -67,5 +69,64 @@ public class Auxiliar {
             
         }*/
         return null;
+    }
+    
+    public static int inputnumber(){
+        Scanner scanner = new Scanner(System.in);
+        int number = -1;
+        try{
+            number = scanner.nextInt();
+        } catch (Exception ex) {
+            //Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("\nError on the input. "
+                    + "Please try again\n");
+        }
+        return number;
+    }
+    
+    public static String translatenumbertoString(){
+        /*
+        1 = Yes; 2 = No; 3 = Unable to check; 4 = a little; 5 = a lot"
+        6 = true; 7 = false");
+        */
+        String string = "";
+        int number;
+        do{
+            number = inputnumber();
+            switch (number) {
+                case 1:{
+                    string = "YES";
+                    break;
+                }
+                case 2:{
+                    string = "NO";
+                    break;
+                }
+                case 3:{
+                    string = "UNABLE_TO_CHECK";
+                    break;
+                }
+                case 4:{
+                    string = "A_LITTLE";
+                    break;
+                }
+                case 5:{
+                    string = "A_LOT";
+                    break;
+                }
+                case 6:{
+                    string = "true";
+                    break;
+                }
+                case 7:{
+                    string = "false";
+                    break;
+                }
+                default:
+                    System.out.print("Please input a correct number: ");
+            }
+        }while((number<1 || number > 7));
+        
+        return string;
     }
 }
