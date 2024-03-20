@@ -22,7 +22,15 @@ public class Action {
     @Override
     public String toString() {
         //return "Action{" + "type=" + type + '}';
-        return "Action{" + "type=" + type + "info="+ type.getInstruction() +'}';
+        //return "Action{" + "type=" + type + "info="+ type.getInstruction() +'}';
+        
+        /*
+        this.type --> access the type of Action (CPR, AED...)
+        this.type.getInstructions --> access the instruction of the type
+        If we put the toString on ActionType when we put this.type it will only print the instruction and not the type
+            thats why the toString is commented
+        */
+        return "\n\t\t" + this.type + ": "+ this.type.getInstruction();
 
     }   
 }

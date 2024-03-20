@@ -45,7 +45,7 @@ public enum ActionType {
 
     /*@Override
     public String toString() {
-        return "ActionType{" + "instruction=" + instruction + '}';
+        return "ActionType{" + "instruction=" + this.instruction + '}';
     }*/
     
 }

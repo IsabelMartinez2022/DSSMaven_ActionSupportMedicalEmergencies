@@ -220,11 +220,20 @@ public class Protocol {
     public String actionString(){       
         String info = "";
         
+        /*
+        1_THIS FOR WILL GO THROUGH THE MAP
+        2_WHEN THE KEY IS THE SAME AS THE ONE THAT OUR PROTOCAL HAS IT WILL SAVE IT IN THE STRING
+        */
         for (Map.Entry<ProtocolType, Protocol> entry : PROTOCOLS_MAP.entrySet()) {
             //System.out.println("ENTRY KEY: "+entry.getKey().toString()); //IMPRIME BIEN --> son las Keys
             //System.out.println("ENTRY VALUE: "+entry.getValue().toString()); //MAL --> Con est redirijo otra vez al tostring del protocol que vuelve a esta funcion --> errores
             //System.out.println("ENTRY VALUE: "+entry.getValue().getActions()); //IMPRIME BIEN --> son las actions
             //LOS 2 SOUT IMPRIMEN TODOS LOS PROTOCOLOS!!
+            
+            /*
+            getKey --> access the key
+            getValue --> access the value of the key
+            */
             
             if(entry.getKey() == this.type){
                 //info = info + /*"[Key] : " + entry.getKey().toString() +*/ " [Value] : " + entry.getValue().getActions() + "\n";
@@ -237,10 +246,10 @@ public class Protocol {
     
     @Override
     public String toString() {
-        return "Protocol{" + "id=" + id + ", type=" + type + ", actions=" + actionString() + '}';
+        return "\nProtocol{\n" + "\tid=" + this.id + "\n\ttype: " + this.type + "\n\tActions: " + actionString() + '}';
     }
     
-    
+    //MAIN TO TRY PROTOCOL WITHOUT HAVING TO INPUT ALL THE DATA AND RUNNING OUR MENU
     public static void main(String[] args) {
         
         PersonUnit personunit = new PersonUnit();
