@@ -84,11 +84,11 @@ public class Auxiliar {
         return number;
     }
     
-    public static String translatenumbertoString(){
+    /*public static String translatenumbertoString(){
         /*
         1 = Yes; 2 = No; 3 = Unable to check; 4 = a little; 5 = a lot"
         6 = true; 7 = false");
-        */
+        
         String string = "";
         int number;
         do{
@@ -128,8 +128,90 @@ public class Auxiliar {
         }while((number<1 || number > 7));
         
         return string;
+    }*/
+    
+    public static String translatenumbertoStringBoolean(){
+        /*
+        1 = true; 2 = false";
+        */
+        String string = "";
+        int number;
+        do{
+            number = inputnumber();
+            switch (number) {
+                case 1:{
+                    string = "true";
+                    break;
+                }
+                case 2:{
+                    string = "false";
+                    break;
+                }
+                default:
+                    System.out.print("Please input a correct number: ");
+            }
+        }while((number<1 || number > 2));
+        return string;
     }
     
+    public static String translatenumbertoStringEnum1(){
+        /*
+        1 = Yes; 2 = No; 3 = Unable to check
+        */
+        String string = "";
+        int number;
+        do{
+            number = inputnumber();
+            switch (number) {
+                case 1:{
+                    string = "YES";
+                    break;
+                }
+                case 2:{
+                    string = "NO";
+                    break;
+                }
+                case 3:{
+                    string = "UNABLE_TO_CHECK";
+                    break;
+                }
+                default:
+                    System.out.print("Please input a correct number: ");
+            }
+        }while((number<1 || number > 7));
+        
+        return string;
+    }
     
+    public static String translatenumbertoStringEnum2(){
+        
+        /*
+        2 = No; 1 = a little; 3 = a lot"
+        */
+        
+        String string = "";
+        int number;
+        do{
+            number = inputnumber();
+            switch (number) {
+                case 1:{
+                    string = "A_LITTLE";
+                    break;
+                }
+                case 2:{
+                    string = "NO";
+                    break;
+                }
+                case 3:{
+                    string = "A_LOT";
+                    break;
+                }
+                default:
+                    System.out.print("Please input a correct number: ");
+            }
+        }while((number<1 || number > 7));
+        
+        return string;
+    }
     
 }
