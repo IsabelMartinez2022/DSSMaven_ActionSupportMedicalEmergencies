@@ -18,9 +18,14 @@ public class Action implements Serializable {
     private final ActionType type; // Many to one relationship
     private List<Protocol> protocols; // Many to many relationship
 
-    public Action(ActionType type, List<Protocol> protocols) {
+    //Used to try correct implementation of menus
+    public Action(ActionType type) {
         this.type = type;
     }
+    //When the doubts are solve change to this --> also change protocol
+    /*public Action(ActionType type, List<Protocol> protocols) {
+        this.type = type;
+    }*/
 
     public ActionType getType() {
         return type;

@@ -53,6 +53,7 @@ public class ActionSupportMedicalEmergencies {
                     case 0:{//CLOSE
                         // No olvides cerrar la instancia al final para liberar recursos
                         instance.close();
+                        System.out.println("\nYou are leaving the app\n");
                         System.exit(0);
                     }
                     /*default:{
@@ -69,75 +70,104 @@ public class ActionSupportMedicalEmergencies {
     public static Person execute() {
         Scanner scanner = new Scanner(System.in);
         Person p = new Person();
+        String info;
         
-        System.out.println("You will be presented with some casuistic at which you need to input a number: ");
+        System.out.println("\nYou will be presented with some casuistic at which you need to input a number: ");
         System.out.println("1 = Yes; \t2 = No; \t3 = Unable to check;\n"
                     + "4 = a little; \t5 = a lot;\n"
                     + "6 = true; \t7 = false");
         
-        System.out.println("Is the person conscious? (true(6)/false(7)): ");
-        String info = translatenumbertoString();
+        System.out.println("\nIs the person conscious? (true(6)/false(7)): ");
+        info = translatenumbertoString();
         //Boolean consciousAnswer = scanner.nextBoolean();
-        Boolean consciousAnswer = Boolean.valueOf(info);
+        Boolean consciousAnswer = Boolean.valueOf(info); //'true' --> true; other txt is interpretated as false
         p.setConscious(consciousAnswer);
         
         System.out.println("Is the person breathing? (NO(2),UNABLE_TO_CHECK(3), YES(1)): "); 
-        Breathing breathingAnswer = Breathing.valueOf(scanner.next().toUpperCase());
+        //Breathing breathingAnswer = Breathing.valueOf(scanner.next().toUpperCase());
+        info = translatenumbertoString();
+        Breathing breathingAnswer = Breathing.valueOf(info);
         p.setBreathing(breathingAnswer);
             //if(!consciousAnswer && breathingAnswer == Breathing.NO) {
                     /*p.getProtocol().getType().CALL_112; //acaba directamente la ejecución de la aplicación 
                     return ; //acaba directamente la ejecución de la aplicación */
         
         System.out.println("Is the person bleeding? (NO(2), A_LITTLE(4), A_LOT(5)): ");
-        Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
+        info = translatenumbertoString();
+        //Bleeding bleeding = Bleeding.valueOf(scanner.next().toUpperCase());
+        Bleeding bleeding = Bleeding.valueOf(info);
         p.setBleeding(bleeding);
         
         System.out.println("Has the person just had an electric shock? (true(6)/false(7)): ");
-        Boolean electricAnswer = scanner.nextBoolean();
+        info = translatenumbertoString();
+        //Boolean electricAnswer = scanner.nextBoolean();
+        Boolean electricAnswer = Boolean.valueOf(info);
         p.setElectric_shock(electricAnswer);
         
         System.out.println("Has the person just suffered a major trauma? (true(6)/false(7)): ");
-        Boolean mtAnswer = scanner.nextBoolean();
+        info = translatenumbertoString();
+        //Boolean mtAnswer = scanner.nextBoolean();
+        Boolean mtAnswer = Boolean.valueOf(info);
         p.setMajor_trauma(mtAnswer);
         
         System.out.println("Is the person having seizures? (true(6)/false(7)): ");
-        Boolean seizuresAnswer = scanner.nextBoolean();
+        info = translatenumbertoString();
+        //Boolean seizuresAnswer = scanner.nextBoolean();
+        Boolean seizuresAnswer = Boolean.valueOf(info);
         p.setSeizure(seizuresAnswer);
         
         System.out.println("Has the person just had a car accident? (true(6)/false(7)): ");
-        Boolean carAnswer = scanner.nextBoolean();
+        info = translatenumbertoString();
+        //Boolean carAnswer = scanner.nextBoolean();
+        Boolean carAnswer = Boolean.valueOf(info);
         p.setCar_accident(carAnswer);
         
         System.out.println("Is the person vomiting? (true(6)/false(7)): ");
-        Boolean vomitAnswer = scanner.nextBoolean();
+        info = translatenumbertoString();
+        //Boolean vomitAnswer = scanner.nextBoolean();
+        Boolean vomitAnswer = Boolean.valueOf(info);
         p.setVomit(vomitAnswer);
         
         System.out.println("Does the person have chest pain? (A_LOT(5), A_LITTLE(4), NO(2)): ");
-        ChestPain chestPainAnswer = ChestPain.valueOf(scanner.next().toUpperCase());
+        info = translatenumbertoString();
+        //ChestPain chestPainAnswer = ChestPain.valueOf(scanner.next().toUpperCase());
+        ChestPain chestPainAnswer = ChestPain.valueOf(info);
         p.setChest_pain(chestPainAnswer);
         
         System.out.println("Is the person dizzy? (A_LOT(5), A_LITTLE(4), NO(2)): ");
-        Dizzy dizzyAnswer = Dizzy.valueOf(scanner.next().toUpperCase());
+        info = translatenumbertoString();
+        //Dizzy dizzyAnswer = Dizzy.valueOf(scanner.next().toUpperCase());
+        Dizzy dizzyAnswer = Dizzy.valueOf(info);
         p.setDizzy(dizzyAnswer);
         
         System.out.println("Does the person have any difficulty breathing? (A_LOT(5), A_LITTLE(4), NO(2)): ");
-        DifficultyBreathing diffbreathing = DifficultyBreathing.valueOf(scanner.next().toUpperCase());
+        info = translatenumbertoString();
+        //DifficultyBreathing diffbreathing = DifficultyBreathing.valueOf(scanner.next().toUpperCase());
+        DifficultyBreathing diffbreathing = DifficultyBreathing.valueOf(info);
         p.setDifficulty_breathing(diffbreathing);
         
-        System.out.println("Does the person have any communication problems? (true(1)/false(2)): ");
-        Boolean communicationProblemsAnswer = scanner.nextBoolean();
+        System.out.println("Does the person have any communication problems? (true(6)/false(7)): ");
+        info = translatenumbertoString();
+        //Boolean communicationProblemsAnswer = scanner.nextBoolean();
+        Boolean communicationProblemsAnswer = Boolean.valueOf(info);
         p.setCommunication_problems(communicationProblemsAnswer);
        
         System.out.println("Is the person emitting words? (true(6)/false(7)): ");
-        Boolean wordsAnswer = scanner.nextBoolean();
+        info = translatenumbertoString();
+        //Boolean wordsAnswer = scanner.nextBoolean();
+        Boolean wordsAnswer = Boolean.valueOf(info);
         p.setEmit_words(wordsAnswer);
         
         System.out.println("Is the person trying to cough? (true(6)/false(7)): ");
-        Boolean cough = scanner.nextBoolean();
+        info = translatenumbertoString();
+        //Boolean cough = scanner.nextBoolean();
+        Boolean cough = Boolean.valueOf(info);
         p.setCough(cough);
         
         System.out.println("Could the person be intoxicated? (true(6)/false(7)): ");
-        Boolean intoxicationAnswer = scanner.nextBoolean();
+        info = translatenumbertoString();
+        //Boolean intoxicationAnswer = scanner.nextBoolean();
+        Boolean intoxicationAnswer = Boolean.valueOf(info);
         p.setPossible_poisoning(intoxicationAnswer);
         
         return p;
