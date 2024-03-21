@@ -26,10 +26,6 @@ import pojos.Protocol;
 import pojos.ProtocolType;
 import pojos.Breathing;
 
-/**
- *
- * @author isama
- */
 public class PersonUnitTest {
 
     static final Logger LOG = LoggerFactory.getLogger(PersonUnitTest.class);
