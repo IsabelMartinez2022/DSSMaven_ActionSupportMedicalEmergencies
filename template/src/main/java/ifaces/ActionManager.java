@@ -17,5 +17,4 @@ public interface ActionManager {
     
     public void addAction(Action a);
     //public Person getPersonById(int choicePerson)?????
-    public List<Action> listAllActions();
 }
