@@ -7,6 +7,7 @@ package jdbc;
 import ifaces.PersonManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import pojos.Bleeding;
@@ -34,8 +35,8 @@ public class JDBCPersonManager implements PersonManager{
 
 			String sql = "INSERT INTO person (conscious, dizzy, breathing, bleeding, "
                                 + "emit_words, chest_pain, cough, seizure, possible_poisoning, electric_shock, "
-                                + "major_trauma, car_accident, vomit, difficulty_breathing, communication_problems) VALUES "
-                                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                + "major_trauma, car_accident, vomit, difficulty_breathing, communication_problems, "
+                                + "userId, protocolId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setBoolean(1, p.getConscious());
                         prep.setString(2, p.getDizzy().name());
@@ -52,9 +53,10 @@ public class JDBCPersonManager implements PersonManager{
                         prep.setBoolean(13, p.getVomit());
                         prep.setString(14, p.getDifficulty_breathing().name());
                         prep.setBoolean(15, p.getCommunication_problems());
+                        prep.setInt(16, p.getUser().getId());
+                        prep.setInt(17, p.getProtocol().getId());
 			prep.executeUpdate();
 			prep.close();
-
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -63,7 +65,7 @@ public class JDBCPersonManager implements PersonManager{
     
     @Override
         public Person getPersonById(int choicePerson){
-            Person p=null;
+            Person person = null;
             
             try{
                 String sql= "SELECT * from person WHERE id LIKE ?";
@@ -72,26 +74,29 @@ public class JDBCPersonManager implements PersonManager{
                 ResultSet rs = statement.executeQuery();
                 
                 while(rs.next()){
-                    int id = rs.getInt("id");
-                    Boolean conscious= rs.getBoolean("conscious");
-                    
-                    Dizzy dizzy; 
-    private Breathing breathing; 
-    private Bleeding bleeding; 
-    private Boolean emit_words; 
-    private ChestPain chest_pain;  
-    private Boolean cough; 
-    private Boolean seizure; 
-    private Boolean possible_poisoning; 
-    private Boolean electric_shock; 
-    private Boolean major_trauma; 
-    private Boolean car_accident; 
-    private Boolean vomit; // 
-    private DifficultyBreathing difficulty_breathing; 
-    private Boolean communication_problems;
+                    person = new Person();
+                    person.setId(rs.getInt("id"));
+                    person.setConscious(rs.getBoolean("conscious"));
+                    person.setDizzy(Dizzy.valueOf(rs.getString("dizzy")));
+                    person.setBreathing(Breathing.valueOf(rs.getString("breathing")));
+                    person.setBleeding(Bleeding.valueOf(rs.getString("bleeding")));
+                    person.setEmit_words(rs.getBoolean("emit_words"));
+                    person.setChest_pain(ChestPain.valueOf(rs.getString("chest_pain")));
+                    person.setCough(rs.getBoolean("cough"));
+                    person.setSeizure(rs.getBoolean("seizure"));
+                    person.setPossible_poisoning(rs.getBoolean("possible_poisoning"));
+                    person.setElectric_shock(rs.getBoolean("electric_shock"));
+                    person.setMajor_trauma(rs.getBoolean("major_trauma"));
+                    person.setCar_accident(rs.getBoolean("car_accident"));
+                    person.setVomit(rs.getBoolean("vomit"));
+                    person.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
+                    person.setCommunication_problems((rs.getBoolean("communication_problems")));
                 }
+            } catch(SQLException e){
+                e.printStackTrace();
             }
-        }
+            return person;
+}
         
     @Override
 	public List<Person> listAllPeople() {

@@ -25,6 +25,10 @@ public class Protocol implements Serializable{
         this.actions = actions;
     }
 
+    public int getId(){
+        return id;
+    }
+    
     public ProtocolType getType() {
         return type;
     }
