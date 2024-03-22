@@ -15,6 +15,5 @@ import pojos.Action;
 public interface ActionManager {
     //SÓLO SI CREAMOS LA BASE DE DATOS DESDE AQUÍ
     
-    public void addAction(Action a);
-    //public Person getPersonById(int choicePerson)?????
+    public void addAction();
 }

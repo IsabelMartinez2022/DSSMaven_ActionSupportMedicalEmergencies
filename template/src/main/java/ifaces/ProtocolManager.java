@@ -15,7 +15,6 @@ import pojos.Protocol;
 public interface ProtocolManager {
     //SÓLO SI CREAMOS LA BASE DE DATOS DESDE AQUÍ
     
-    public void addProtocol(Protocol pr);
-    //public Person getPersonById(int choicePerson)?????
-    public List<Protocol> listAllProtocols();
+    public void addProtocol();
+    //public List<Protocol> listAllProtocols();
 }
