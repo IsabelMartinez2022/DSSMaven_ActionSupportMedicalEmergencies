@@ -64,13 +64,13 @@ private static Scanner sc = new Scanner(System.in);
         return null;
     }
     
-    public static String translateNumberToString(int optionsCount, String[] optionStrings) {
+    public static String translateNumberToString(int optionsCount, String[] optionStrings) { //1º, nº total opciones posibles; 2º, txt opciones posibles
         int number;
         String string = "";
         do {
             number = inputNumber();
             if (number >= 1 && number <= optionsCount) {
-                string = optionStrings[number - 1];
+                string = optionStrings[number - 1]; // Adjust index
             } else {
                 System.out.print("Please input a correct number: ");
             }
