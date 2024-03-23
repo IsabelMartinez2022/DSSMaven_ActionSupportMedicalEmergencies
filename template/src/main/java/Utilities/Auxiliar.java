@@ -4,9 +4,6 @@
  */
 package Utilities;
 
-import java.io.IOException;
-import java.util.Scanner;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -16,16 +13,12 @@ import java.util.logging.Logger;
 import pojos.Person;
 import pojos.User;
 
-/**
- *
- * @author maria
- */
 public class Auxiliar {
-    
+private static Scanner sc = new Scanner(System.in);
+
     public static void register() throws SQLException {
         User u = null;
         try {
-            Scanner scanner = new Scanner(System.in);
             u = new User();
 
             System.out.println("Let's proceed with the registration:");
@@ -33,11 +26,11 @@ public class Auxiliar {
             String username, password;
 
             System.out.print("Username:");
-            username = scanner.nextLine();
+            username = sc.nextLine();
             u.setUsername(username);
 
             System.out.print("password:");
-            password = scanner.nextLine();
+            password = sc.nextLine();
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
             byte[] hash = md.digest();
@@ -56,10 +49,10 @@ public class Auxiliar {
             Scanner scanner = new Scanner(System.in);
             System.out.print("Username:");
 
-            String username = scanner.nextLine();
+            String username = sc.nextLine();
 
             System.out.print("password:");
-            String password = scanner.nextLine();
+            String password = sc.nextLine();
             byte[] bytesDefaultCharset = password.getBytes();
             if (verifyUsername(username) && verifyPassword(username, password)) {
 
@@ -71,139 +64,31 @@ public class Auxiliar {
         return null;
     }
     
-    public static int inputnumber(){
-        Scanner scanner = new Scanner(System.in);
+    public static String translateNumberToString(int optionsCount, String[] optionStrings) {
+        int number;
+        String string = "";
+        do {
+            number = inputNumber();
+            if (number >= 1 && number <= optionsCount) {
+                string = optionStrings[number - 1];
+            } else {
+                System.out.print("Please input a correct number: ");
+            }
+        } while (number < 1 || number > optionsCount);
+
+        return string;
+    }
+    
+    private static int inputNumber() {
         int number = -1;
-        try{
-            number = scanner.nextInt();
+        try {
+            number = sc.nextInt();
         } catch (Exception ex) {
-            //Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("\nError on the input. "
-                    + "Please try again\n");
+            System.out.println("\nError on the input. Please try again\n");
+        } finally {
+            sc.nextLine(); // Consume newline character
         }
         return number;
-    }
-    
-    /*public static String translatenumbertoString(){
-        /*
-        1 = Yes; 2 = No; 3 = Unable to check; 4 = a little; 5 = a lot"
-        6 = true; 7 = false");
-        
-        String string = "";
-        int number;
-        do{
-            number = inputnumber();
-            switch (number) {
-                case 1:{
-                    string = "YES";
-                    break;
-                }
-                case 2:{
-                    string = "NO";
-                    break;
-                }
-                case 3:{
-                    string = "UNABLE_TO_CHECK";
-                    break;
-                }
-                case 4:{
-                    string = "A_LITTLE";
-                    break;
-                }
-                case 5:{
-                    string = "A_LOT";
-                    break;
-                }
-                case 6:{
-                    string = "true";
-                    break;
-                }
-                case 7:{
-                    string = "false";
-                    break;
-                }
-                default:
-                    System.out.print("Please input a correct number: ");
-            }
-        }while((number<1 || number > 7));
-        
-        return string;
-    }*/
-    
-    public static String translatenumbertoStringBoolean(){
-        //1 = true; 2 = false";
-        String string = "";
-        int number;
-        do{
-            number = inputnumber();
-            switch (number) {
-                case 1:{
-                    string = "true";
-                    break;
-                }
-                case 2:{
-                    string = "false";
-                    break;
-                }
-                default:
-                    System.out.print("Please input a correct number: ");
-            }
-        }while((number<1 || number > 2));
-        return string;
-    }
-    
-    public static String translatenumbertoStringEnum1(){
-        //1 = Yes; 2 = No; 3 = Unable to check
-        String string = "";
-        int number;
-        do{
-            number = inputnumber();
-            switch (number) {
-                case 1:{
-                    string = "YES";
-                    break;
-                }
-                case 2:{
-                    string = "NO";
-                    break;
-                }
-                case 3:{
-                    string = "UNABLE_TO_CHECK";
-                    break;
-                }
-                default:
-                    System.out.print("Please input a correct number: ");
-            }
-        }while((number<1 || number > 7));
-        
-        return string;
-    }
-    
-    public static String translatenumbertoStringEnum2(){
-        //2 = No; 1 = a little; 3 = a lot"
-        String string = "";
-        int number;
-        do{
-            number = inputnumber();
-            switch (number) {
-                case 1:{
-                    string = "A_LITTLE";
-                    break;
-                }
-                case 2:{
-                    string = "NO";
-                    break;
-                }
-                case 3:{
-                    string = "A_LOT";
-                    break;
-                }
-                default:
-                    System.out.print("Please input a correct number: ");
-            }
-        }while((number<1 || number > 7));
-        
-        return string;
     }
     
 }
