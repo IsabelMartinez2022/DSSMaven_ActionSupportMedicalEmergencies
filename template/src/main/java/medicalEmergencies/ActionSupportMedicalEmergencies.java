@@ -5,12 +5,12 @@
 
 package medicalEmergencies;
 
-import static Utilities.Auxiliar.inputnumber;
 //import static Utilities.Auxiliar.translatenumbertoString;
 import static Utilities.Auxiliar.translatenumbertoStringBoolean;
 import static Utilities.Auxiliar.translatenumbertoStringEnum1;
 import static Utilities.Auxiliar.translatenumbertoStringEnum2;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,6 +45,7 @@ public class ActionSupportMedicalEmergencies {
         PersonUnit personunit = new PersonUnit();
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
         Person p = null;
+        int option;
         try {
             connectionManager = new ConnectionManager();
             
@@ -65,7 +66,14 @@ public class ActionSupportMedicalEmergencies {
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 System.out.print("\nSelect an option: ");
                 
-                int option = sc.nextInt();
+                //int option = sc.nextInt();
+                try {
+                    option = sc.nextInt();
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    sc.next(); // Clear the invalid input
+                    continue; // Restart the loop
+                }
                 switch (option) {
                     case 1:
                         Utilities.Auxiliar.register();
