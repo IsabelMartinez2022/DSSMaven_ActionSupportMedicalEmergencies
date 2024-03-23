@@ -18,9 +18,9 @@ import pojos.ActionType;
  * @author maria
  */
 public class JDBCActionManager implements ActionManager{
-    private JDBCManager manager;
+    private ConnectionManager manager;
     
-    public JDBCActionManager (JDBCManager m){
+    public JDBCActionManager (ConnectionManager m){
         this.manager=m;
     }
     

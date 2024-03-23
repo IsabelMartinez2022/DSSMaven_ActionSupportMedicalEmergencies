@@ -17,9 +17,9 @@ import pojos.ProtocolType;
  * @author maria
  */
 public class JDBCProtocolManager implements ProtocolManager{
-    private JDBCManager manager;
+    private ConnectionManager manager;
     
-    public JDBCProtocolManager (JDBCManager m){
+    public JDBCProtocolManager (ConnectionManager m){
         this.manager=m;
     }
     

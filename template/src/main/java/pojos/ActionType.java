@@ -39,7 +39,6 @@ public enum ActionType implements Serializable{
     private static final long serialVersionUID = 5L;
     private int id;
     private final String instruction;
-    //private final List<Action> actions;
 
     ActionType(String instruction) {
         this.instruction = instruction;

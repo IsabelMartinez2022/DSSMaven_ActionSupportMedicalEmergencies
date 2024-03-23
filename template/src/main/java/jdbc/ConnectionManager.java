@@ -15,11 +15,11 @@ import java.sql.Statement;
  *
  * @author isama
  */
-public class JDBCManager {
+public class ConnectionManager {
 
 	private Connection c = null;
 
-        public JDBCManager() {
+        public ConnectionManager() {
 		try {
 			// Open database connection
 			Class.forName("org.sqlite.JDBC");
@@ -28,6 +28,7 @@ public class JDBCManager {
 			System.out.println("Database connection opened.");
 			this.createTables();
 		} catch (SQLException e) {
+                        System.out.println("Database access error");
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			System.out.println("Libraries not loaded");
@@ -48,7 +49,6 @@ public class JDBCManager {
 
 //------CREATE TABLES-------------
 	public void createTables() {  
-            // Create Tables
 		try {
 			Statement stmt = c.createStatement();
 			String sql = "CREATE TABLE user ("

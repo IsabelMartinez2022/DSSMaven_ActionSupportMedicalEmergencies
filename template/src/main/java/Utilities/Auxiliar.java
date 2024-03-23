@@ -131,9 +131,7 @@ public class Auxiliar {
     }*/
     
     public static String translatenumbertoStringBoolean(){
-        /*
-        1 = true; 2 = false";
-        */
+        //1 = true; 2 = false";
         String string = "";
         int number;
         do{
@@ -155,9 +153,7 @@ public class Auxiliar {
     }
     
     public static String translatenumbertoStringEnum1(){
-        /*
-        1 = Yes; 2 = No; 3 = Unable to check
-        */
+        //1 = Yes; 2 = No; 3 = Unable to check
         String string = "";
         int number;
         do{
@@ -184,11 +180,7 @@ public class Auxiliar {
     }
     
     public static String translatenumbertoStringEnum2(){
-        
-        /*
-        2 = No; 1 = a little; 3 = a lot"
-        */
-        
+        //2 = No; 1 = a little; 3 = a lot"
         String string = "";
         int number;
         do{

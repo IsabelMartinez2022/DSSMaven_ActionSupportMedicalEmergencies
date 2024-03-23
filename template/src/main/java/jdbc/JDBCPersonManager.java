@@ -23,9 +23,9 @@ import pojos.Person;
  */
 public class JDBCPersonManager implements PersonManager{
     
-    private JDBCManager manager;
+    private ConnectionManager manager;
 
-	public JDBCPersonManager(JDBCManager m) {
+	public JDBCPersonManager(ConnectionManager m) {
 		this.manager = m;
 	}
 

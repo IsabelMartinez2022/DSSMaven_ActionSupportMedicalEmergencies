@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import jdbc.ConnectionManager;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import org.drools.ruleunits.api.RuleUnitProvider;
 import pojos.Bleeding;
@@ -25,26 +26,52 @@ import pojos.Person;
 import pojos.PersonUnit;
 
 public class ActionSupportMedicalEmergencies {
+    private static ConnectionManager connectionManager;
+    private static boolean control;
+    private static Scanner sc = new Scanner(System.in);
+    
+    /*public static boolean logIn() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Type the user name:");
+        String username = sc.nextLine();
+        System.out.println("Type the password:");
+        String password = sc.nextLine();
+        //boolean d = user.login(username, password);
+        return d;
+    }*/
 
+    
     public static void main(String[] args) {
         PersonUnit personunit = new PersonUnit();
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
-        
         Person p = null;
-        //User u = null;
-        
         try {
-            do{
-                int option = menu();
+            connectionManager = new ConnectionManager();
+            
+            boolean log = true;
+            /*while (log) {
+                    log = logIn();
+            }*/
+            
+            boolean control = true;
+            while (control)  {
+                System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                System.out.println("@@                                                                  @@");
+                System.out.println("@@                 Welcome.                                         @@");
+                System.out.println("@@                 1. Register                                      @@");
+                System.out.println("@@                 2. Login                                         @@");
+                System.out.println("@@                 0. Exit                                          @@");
+                System.out.println("@@                                                                  @@");
+                System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                System.out.print("\nSelect an option: ");
+                
+                int option = sc.nextInt();
                 switch (option) {
-                    case 1:{//REGISTER
-                        //u =  Utilities.Auxiliar.register();
+                    case 1:
                         Utilities.Auxiliar.register();
                         break;
-                    }
-                    case 2:{//LOG IN
-                        Utilities.Auxiliar.login();
-                        //int option2 = menulogin();
+                    case 2:
+                        Utilities.Auxiliar.login(); //TODO descomentar el método
                         p = execute();
                         personunit.getPeople().add(p);
                         // Ejecutar las reglas sobre la instancia
@@ -52,22 +79,24 @@ public class ActionSupportMedicalEmergencies {
                         instance.close();
                         System.out.println(p.getProtocol().toString());
                         break;
-                    }
-                    case 0:{//CLOSE
-                        // No olvides cerrar la instancia al final para liberar recursos
+                    case 0:
                         instance.close();
-                        System.out.println("\nYou are leaving the app\n");
-                        System.exit(0);
+                        control = false;
+			break;
+                    default:
+                        System.out.println("  NOT AN OPTION \n");
+                        break;
                     }
-                    /*default:{
-                        System.out.println("Please introduce a correct optcion(0-2)");
-                    }*/
                 }
-            }while(true);
-            
-        } catch (SQLException ex) {
+                
+        }catch (NumberFormatException e) {
+            System.out.println("  NOT A NUMBER. Closing application... \n");
+            sc.close();
+        }catch (SQLException ex) {
             Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }finally {
+            sc.close();
+	}
     }
         
     public static Person execute() {
@@ -178,62 +207,4 @@ public class ActionSupportMedicalEmergencies {
         
         return p;
     }
-        
-    
-    public static int menu() {
-    Scanner scanner = new Scanner(System.in);
-        //boolean exit = false;
-        int option = -1;
-        //try {
-        
-        System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-        System.out.println("@@                                                                  @@");
-        System.out.println("@@                 Welcome.                                         @@");
-        System.out.println("@@                 1. Register                                      @@");
-        System.out.println("@@                 2. Login                                         @@");
-        System.out.println("@@                 0. Exit                                          @@");
-        System.out.println("@@                                                                  @@");
-        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-
-        System.out.print("\nSelect an option: ");
-        
-            do {
-                
-                option = inputnumber(); //is an import but it could be: Utilities.Auxiliar.inputnumber()
-                
-                if(option<0 || option>2){
-                    System.out.print("\nPlease introduce a correct optcion(0-2): ");
-                }
-                
-                /*try{
-                    option = scanner.nextInt();
-                } catch (Exception ex) {
-                    //Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("\nError on the input. "
-                            + "Please try again\n");
-                }*/
-                
-                /*switch (option) {
-                    case 1:
-                        Utilities.Auxiliar.register();
-                        break;
-                    case 2:
-                        Utilities.Auxiliar.login();
-                        break;
-                    case 0:
-                        System.exit(0);
-                }*/
-                //return option; //the return shoul be outside so that the loop could be effective
-            } while ((option<0 || option>2));
-            return option;
-
-        /*} catch (Exception ex) {
-            Logger.getLogger(ActionSupportMedicalEmergencies.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
-    }
-    
-    /*public static void menulogin(){
-
-    }*/
-    
 }

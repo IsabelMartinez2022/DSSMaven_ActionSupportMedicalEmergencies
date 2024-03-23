@@ -14,7 +14,6 @@ import java.util.List;
 public class Action implements Serializable {
     
     private static final long serialVersionUID = 4L;
-    private int id;
     private final ActionType type; // Many to one relationship
     private List<Protocol> protocols; // Many to many relationship
 
