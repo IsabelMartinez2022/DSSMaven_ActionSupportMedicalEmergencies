@@ -14,5 +14,4 @@ import pojos.Person;
 public interface PersonManager {
         public void addPerson(Person p);
         public Person getPersonById(int choicePerson);
-	public List<Person> listAllPeople();
 }

@@ -91,39 +91,11 @@ public class JDBCPersonManager implements PersonManager{
                     person.setVomit(rs.getBoolean("vomit"));
                     person.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
                     person.setCommunication_problems((rs.getBoolean("communication_problems")));
+                    //person.setProtocol(rs.get???.getProtocol())
                 }
             } catch(SQLException e){
                 e.printStackTrace();
             }
             return person;
 }
-        
-    @Override
-	public List<Person> listAllPeople() {
-
-		List<Person> peopleList = new ArrayList<Person>();
-
-		try {
-			String sql = "SELECT * FROM person";
-
-			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-			ResultSet r = prep.executeQuery();
-
-			while (r.next()) {
-				Integer id = r.getInt("id");
-				Boolean conscious = r.getBoolean("conscious");
-                                //ALL SYMPTOMS
-				//Person person = new Person(...);
-				//peopleList.add(person);
-
-			}
-			r.close();
-			prep.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return peopleList;
-	}
-
 }

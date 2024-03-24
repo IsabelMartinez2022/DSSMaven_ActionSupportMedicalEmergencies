@@ -47,10 +47,5 @@ public enum ActionType implements Serializable{
     public String getInstruction() {
         return instruction;
     }
-
-    /*@Override
-    public String toString() {
-        return "ActionType{" + "instruction=" + this.instruction + '}';
-    }*/
     
 }
