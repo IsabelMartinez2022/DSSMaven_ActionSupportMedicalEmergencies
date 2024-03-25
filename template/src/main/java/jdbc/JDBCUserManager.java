@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import pojos.Bleeding;
 import pojos.Breathing;
 import pojos.ChestPain;
@@ -125,6 +127,38 @@ public class JDBCUserManager implements UserManager{
 		}
 		return peopleList;
 	}
+     public User getUser(int id) {
+        try {
+            String sql = "SELECT * FROM USER WHERE id = ?";
+            PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+            prep.setInt(1, id);
+            ResultSet rs = prep.executeQuery();
+            if (rs.next()) {
+                String username = rs.getString("username");
+                byte[] password = rs.getBytes("password");
+                User user = new User(id, username, password);
+                return user;
+            }
+            rs.close();
+            prep.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+      public int getId(String username) {
+        String sql1 = "SELECT * FROM USER WHERE username = ?";
+        int id = 0;
+        try {
+            PreparedStatement p = manager.getConnection().prepareStatement(sql1);
+            p.setString(1, username);
+            ResultSet rs = p.executeQuery();
+            id = rs.getInt("id");
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 
 
 }

@@ -27,6 +27,12 @@ public class User implements Serializable{
         this.password = password;
     }
 
+    public User(int id, String username, byte[] password) {
+        this.id=id;
+        this.username=username;
+        this.password=password;
+    }
+
     public String getUsername() {
         return username;
     }

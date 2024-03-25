@@ -53,9 +53,10 @@ public class JDBCPersonManager implements PersonManager{
 		}
 	}
 }
-        
-    /* SUBSTITUED BY getPeopleofUser 
-    @Override
+
+/*
+  SUBSTITUED BY getPeopleofUser 
+   @Override
         public Person getPersonById(int choicePerson){
             Person person = null;
             
@@ -90,5 +91,5 @@ public class JDBCPersonManager implements PersonManager{
             }
             return person;
 }
-        /*
+/*
 

@@ -12,6 +12,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.ConnectionManager;
+import jdbc.JDBCPersonManager;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import org.drools.ruleunits.api.RuleUnitProvider;
 import pojos.Bleeding;
@@ -21,9 +22,13 @@ import pojos.DifficultyBreathing;
 import pojos.Dizzy;
 import pojos.Person;
 import pojos.PersonUnit;
+import jdbc.JDBCUserManager;
+import pojos.User;
 
 public class ActionSupportMedicalEmergencies {
     private static ConnectionManager connectionManager;
+    public static JDBCUserManager userManager;
+    public static JDBCPersonManager personManager;
     private static boolean control;
     private static Scanner sc = new Scanner(System.in);
     
@@ -42,6 +47,7 @@ public class ActionSupportMedicalEmergencies {
         PersonUnit personunit = new PersonUnit();
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
         Person p = null;
+        User u = null;
         int option;
         try {
             connectionManager = new ConnectionManager();
@@ -63,7 +69,6 @@ public class ActionSupportMedicalEmergencies {
                 System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 System.out.print("\nSelect an option: ");
                 
-                //int option = sc.nextInt();
                 try {
                     option = sc.nextInt();
                 } catch (InputMismatchException e) {
@@ -73,10 +78,11 @@ public class ActionSupportMedicalEmergencies {
                 }
                 switch (option) {
                     case 1:
-                        Utilities.Auxiliar.register();
+                        Utilities.Auxiliar.register(userManager);
                         break;
                     case 2:
-                        Utilities.Auxiliar.login(); //TODO descomentar el método
+                        u= Utilities.Auxiliar.login(userManager);
+                        Utilities.Auxiliar.menuUser(u);
                         p = execute();
                         personunit.getPeople().add(p);
                         // Ejecutar las reglas sobre la instancia
@@ -187,6 +193,8 @@ public class ActionSupportMedicalEmergencies {
         info = translateNumberToString(2, new String[]{"true", "false"});
         Boolean intoxicatedAnswer = Boolean.valueOf(info);
         p.setPossible_poisoning(intoxicatedAnswer);
+        //se añade a la base de datos
+        personManager.addPerson(p);
 
         return p;
     }
