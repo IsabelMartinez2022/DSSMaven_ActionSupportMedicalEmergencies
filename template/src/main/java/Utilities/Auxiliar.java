@@ -18,6 +18,7 @@ import jdbc.JDBCUserManager;
 public class Auxiliar {
 private static Scanner sc = new Scanner(System.in);
 
+/* MOVED TO MAIN
     public static void register(JDBCUserManager userManager) throws SQLException {
         User u = null;
         try {
@@ -59,7 +60,7 @@ private static Scanner sc = new Scanner(System.in);
     }
     
     public static void menuUser(User u){
-        //int userId = ;
+        int userId = u.getId();
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         
@@ -75,7 +76,8 @@ private static Scanner sc = new Scanner(System.in);
 
             switch (choice) {
                 case 1:
-                    // Assuming a method that handles new person entry
+                    // MOVER ESTE MENU A ACTIONSUPPORT p= execute();
+                    
                     break;
                 case 2:
                     // Assuming a method that lists all people for the user
@@ -92,6 +94,7 @@ private static Scanner sc = new Scanner(System.in);
             }
         }
     }
+    */
     
     public static String translateNumberToString(int optionsCount, String[] optionStrings) { //1º, nº total opciones posibles; 2º, txt opciones posibles
         int number;

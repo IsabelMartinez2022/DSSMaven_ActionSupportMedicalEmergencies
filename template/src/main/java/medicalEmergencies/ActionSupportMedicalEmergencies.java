@@ -5,7 +5,10 @@
 
 package medicalEmergencies;
 
+import Utilities.Auxiliar;
 import static Utilities.Auxiliar.translateNumberToString;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -32,7 +35,8 @@ public class ActionSupportMedicalEmergencies {
     private static boolean control;
     private static Scanner sc = new Scanner(System.in);
     
-    /*public static boolean logIn() {
+    /* WHAT IS THIS??
+    public static boolean logIn() {
         Scanner sc = new Scanner(System.in);
         System.out.println("Type the user name:");
         String username = sc.nextLine();
@@ -78,12 +82,12 @@ public class ActionSupportMedicalEmergencies {
                 }
                 switch (option) {
                     case 1:
-                        Utilities.Auxiliar.register(userManager);
+                        register(userManager);
                         break;
                     case 2:
-                        u= Utilities.Auxiliar.login(userManager);
-                        Utilities.Auxiliar.menuUser(u);
-                        p = execute();
+                        login(userManager);
+                        menuUser(u);
+                        p = createPerson(u);
                         personunit.getPeople().add(p);
                         // Ejecutar las reglas sobre la instancia
                         instance.fire();
@@ -110,7 +114,87 @@ public class ActionSupportMedicalEmergencies {
 	}
     }
         
-    public static Person execute() {
+    
+    public static void register(JDBCUserManager userManager) throws SQLException {
+        User u = null;
+        try {
+            u = new User();
+
+            System.out.println("Let's proceed with the registration:");
+
+            String username, password;
+
+            System.out.print("Username:");
+            username = sc.nextLine();
+            u.setUsername(username);
+
+            System.out.print("password:");
+            password = sc.nextLine();
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] hash = md.digest();
+            u.setPassword(hash);
+            userManager.addUser(u);
+
+        }catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
+    public static User login(JDBCUserManager userManager) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Username:");
+        String username = sc.nextLine();
+        System.out.print("password:");
+        String password = sc.nextLine();
+        byte[] bytesDefaultCharset = password.getBytes();
+        if (userManager.verifyUsername(username) && userManager.verifyPassword(username, password)) {
+            return userManager.getUser(userManager.getId(username));
+        }
+        return null;
+    }
+    
+        public static void menuUser(User u){
+        int userId = u.getId();
+        Person p= null;
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+        
+        while (running) {
+            System.out.println("Please select an option:");
+            System.out.println("1. Enter symptoms for a new person");
+            System.out.println("2. Show all people associated with this user");
+            System.out.println("3. Select a person to view the protocol and actions");
+            System.out.println("0. Exit");
+            
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline left-over
+
+            switch (choice) {
+                case 1:
+                    p= createPerson(u);
+                    break;
+                case 2:
+                    // Assuming a method that lists all people for the user
+                    // CALL userManager listPeopleofUser (u.getId());
+                    break;
+                case 3:
+                    // Assuming a method that handles selection of a person and displays protocol and actions
+                    // Create a function that reads the id from consola
+                    // CALL protocolManager getProtocolofPerson (id);
+                    break;
+                case 0:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid option. Please try again.");
+                    break;
+            }
+        }
+    }
+        
+    public static Person createPerson (User user) {
         Person p = new Person();
         String info;
 
@@ -193,9 +277,12 @@ public class ActionSupportMedicalEmergencies {
         info = translateNumberToString(2, new String[]{"true", "false"});
         Boolean intoxicatedAnswer = Boolean.valueOf(info);
         p.setPossible_poisoning(intoxicatedAnswer);
-        //se añade a la base de datos
-        personManager.addPerson(p);
+        
+        p.setUser(user);
+        
+        personManager.addPerson(p); //se añade a la base de datos
 
         return p;
     }
+   
 }

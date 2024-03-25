@@ -45,11 +45,11 @@ public class JDBCProtocolManager implements ProtocolManager{
         }
     }
     
-            @Override
-        public Protocol getProtocolofPerson(int personId){
-            List<Action> actions= new ArrayList<>();
-            ProtocolType pType = null;
-            Protocol protocol= null;
+    @Override
+    public Protocol getProtocolofPerson(int personId){
+        List<Action> actions= new ArrayList<>();
+        ProtocolType pType = null;
+        Protocol protocol= null;
         
         try {
             
@@ -81,5 +81,5 @@ public class JDBCProtocolManager implements ProtocolManager{
         }
         
         return protocol; 
-        }
+    }
 }

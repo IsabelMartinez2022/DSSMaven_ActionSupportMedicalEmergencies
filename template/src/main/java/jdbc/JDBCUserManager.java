@@ -142,7 +142,7 @@ public class JDBCUserManager implements UserManager{
             rs.close();
             prep.close();
         } catch (SQLException ex) {
-            Logger.getLogger(JDBCManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -155,7 +155,7 @@ public class JDBCUserManager implements UserManager{
             ResultSet rs = p.executeQuery();
             id = rs.getInt("id");
         } catch (SQLException ex) {
-            Logger.getLogger(JDBCManager.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
     }
