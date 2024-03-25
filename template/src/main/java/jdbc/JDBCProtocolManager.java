@@ -6,10 +6,15 @@ package jdbc;
 
 import ifaces.ProtocolManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pojos.Action;
 import pojos.ActionType;
+import pojos.Protocol;
 import pojos.ProtocolType;
 
 /**
@@ -39,4 +44,42 @@ public class JDBCProtocolManager implements ProtocolManager{
             }
         }
     }
+    
+            @Override
+        public Protocol getProtocolofPerson(int personId){
+            List<Action> actions= new ArrayList<>();
+            ProtocolType pType = null;
+            Protocol protocol= null;
+        
+        try {
+            
+            String sql = "SELECT a.id AS actionId, a.type AS actionType, a.instruction AS actionInstruction, " +
+                        "p.type AS protocolType " +
+                        "FROM action AS a " +
+                        "JOIN protocolAction AS pa ON a.id = pa.actionId " +
+                        "JOIN protocol AS p ON pa.protocolId = p.id " +
+                        "JOIN person AS per ON p.id = per.protocolId " +
+                        "WHERE per.id = ?";
+            
+            PreparedStatement statement = manager.getConnection().prepareStatement(sql);
+            statement.setInt(1, personId);
+            ResultSet rs = statement.executeQuery();
+            
+            while (rs.next()) {
+                ActionType aType= ActionType.valueOf(rs.getString("actionType"));
+                Action action = new Action(aType);
+                actions.add(action);
+                
+                    if (pType == null) {
+                    pType = ProtocolType.valueOf(rs.getString("protocolType"));
+        }
+    }
+            protocol= new Protocol(pType,actions);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return protocol; 
+        }
 }

@@ -13,8 +13,7 @@ import pojos.Protocol;
  */
 
 public interface ProtocolManager {
-    //SÓLO SI CREAMOS LA BASE DE DATOS DESDE AQUÍ
     
     public void addProtocol();
-    //public List<Protocol> listAllProtocols();
+    public Protocol getProtocolofPerson(int personId);
 }

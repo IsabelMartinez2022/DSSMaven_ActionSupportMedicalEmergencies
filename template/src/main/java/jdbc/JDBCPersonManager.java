@@ -6,15 +6,6 @@ package jdbc;
 
 import ifaces.PersonManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import pojos.Bleeding;
-import pojos.Breathing;
-import pojos.ChestPain;
-import pojos.DifficultyBreathing;
-import pojos.Dizzy;
 import pojos.Person;
 
 /**
@@ -61,8 +52,9 @@ public class JDBCPersonManager implements PersonManager{
 			ex.printStackTrace();
 		}
 	}
-
-    
+}
+        
+    /* SUBSTITUED BY getPeopleofUser 
     @Override
         public Person getPersonById(int choicePerson){
             Person person = null;
@@ -98,4 +90,5 @@ public class JDBCPersonManager implements PersonManager{
             }
             return person;
 }
-}
+        /*
+

@@ -6,6 +6,7 @@ package ifaces;
 
 import java.util.List;
 import pojos.Person;
+import pojos.Protocol;
 
 /**
  *
@@ -13,5 +14,5 @@ import pojos.Person;
  */
 public interface PersonManager {
         public void addPerson(Person p);
-        public Person getPersonById(int choicePerson);
+        // SUBSTITUED public Person getPersonById(int choicePerson);
 }

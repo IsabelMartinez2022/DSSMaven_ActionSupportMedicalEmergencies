@@ -13,6 +13,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import pojos.Bleeding;
+import pojos.Breathing;
+import pojos.ChestPain;
+import pojos.DifficultyBreathing;
+import pojos.Dizzy;
 import pojos.Person;
 import pojos.User;
 
@@ -79,26 +84,40 @@ public class JDBCUserManager implements UserManager{
         return false;
     }
     
-    // TODO NOT FINISHED
     @Override
 	public List<Person> listPeopleofUser(int userId) {
 
-		List<Person> peopleList = new ArrayList<Person>();
+		List<Person> peopleList = new ArrayList<>();
 
 		try {
 			String sql = "SELECT * FROM person WHERE userId LIKE ?";
 
 			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
 			prep.setInt(1, userId);
-			ResultSet r = prep.executeQuery();
+			ResultSet rs = prep.executeQuery();
 
-			while (r.next()) {
-				int id = r.getInt("id");
-				//Protocol p=
-				//peopleList.add(person);
+			while (rs.next()) {
+                        Person person = new Person();
+                        person.setId(rs.getInt("id"));
+                        person.setConscious(rs.getBoolean("conscious"));
+                        person.setDizzy(Dizzy.valueOf(rs.getString("dizzy")));
+                        person.setBreathing(Breathing.valueOf(rs.getString("breathing")));
+                        person.setBleeding(Bleeding.valueOf(rs.getString("bleeding")));
+                        person.setEmit_words(rs.getBoolean("emit_words"));
+                        person.setChest_pain(ChestPain.valueOf(rs.getString("chest_pain")));
+                        person.setCough(rs.getBoolean("cough"));
+                        person.setSeizure(rs.getBoolean("seizure"));
+                        person.setPossible_poisoning(rs.getBoolean("possible_poisoning"));
+                        person.setElectric_shock(rs.getBoolean("electric_shock"));
+                        person.setMajor_trauma(rs.getBoolean("major_trauma"));
+                        person.setCar_accident(rs.getBoolean("car_accident"));
+                        person.setVomit(rs.getBoolean("vomit"));
+                        person.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
+                        person.setCommunication_problems((rs.getBoolean("communication_problems")));
+			peopleList.add(person);
 
 			}
-			r.close();
+			rs.close();
 			prep.close();
 
 		} catch (Exception e) {

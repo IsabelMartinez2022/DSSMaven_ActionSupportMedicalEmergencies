@@ -29,10 +29,11 @@ public class Action implements Serializable {
     public ActionType getType() {
         return type;
     }
-
+    
     public List<Protocol> getProtocols() {
         return protocols;
     }
+   
     
     @Override
     public String toString() {
