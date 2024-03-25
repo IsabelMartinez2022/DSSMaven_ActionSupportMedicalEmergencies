@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.ConnectionManager;
 import jdbc.JDBCPersonManager;
+import jdbc.JDBCProtocolManager;
 import org.drools.ruleunits.api.RuleUnitInstance;
 import org.drools.ruleunits.api.RuleUnitProvider;
 import pojos.Bleeding;
@@ -32,6 +33,7 @@ public class ActionSupportMedicalEmergencies {
     private static ConnectionManager connectionManager;
     public static JDBCUserManager userManager;
     public static JDBCPersonManager personManager;
+    public static JDBCProtocolManager protocolManager;
     private static boolean control;
     private static Scanner sc = new Scanner(System.in);
     
@@ -165,7 +167,6 @@ public class ActionSupportMedicalEmergencies {
             System.out.println("Please select an option:");
             System.out.println("1. Enter symptoms for a new person");
             System.out.println("2. Show all people associated with this user");
-            System.out.println("3. Select a person to view the protocol and actions");
             System.out.println("0. Exit");
             
             int choice = scanner.nextInt();
@@ -178,11 +179,19 @@ public class ActionSupportMedicalEmergencies {
                 case 2:
                     // Assuming a method that lists all people for the user
                     // CALL userManager listPeopleofUser (u.getId());
-                    break;
-                case 3:
-                    // Assuming a method that handles selection of a person and displays protocol and actions
-                    // Create a function that reads the id from consola
-                    // CALL protocolManager getProtocolofPerson (id);
+                    userManager.listPeopleofUser(userId);
+                    System.out.println("Do you want to choose a specific person to see its protocol? (1: yes \n 2: no");
+                    int choice2 = scanner.nextInt();
+                    switch(choice2){
+                        case 1:
+                            System.out.println("Introduce the id of the person you want to see: ");
+                            int idperson = scanner.nextInt();
+                            protocolManager.getProtocolofPerson(idperson);
+                            break;
+                        case 2:
+                            running = false;
+                            break;
+                    }
                     break;
                 case 0:
                     running = false;

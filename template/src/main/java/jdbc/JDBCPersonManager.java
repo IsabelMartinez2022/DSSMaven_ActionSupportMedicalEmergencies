@@ -6,6 +6,15 @@ package jdbc;
 
 import ifaces.PersonManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import pojos.Bleeding;
+import pojos.Breathing;
+import pojos.ChestPain;
+import pojos.DifficultyBreathing;
+import pojos.Dizzy;
 import pojos.Person;
 
 /**
@@ -52,5 +61,40 @@ public class JDBCPersonManager implements PersonManager{
 			ex.printStackTrace();
 		}
 	}
+    @Override
+    public Person selectPerson(int id) {
+        Person p = null;
+    try {
+        String sql = "SELECT * FROM person WHERE id = ?";
+        PreparedStatement pr = manager.getConnection().prepareStatement(sql);
+        pr.setInt(1, id);
+        ResultSet rs = pr.executeQuery();
+        if (rs.next()) {
+            p = new Person();
+            p.setId(rs.getInt("id"));
+            p.setConscious(rs.getBoolean("conscious"));
+            p.setDizzy(Dizzy.valueOf(rs.getString("dizzy")));
+            p.setBreathing(Breathing.valueOf(rs.getString("breathing")));
+            p.setBleeding(Bleeding.valueOf(rs.getString("bleeding")));
+            p.setEmit_words(rs.getBoolean("emit_words"));
+            p.setChest_pain(ChestPain.valueOf(rs.getString("chest_pain")));
+            p.setCough(rs.getBoolean("cough"));
+            p.setSeizure(rs.getBoolean("seizure"));
+            p.setPossible_poisoning(rs.getBoolean("possible_poisoning"));
+            p.setElectric_shock(rs.getBoolean("electric_shock"));
+            p.setMajor_trauma(rs.getBoolean("major_trauma"));
+            p.setCar_accident(rs.getBoolean("car_accident"));
+            p.setVomit(rs.getBoolean("vomit"));
+            p.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
+            p.setCommunication_problems(rs.getBoolean("communication_problems"));
+        }
+        pr.close();
+        rs.close();
+    } catch (SQLException ex) {
+        Logger.getLogger(JDBCPersonManager.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return p;
+    }
+
 }
 

@@ -14,5 +14,6 @@ import pojos.Protocol;
  */
 public interface PersonManager {
         public void addPerson(Person p);
+        public Person selectPerson(int id);
         // SUBSTITUED public Person getPersonById(int choicePerson);
 }
