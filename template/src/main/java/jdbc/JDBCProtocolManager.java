@@ -5,6 +5,7 @@
 package jdbc;
 
 import ifaces.ProtocolManager;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -22,10 +23,11 @@ import pojos.ProtocolType;
  * @author maria
  */
 public class JDBCProtocolManager implements ProtocolManager{
-    private ConnectionManager manager;
     
-    public JDBCProtocolManager (ConnectionManager m){
-        this.manager=m;
+    private Connection c;
+
+    public JDBCProtocolManager(Connection c) {
+        this.c = c;
     }
     
     @Override
@@ -33,8 +35,8 @@ public class JDBCProtocolManager implements ProtocolManager{
         // Se itera sobre los valores del enum ActionType.
         for (ProtocolType protocolType : ProtocolType.values()) {
             try {
-                String sql = "INSERT INTO protocol (type) VALUES (?)";
-                PreparedStatement statement = manager.getConnection().prepareStatement(sql);
+                String sql = "INSERT INTO protocol (type)" + "VALUES (?);";
+                PreparedStatement statement = c.prepareStatement(sql);
                 statement.setString(1, protocolType.name());  
                 
                 statement.executeUpdate();
@@ -61,7 +63,7 @@ public class JDBCProtocolManager implements ProtocolManager{
                         "JOIN person AS per ON p.id = per.protocolId " +
                         "WHERE per.id = ?";
             
-            PreparedStatement statement = manager.getConnection().prepareStatement(sql);
+            PreparedStatement statement = c.prepareStatement(sql);
             statement.setInt(1, personId);
             ResultSet rs = statement.executeQuery();
             

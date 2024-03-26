@@ -18,10 +18,10 @@ import pojos.ActionType;
  * @author maria
  */
 public class JDBCActionManager implements ActionManager{
-    private ConnectionManager manager;
+    private Connection c;
     
-    public JDBCActionManager (ConnectionManager m){
-        this.manager=m;
+    public JDBCActionManager (Connection c){
+        this.c = c;
     }
     
     @Override
@@ -29,13 +29,12 @@ public class JDBCActionManager implements ActionManager{
         // Se itera sobre los valores del enum ActionType.
         for (ActionType actionType : ActionType.values()) {
             try {
-                String sql = "INSERT INTO action (type, instruction) VALUES (?, ?)";
-                PreparedStatement statement = manager.getConnection().prepareStatement(sql);
-                statement.setString(1, actionType.name()); 
-                statement.setString(2, actionType.getInstruction()); 
-                
-                statement.executeUpdate();
-                statement.close();
+                String sql = "INSERT INTO action (type, instruction)" + "VALUES (?, ?);";
+                PreparedStatement prep = c.prepareStatement(sql);
+                prep.setString(1, actionType.name()); 
+                prep.setString(2, actionType.getInstruction());
+                prep.executeUpdate();
+                prep.close();
             } catch (SQLException ex) {
                 Logger.getLogger(JDBCActionManager.class.getName()).log(Level.SEVERE, null, ex);
             }

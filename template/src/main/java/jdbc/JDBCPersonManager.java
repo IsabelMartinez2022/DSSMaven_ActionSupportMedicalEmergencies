@@ -5,6 +5,7 @@
 package jdbc;
 
 import ifaces.PersonManager;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,10 +24,10 @@ import pojos.Person;
  */
 public class JDBCPersonManager implements PersonManager{
     
-    private ConnectionManager manager;
+    private Connection c;
 
-	public JDBCPersonManager(ConnectionManager m) {
-		this.manager = m;
+	public JDBCPersonManager(Connection c) {
+		this.c = c;
 	}
 
 	@Override
@@ -37,7 +38,7 @@ public class JDBCPersonManager implements PersonManager{
                                 + "emit_words, chest_pain, cough, seizure, possible_poisoning, electric_shock, "
                                 + "major_trauma, car_accident, vomit, difficulty_breathing, communication_problems, "
                                 + "userId, protocolId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+			PreparedStatement prep = c.prepareStatement(sql);
 			prep.setBoolean(1, p.getConscious());
                         prep.setString(2, p.getDizzy().name());
                         prep.setString(3, p.getBreathing().name());
@@ -66,7 +67,7 @@ public class JDBCPersonManager implements PersonManager{
         Person p = null;
     try {
         String sql = "SELECT * FROM person WHERE id = ?";
-        PreparedStatement pr = manager.getConnection().prepareStatement(sql);
+        PreparedStatement pr = c.prepareStatement(sql);
         pr.setInt(1, id);
         ResultSet rs = pr.executeQuery();
         if (rs.next()) {

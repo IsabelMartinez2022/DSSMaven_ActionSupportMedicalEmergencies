@@ -37,18 +37,6 @@ public class ActionSupportMedicalEmergencies {
     private static boolean control;
     private static Scanner sc = new Scanner(System.in);
     
-    /* WHAT IS THIS??
-    public static boolean logIn() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Type the user name:");
-        String username = sc.nextLine();
-        System.out.println("Type the password:");
-        String password = sc.nextLine();
-        //boolean d = user.login(username, password);
-        return d;
-    }*/
-
-    
     public static void main(String[] args) {
         PersonUnit personunit = new PersonUnit();
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
@@ -57,7 +45,9 @@ public class ActionSupportMedicalEmergencies {
         int option;
         try {
             connectionManager = new ConnectionManager();
-            
+            userManager = new JDBCUserManager(connectionManager.getConnection());
+            personManager = new JDBCPersonManager(connectionManager.getConnection());
+            protocolManager = new JDBCProtocolManager(connectionManager.getConnection());
             boolean log = true;
             /*while (log) {
                     log = logIn();
@@ -118,6 +108,7 @@ public class ActionSupportMedicalEmergencies {
         
     
     public static void register(JDBCUserManager userManager) throws SQLException {
+        Scanner sc = new Scanner(System.in);
         User u = null;
         try {
             u = new User();
@@ -130,13 +121,13 @@ public class ActionSupportMedicalEmergencies {
             username = sc.nextLine();
             u.setUsername(username);
 
-            System.out.print("password:");
+            System.out.print("Password:");
             password = sc.nextLine();
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
             byte[] hash = md.digest();
             u.setPassword(hash);
-            userManager.addUser(u);
+            userManager.addUser(u); //aqui el usuario se añade correctamente
 
         }catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
@@ -145,7 +136,7 @@ public class ActionSupportMedicalEmergencies {
     }
     
     public static User login(JDBCUserManager userManager) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.print("Username:");
         String username = sc.nextLine();
         System.out.print("password:");
@@ -160,7 +151,7 @@ public class ActionSupportMedicalEmergencies {
         public static void menuUser(User u){
         int userId = u.getId();
         Person p= null;
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         boolean running = true;
         
         while (running) {
@@ -169,8 +160,8 @@ public class ActionSupportMedicalEmergencies {
             System.out.println("2. Show all people associated with this user");
             System.out.println("0. Exit");
             
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline left-over
+            int choice = sc.nextInt();
+            sc.nextLine(); // Consume newline left-over
 
             switch (choice) {
                 case 1:
@@ -181,11 +172,11 @@ public class ActionSupportMedicalEmergencies {
                     // CALL userManager listPeopleofUser (u.getId());
                     userManager.listPeopleofUser(userId);
                     System.out.println("Do you want to choose a specific person to see its protocol? (1: yes \n 2: no");
-                    int choice2 = scanner.nextInt();
+                    int choice2 = sc.nextInt();
                     switch(choice2){
                         case 1:
                             System.out.println("Introduce the id of the person you want to see: ");
-                            int idperson = scanner.nextInt();
+                            int idperson = sc.nextInt();
                             protocolManager.getProtocolofPerson(idperson);
                             break;
                         case 2:
