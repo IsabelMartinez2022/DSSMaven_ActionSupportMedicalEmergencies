@@ -15,6 +15,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jdbc.ConnectionManager;
+import jdbc.JDBCActionManager;
 import jdbc.JDBCPersonManager;
 import jdbc.JDBCProtocolManager;
 import org.drools.ruleunits.api.RuleUnitInstance;
@@ -34,6 +35,7 @@ public class ActionSupportMedicalEmergencies {
     public static JDBCUserManager userManager;
     public static JDBCPersonManager personManager;
     public static JDBCProtocolManager protocolManager;
+    public static JDBCActionManager actionManager;
     private static boolean control;
     private static Scanner sc = new Scanner(System.in);
     
@@ -43,7 +45,9 @@ public class ActionSupportMedicalEmergencies {
         userManager = new JDBCUserManager(connectionManager);
         personManager = new JDBCPersonManager(connectionManager);
         protocolManager = new JDBCProtocolManager(connectionManager);
-        
+        actionManager = new JDBCActionManager(connectionManager);
+        protocolManager.addProtocol();
+        actionManager.addAction();
         Person p = null;
         
         int option;
@@ -161,11 +165,11 @@ public class ActionSupportMedicalEmergencies {
 
             switch (choice) {
                 case 1:
-                    p= createPerson(u);
+                    p= createPerson(u, personunit, instance);
                     // RULES
-                    personunit.getPeople().add(p);
-                    instance.fire();
-                    instance.close();
+                    //personunit.getPeople().add(p);
+                    //instance.fire();
+                    //instance.close();
                     //System.out.println(p.getProtocol().toString()); 
                     // We need to get this from the database
                     break;
@@ -194,7 +198,7 @@ public class ActionSupportMedicalEmergencies {
         }
     }
         
-    public static Person createPerson (User user) {
+    public static Person createPerson (User user, PersonUnit personunit, RuleUnitInstance<PersonUnit> instance) {
         Person p = new Person();
         String info;
 
@@ -279,6 +283,9 @@ public class ActionSupportMedicalEmergencies {
         p.setPossible_poisoning(intoxicatedAnswer);
         
         p.setUser(user);
+        personunit.getPeople().add(p);
+        instance.fire();
+        instance.close();
         
         personManager.addPerson(p); //se añade a la base de datos
 

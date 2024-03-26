@@ -22,6 +22,8 @@ import java.util.logging.Logger;
 public class ConnectionManager implements InterfaceConnectionManager{
 
 	private Connection c= null;
+        private JDBCProtocolManager protocolManager;
+        private JDBCActionManager actionManager;
 
         public ConnectionManager() {
 		try {
@@ -79,7 +81,7 @@ public class ConnectionManager implements InterfaceConnectionManager{
                         String table3 ="CREATE TABLE action("
                                 +"id INTEGER PRIMARY KEY AUTOINCREMENT,"
                                 + "type VARCHAR(255) NOT NULL,"
-                                +"intruction TEXT NOT NULL"
+                                +"instruction TEXT NOT NULL"
                                 +");";
                         stmt.executeUpdate(table3);
                         String table4 ="CREATE TABLE protocolAction ("

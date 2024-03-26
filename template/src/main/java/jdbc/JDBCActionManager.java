@@ -18,9 +18,9 @@ import pojos.ActionType;
  * @author maria
  */
 public class JDBCActionManager implements ActionManager{
-    private Connection c;
+    private ConnectionManager c;
     
-    public JDBCActionManager (Connection c){
+    public JDBCActionManager (ConnectionManager c){
         this.c = c;
     }
     
@@ -30,7 +30,7 @@ public class JDBCActionManager implements ActionManager{
         for (ActionType actionType : ActionType.values()) {
             try {
                 String sql = "INSERT INTO action (type, instruction)" + "VALUES (?, ?);";
-                PreparedStatement prep = c.prepareStatement(sql);
+                PreparedStatement prep = c.getConnection().prepareStatement(sql);
                 prep.setString(1, actionType.name()); 
                 prep.setString(2, actionType.getInstruction());
                 prep.executeUpdate();
