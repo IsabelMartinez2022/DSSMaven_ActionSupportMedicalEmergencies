@@ -34,7 +34,7 @@ public class JDBCUserManager implements UserManager{
     @Override
     public void addUser(User user) { //aqui tb se pasa el user correctamente
         try {
-            String sql = "INSERT INTO user (username, password)" + "VALUES (?, ?)";
+            String sql = "INSERT INTO user (username, password) VALUES (?, ?)";
             PreparedStatement prep = cM.getConnection().prepareStatement(sql);
             prep.setString(1, user.getUsername());
             prep.setBytes(2, user.getPassword());

@@ -38,8 +38,6 @@ public class ActionSupportMedicalEmergencies {
     private static Scanner sc = new Scanner(System.in);
     
     public static void main(String[] args) {
-        PersonUnit personunit = new PersonUnit();
-        RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
         
         connectionManager= new ConnectionManager();
         userManager = new JDBCUserManager(connectionManager);
@@ -47,7 +45,6 @@ public class ActionSupportMedicalEmergencies {
         protocolManager = new JDBCProtocolManager(connectionManager);
         
         Person p = null;
-        User u = null;
         
         int option;
         try {
@@ -77,20 +74,13 @@ public class ActionSupportMedicalEmergencies {
                 }
                 switch (option) {
                     case 1:
-                        register(userManager);
+                        register();
                         break;
                     case 2:
-                        login(userManager);
-                        menuUser(u);
-                        p = createPerson(u);
-                        personunit.getPeople().add(p);
-                        // Ejecutar las reglas sobre la instancia
-                        instance.fire();
-                        instance.close();
-                        System.out.println(p.getProtocol().toString());
+                        login();
                         break;
                     case 0:
-                        instance.close();
+                        //instance.close();
                         control = false;
 			break;
                     default:
@@ -110,10 +100,10 @@ public class ActionSupportMedicalEmergencies {
     }
         
     
-    public static void register(JDBCUserManager userManager) throws SQLException {
+    public static void register() throws SQLException {
         Scanner sc = new Scanner(System.in);
         try {
-            //u = new User();
+            User u = new User();
 
             System.out.println("Let's proceed with the registration:");
 
@@ -121,16 +111,15 @@ public class ActionSupportMedicalEmergencies {
 
             System.out.print("Username:");
             username = sc.nextLine();
-            //u.setUsername(username);
+            u.setUsername(username);
 
             System.out.print("Password:");
             password = sc.nextLine();
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
             byte[] hash = md.digest();
-            //u.setPassword(hash);
+            u.setPassword(hash);
             
-            User u = new User(username, hash);
             userManager.addUser(u); //aqui el usuario se añade correctamente
 
         }catch (NoSuchAlgorithmException ex) {
@@ -139,7 +128,7 @@ public class ActionSupportMedicalEmergencies {
 
     }
     
-    public static User login(JDBCUserManager userManager) {
+    public static void login() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Username:");
         String username = sc.nextLine();
@@ -147,9 +136,9 @@ public class ActionSupportMedicalEmergencies {
         String password = sc.nextLine();
         byte[] bytesDefaultCharset = password.getBytes();
         if (userManager.verifyUsername(username) && userManager.verifyPassword(username, password)) {
-            return userManager.getUser(userManager.getId(username));
+            User u= userManager.getUser(userManager.getId(username));
+            menuUser(u);
         }
-        return null;
     }
     
         public static void menuUser(User u){
@@ -157,6 +146,9 @@ public class ActionSupportMedicalEmergencies {
         Person p= null;
         Scanner sc = new Scanner(System.in);
         boolean running = true;
+        
+        PersonUnit personunit = new PersonUnit();
+        RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
         
         while (running) {
             System.out.println("Please select an option:");
@@ -170,10 +162,14 @@ public class ActionSupportMedicalEmergencies {
             switch (choice) {
                 case 1:
                     p= createPerson(u);
+                    // RULES
+                    personunit.getPeople().add(p);
+                    instance.fire();
+                    instance.close();
+                    //System.out.println(p.getProtocol().toString()); 
+                    // We need to get this from the database
                     break;
                 case 2:
-                    // Assuming a method that lists all people for the user
-                    // CALL userManager listPeopleofUser (u.getId());
                     userManager.listPeopleofUser(userId);
                     System.out.println("Do you want to choose a specific person to see its protocol? (1: yes \n 2: no");
                     int choice2 = sc.nextInt();
