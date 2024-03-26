@@ -32,8 +32,16 @@ public class JDBCPersonManager implements PersonManager{
 
 	@Override
 	public void addPerson(Person p) {
-		try {
+            
+            try {
+            
+            if (!checkIfUserExists(p.getUser().getId())) {
+                throw new RuntimeException("El usuario no existe en la base de datos.");
+            }
 
+            if (!checkIfProtocolExists(p.getProtocol().getId())) {
+                throw new RuntimeException("El protocolo no existe en la base de datos.");
+            }
 			String sql = "INSERT INTO person (conscious, dizzy, breathing, bleeding, "
                                 + "emit_words, chest_pain, cough, seizure, possible_poisoning, electric_shock, "
                                 + "major_trauma, car_accident, vomit, difficulty_breathing, communication_problems, "
@@ -62,6 +70,7 @@ public class JDBCPersonManager implements PersonManager{
 			ex.printStackTrace();
 		}
 	}
+        
     @Override
     public Person selectPerson(int id) {
         Person p = null;
@@ -96,6 +105,31 @@ public class JDBCPersonManager implements PersonManager{
     }
     return p;
     }
-
+    
+    private boolean checkIfUserExists(int userId) throws SQLException {
+        String query = "SELECT COUNT(*) FROM user WHERE id = ?";
+        PreparedStatement prep = cM.getConnection().prepareStatement(query);
+        prep.setInt(1, userId);
+        ResultSet rs = prep.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+        rs.close();
+        prep.close();
+        return false;
+    }
+    
+    private boolean checkIfProtocolExists(int protocolId) throws SQLException {
+        String query = "SELECT COUNT(*) FROM protocol WHERE id = ?";
+        PreparedStatement prep = cM.getConnection().prepareStatement(query);
+        prep.setInt(1, protocolId);
+        ResultSet rs = prep.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+        rs.close();
+        prep.close();
+        return false;
+    }
 }
 

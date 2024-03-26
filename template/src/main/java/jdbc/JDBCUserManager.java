@@ -94,7 +94,7 @@ public class JDBCUserManager implements UserManager{
 			prep.setInt(1, userId);
 			ResultSet rs = prep.executeQuery();
 
-			while (rs.next()) {
+			while (rs.next()) { //aqui NO llega a entrar nunca
                         Person person = new Person();
                         person.setId(rs.getInt("id"));
                         person.setConscious(rs.getBoolean("conscious"));

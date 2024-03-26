@@ -260,7 +260,7 @@ public class Protocol implements Serializable{
     //TODO hashCode()
     
     //MAIN TO TRY PROTOCOL WITHOUT HAVING TO INPUT ALL THE DATA AND RUNNING OUR MENU
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         
         PersonUnit personunit = new PersonUnit();
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
@@ -286,7 +286,7 @@ public class Protocol implements Serializable{
         instance.close();
         System.out.println(person.getProtocol().toString());
         
-    }
+    }*/
     
 }
 

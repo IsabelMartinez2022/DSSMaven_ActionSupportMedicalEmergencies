@@ -287,6 +287,8 @@ public class ActionSupportMedicalEmergencies {
         instance.fire();
         instance.close();
         
+        System.out.println(p.getProtocol().toString()); 
+        
         personManager.addPerson(p); //se añade a la base de datos
 
         return p;
