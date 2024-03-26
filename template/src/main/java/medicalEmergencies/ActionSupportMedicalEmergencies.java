@@ -44,7 +44,7 @@ public class ActionSupportMedicalEmergencies {
         User u = null;
         int option;
         try {
-            connectionManager = new ConnectionManager();
+            connectionManager.connect();
             userManager = new JDBCUserManager(connectionManager.getConnection());
             personManager = new JDBCPersonManager(connectionManager.getConnection());
             protocolManager = new JDBCProtocolManager(connectionManager.getConnection());

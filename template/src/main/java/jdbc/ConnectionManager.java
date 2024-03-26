@@ -5,6 +5,7 @@
 package jdbc;
 
 import ifaces.ActionManager;
+import ifaces.InterfaceConnectionManager;
 import ifaces.PersonManager;
 import ifaces.ProtocolManager;
 import ifaces.UserManager;
@@ -15,43 +16,40 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author isama
  */
-public class ConnectionManager {
+public class ConnectionManager implements InterfaceConnectionManager{
 
 	private Connection c;
-	private static UserManager userM;
+	private UserManager userM;
 	private static PersonManager personM;
         private static ProtocolManager protocolM;
         private static ActionManager actionM;
 
-        public ConnectionManager() {
+        @Override
+        public void connect() {
 		try {
-                    /*
-                    // Verifica si el archivo de la base de datos existe
-                    File dbFile = new File("./db/ActionSupportMedicalEmergencies.db");
-                    if (!dbFile.exists()) {
-                        System.out.println("La base de datos no existe en la ruta especificada: " + dbFile.getAbsolutePath());
-                        return; // Sale del constructor si la base de datos no existe
-                    }*/
-                    // Open database connection
+                    if(c==null){
                     Class.forName("org.sqlite.JDBC");
-                    c = DriverManager.getConnection("jdbc:sqlite:./db/ActionSupportMedicalEmergencies.db");
+                    this.c = DriverManager.getConnection("jdbc:sqlite:./db/ActionSupportMedicalEmergencies.db");
                     c.createStatement().execute("PRAGMA foreign_keys=ON");
                     System.out.println("Database connection opened.");
                     this.createTables();
-		} catch (SQLException e) {
-                        System.out.println("Database access error");
-			e.printStackTrace();
+                }
 		} catch (ClassNotFoundException e) {
 			System.out.println("Libraries not loaded");
-		}
+		} catch (SQLException ex) {
+                Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 
 //------CREATE TABLES-------------
+        @Override
 	public void createTables() {  
 		try {
 			Statement stmt = c.createStatement();
@@ -114,10 +112,12 @@ public class ConnectionManager {
 		}
 	}
         
+        @Override
         public Connection getConnection() {
             return c;
 	}
         
+        @Override
         public void disconnect() {
             try {
                 c.close();
