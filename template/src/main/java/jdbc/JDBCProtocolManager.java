@@ -17,10 +17,6 @@ import pojos.ActionType;
 import pojos.Protocol;
 import pojos.ProtocolType;
 
-/**
- *
- * @author maria
- */
 public class JDBCProtocolManager implements ProtocolManager{
     
     private ConnectionManager cM;
@@ -82,5 +78,27 @@ public class JDBCProtocolManager implements ProtocolManager{
         }
         
         return protocol; 
+    }
+    
+    public int getProtocolId(String protocolType) {
+    int protocolId = 0; // Inicializamos a 0 por si no se encuentra ningún protocolo
+
+        try {
+            String sql = "SELECT id FROM protocol WHERE type = ? LIMIT 1";
+            PreparedStatement prep = cM.getConnection().prepareStatement(sql);
+            prep.setString(1, protocolType);
+            ResultSet rs = prep.executeQuery();
+
+            if (rs.next()) {
+                protocolId = rs.getInt("id");
+            }
+
+            rs.close();
+            prep.close();
+        } catch (SQLException ex) {
+             ex.printStackTrace();
+        }
+
+        return protocolId;
     }
 }

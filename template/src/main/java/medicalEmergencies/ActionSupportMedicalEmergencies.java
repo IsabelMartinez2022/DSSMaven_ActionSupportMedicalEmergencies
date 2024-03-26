@@ -181,7 +181,7 @@ public class ActionSupportMedicalEmergencies {
                         case 1:
                             System.out.println("Introduce the id of the person you want to see: ");
                             int idperson = sc.nextInt();
-                            protocolManager.getProtocolofPerson(idperson);
+                            protocolManager.getProtocolofPerson(idperson); //ESTO NO FUNCIONA
                             break;
                         case 2:
                             running = false;
@@ -287,7 +287,7 @@ public class ActionSupportMedicalEmergencies {
         instance.fire();
         instance.close();
         
-        System.out.println(p.getProtocol().toString()); 
+        //System.out.println(p.getProtocol().toString()); 
         
         personManager.addPerson(p); //se añade a la base de datos
 
