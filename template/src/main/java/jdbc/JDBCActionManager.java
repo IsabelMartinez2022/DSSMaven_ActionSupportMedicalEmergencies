@@ -26,6 +26,7 @@ public class JDBCActionManager implements ActionManager{
         for (ActionType actionType : ActionType.values()) {
             try {
                 String sql = "INSERT INTO action (type, instruction)" + "VALUES (?, ?);";
+                //aqui hacer tb lo del protocol
                 PreparedStatement prep = c.getConnection().prepareStatement(sql);
                 prep.setString(1, actionType.name()); 
                 prep.setString(2, actionType.getInstruction());
