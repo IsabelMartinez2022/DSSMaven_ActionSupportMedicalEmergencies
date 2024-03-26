@@ -4,11 +4,7 @@
  */
 package jdbc;
 
-import ifaces.ActionManager;
 import ifaces.InterfaceConnectionManager;
-import ifaces.PersonManager;
-import ifaces.ProtocolManager;
-import ifaces.UserManager;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,22 +21,15 @@ import java.util.logging.Logger;
  */
 public class ConnectionManager implements InterfaceConnectionManager{
 
-	private Connection c;
-	private UserManager userM;
-	private static PersonManager personM;
-        private static ProtocolManager protocolM;
-        private static ActionManager actionM;
+	private Connection c= null;
 
-        @Override
-        public void connect() {
+        public ConnectionManager() {
 		try {
-                    if(c==null){
                     Class.forName("org.sqlite.JDBC");
-                    this.c = DriverManager.getConnection("jdbc:sqlite:./db/ActionSupportMedicalEmergencies.db");
+                    c = DriverManager.getConnection("jdbc:sqlite:./db/ActionSupportMedicalEmergencies.db");
                     c.createStatement().execute("PRAGMA foreign_keys=ON");
                     System.out.println("Database connection opened.");
                     this.createTables();
-                }
 		} catch (ClassNotFoundException e) {
 			System.out.println("Libraries not loaded");
 		} catch (SQLException ex) {

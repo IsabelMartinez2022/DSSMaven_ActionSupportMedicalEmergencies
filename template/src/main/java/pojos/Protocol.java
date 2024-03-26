@@ -21,6 +21,7 @@ public class Protocol implements Serializable{
     private List<Action> actions; //Many to many relationship
 
     public Protocol(ProtocolType type, List<Action> actions) {
+        super();
         this.type = type;
         this.actions = actions;
     }

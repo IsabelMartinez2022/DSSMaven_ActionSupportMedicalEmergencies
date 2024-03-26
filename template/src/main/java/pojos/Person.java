@@ -39,6 +39,7 @@ public class Person implements Serializable{
    //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
 
     public Person(Boolean conscious, Dizzy dizzy, Breathing breathing, Bleeding bleeding, Boolean emit_words, ChestPain chest_pain, Boolean cough, Boolean seizure, Boolean possible_poisoning, Boolean electric_shock, Boolean major_trauma, Boolean car_accident, Boolean vomit, DifficultyBreathing difficulty_breathing, Boolean communication_problems) {
+        super();
         this.conscious = conscious;
         this.dizzy = dizzy;
         this.breathing = breathing;
@@ -57,6 +58,7 @@ public class Person implements Serializable{
     }
 
     public Person(){  
+        super();
     } 
 
     public int getId(){

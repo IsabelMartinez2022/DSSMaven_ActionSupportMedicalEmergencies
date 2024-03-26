@@ -7,7 +7,6 @@ package jdbc;
 import ifaces.UserManager;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,17 +25,17 @@ import pojos.User;
 
 public class JDBCUserManager implements UserManager{
     
-    private Connection c;
+    private ConnectionManager cM;
 
-    public JDBCUserManager(Connection c) {
-            this.c = c;
+    public JDBCUserManager(ConnectionManager cManager) {
+            this.cM = cManager;
     }
         
     @Override
     public void addUser(User user) { //aqui tb se pasa el user correctamente
         try {
-            String sql = "INSERT INTO user (username, password)" + "VALUES (?, ?);";
-            PreparedStatement prep = c.prepareStatement(sql);
+            String sql = "INSERT INTO user (username, password)" + "VALUES (?, ?)";
+            PreparedStatement prep = cM.getConnection().prepareStatement(sql);
             prep.setString(1, user.getUsername());
             prep.setBytes(2, user.getPassword());
             prep.executeUpdate();
@@ -50,7 +49,7 @@ public class JDBCUserManager implements UserManager{
     public boolean verifyUsername(String username) {
         String sql = "SELECT username FROM user WHERE username LIKE ?";
         try {
-            PreparedStatement prep = c.prepareStatement(sql);
+            PreparedStatement prep = cM.getConnection().prepareStatement(sql);
             prep.setString(1, username);
             ResultSet rs = prep.executeQuery();
             if (rs.next()) {
@@ -66,7 +65,7 @@ public class JDBCUserManager implements UserManager{
     public boolean verifyPassword(String username, String passwordIntroduced) {
         String sql = "SELECT password FROM user WHERE username LIKE ?";
         try {
-            PreparedStatement prep = c.prepareStatement(sql);
+            PreparedStatement prep = cM.getConnection().prepareStatement(sql);
             prep.setString(1, username);
             ResultSet rs = prep.executeQuery();
             if (rs.next()) {
@@ -91,7 +90,7 @@ public class JDBCUserManager implements UserManager{
 		try {
 			String sql = "SELECT * FROM person WHERE userId LIKE ?";
 
-			PreparedStatement prep = c.prepareStatement(sql);
+			PreparedStatement prep = cM.getConnection().prepareStatement(sql);
 			prep.setInt(1, userId);
 			ResultSet rs = prep.executeQuery();
 
@@ -127,7 +126,7 @@ public class JDBCUserManager implements UserManager{
      public User getUser(int id) {
         try {
             String sql = "SELECT * FROM USER WHERE id = ?";
-            PreparedStatement prep = c.prepareStatement(sql);
+            PreparedStatement prep = cM.getConnection().prepareStatement(sql);
             prep.setInt(1, id);
             ResultSet rs = prep.executeQuery();
             if (rs.next()) {
@@ -147,7 +146,7 @@ public class JDBCUserManager implements UserManager{
         String sql1 = "SELECT * FROM USER WHERE username = ?";
         int id = 0;
         try {
-            PreparedStatement p = c.prepareStatement(sql1);
+            PreparedStatement p = cM.getConnection().prepareStatement(sql1);
             p.setString(1, username);
             ResultSet rs = p.executeQuery();
             id = rs.getInt("id");

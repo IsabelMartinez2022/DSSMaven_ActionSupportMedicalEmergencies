@@ -11,7 +11,6 @@ import java.sql.Connection;
  * @author maria
  */
 public interface InterfaceConnectionManager {
-    public void connect();
     public void disconnect();
     public void createTables();
     public Connection getConnection();

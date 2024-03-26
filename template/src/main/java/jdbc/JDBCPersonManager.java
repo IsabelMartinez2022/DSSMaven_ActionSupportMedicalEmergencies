@@ -24,10 +24,10 @@ import pojos.Person;
  */
 public class JDBCPersonManager implements PersonManager{
     
-    private Connection c;
+    private ConnectionManager cM;
 
-	public JDBCPersonManager(Connection c) {
-		this.c = c;
+	public JDBCPersonManager(ConnectionManager cManager) {
+		this.cM = cManager;
 	}
 
 	@Override
@@ -38,7 +38,7 @@ public class JDBCPersonManager implements PersonManager{
                                 + "emit_words, chest_pain, cough, seizure, possible_poisoning, electric_shock, "
                                 + "major_trauma, car_accident, vomit, difficulty_breathing, communication_problems, "
                                 + "userId, protocolId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement prep = c.prepareStatement(sql);
+			PreparedStatement prep = cM.getConnection().prepareStatement(sql);
 			prep.setBoolean(1, p.getConscious());
                         prep.setString(2, p.getDizzy().name());
                         prep.setString(3, p.getBreathing().name());
@@ -67,7 +67,7 @@ public class JDBCPersonManager implements PersonManager{
         Person p = null;
     try {
         String sql = "SELECT * FROM person WHERE id = ?";
-        PreparedStatement pr = c.prepareStatement(sql);
+        PreparedStatement pr = cM.getConnection().prepareStatement(sql);
         pr.setInt(1, id);
         ResultSet rs = pr.executeQuery();
         if (rs.next()) {

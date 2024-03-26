@@ -20,9 +20,11 @@ public class User implements Serializable{
     public List<Person> people; //One to many relationship
 
     public User() {
+        super();
     }
 
     public User(String username, byte[] password) {
+        super();
         this.username = username;
         this.password = password;
     }

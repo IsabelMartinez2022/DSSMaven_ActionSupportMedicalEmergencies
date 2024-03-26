@@ -40,14 +40,17 @@ public class ActionSupportMedicalEmergencies {
     public static void main(String[] args) {
         PersonUnit personunit = new PersonUnit();
         RuleUnitInstance<PersonUnit> instance = RuleUnitProvider.get().createRuleUnitInstance(personunit);
+        
+        connectionManager= new ConnectionManager();
+        userManager = new JDBCUserManager(connectionManager);
+        personManager = new JDBCPersonManager(connectionManager);
+        protocolManager = new JDBCProtocolManager(connectionManager);
+        
         Person p = null;
         User u = null;
+        
         int option;
         try {
-            connectionManager.connect();
-            userManager = new JDBCUserManager(connectionManager.getConnection());
-            personManager = new JDBCPersonManager(connectionManager.getConnection());
-            protocolManager = new JDBCProtocolManager(connectionManager.getConnection());
             boolean log = true;
             /*while (log) {
                     log = logIn();
@@ -109,9 +112,8 @@ public class ActionSupportMedicalEmergencies {
     
     public static void register(JDBCUserManager userManager) throws SQLException {
         Scanner sc = new Scanner(System.in);
-        User u = null;
         try {
-            u = new User();
+            //u = new User();
 
             System.out.println("Let's proceed with the registration:");
 
@@ -119,14 +121,16 @@ public class ActionSupportMedicalEmergencies {
 
             System.out.print("Username:");
             username = sc.nextLine();
-            u.setUsername(username);
+            //u.setUsername(username);
 
             System.out.print("Password:");
             password = sc.nextLine();
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
             byte[] hash = md.digest();
-            u.setPassword(hash);
+            //u.setPassword(hash);
+            
+            User u = new User(username, hash);
             userManager.addUser(u); //aqui el usuario se añade correctamente
 
         }catch (NoSuchAlgorithmException ex) {

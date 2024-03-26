@@ -19,6 +19,7 @@ public class Action implements Serializable {
 
     //Used to try correct implementation of menus
     public Action(ActionType type) {
+        super();
         this.type = type;
     }
     //When the doubts are solve change to this --> also change protocol

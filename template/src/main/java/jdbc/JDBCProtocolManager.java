@@ -5,7 +5,6 @@
 package jdbc;
 
 import ifaces.ProtocolManager;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,10 +23,10 @@ import pojos.ProtocolType;
  */
 public class JDBCProtocolManager implements ProtocolManager{
     
-    private Connection c;
+    private ConnectionManager cM;
 
-    public JDBCProtocolManager(Connection c) {
-        this.c = c;
+    public JDBCProtocolManager(ConnectionManager cManager) {
+        this.cM = cManager;
     }
     
     @Override
@@ -36,7 +35,7 @@ public class JDBCProtocolManager implements ProtocolManager{
         for (ProtocolType protocolType : ProtocolType.values()) {
             try {
                 String sql = "INSERT INTO protocol (type)" + "VALUES (?);";
-                PreparedStatement statement = c.prepareStatement(sql);
+                PreparedStatement statement = cM.getConnection().prepareStatement(sql);
                 statement.setString(1, protocolType.name());  
                 
                 statement.executeUpdate();
@@ -63,7 +62,7 @@ public class JDBCProtocolManager implements ProtocolManager{
                         "JOIN person AS per ON p.id = per.protocolId " +
                         "WHERE per.id = ?";
             
-            PreparedStatement statement = c.prepareStatement(sql);
+            PreparedStatement statement = cM.getConnection().prepareStatement(sql);
             statement.setInt(1, personId);
             ResultSet rs = statement.executeQuery();
             
