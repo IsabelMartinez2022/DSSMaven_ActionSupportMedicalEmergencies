@@ -7,10 +7,6 @@ package pojos;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author maria
- */
 public class User implements Serializable{
 
     private static final long serialVersionUID = 2L;

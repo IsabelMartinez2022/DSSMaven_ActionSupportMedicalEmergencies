@@ -4,9 +4,5 @@
  */
 package pojos;
 
-/**
- *
- * @author marty
- */
 public enum Dizzy {A_LOT,NO, A_LITTLE}
 

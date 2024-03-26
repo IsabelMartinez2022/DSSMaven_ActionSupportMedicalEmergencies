@@ -13,10 +13,6 @@ import java.util.logging.Logger;
 import pojos.Action;
 import pojos.ActionType;
 
-/**
- *
- * @author maria
- */
 public class JDBCActionManager implements ActionManager{
     private ConnectionManager c;
     

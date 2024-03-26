@@ -4,8 +4,4 @@
  */
 package pojos;
 
-/**
- *
- * @author isama
- */
 public enum Breathing {YES, UNABLE_TO_CHECK, NO}

@@ -7,11 +7,6 @@ package ifaces;
 import java.util.List;
 import pojos.Action;
 
-/**
- *
- * @author isama
- */
-
 public interface ActionManager {
     //SÓLO SI CREAMOS LA BASE DE DATOS DESDE AQUÍ
     

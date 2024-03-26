@@ -7,13 +7,9 @@ package ifaces;
 import java.util.List;
 import pojos.Protocol;
 
-/**
- *
- * @author isama
- */
-
 public interface ProtocolManager {
     
     public void addProtocol();
     public Protocol getProtocolofPerson(int personId);
+    public int getProtocolId(String protocolType);
 }

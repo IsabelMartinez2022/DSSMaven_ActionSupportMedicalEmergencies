@@ -4,8 +4,4 @@
  */
 package pojos;
 
-/**
- *
- * @author marty
- */
 public enum DifficultyBreathing {A_LOT, A_LITTLE, NO}

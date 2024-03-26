@@ -19,10 +19,6 @@ import pojos.DifficultyBreathing;
 import pojos.Dizzy;
 import pojos.Person;
 
-/**
- *
- * @author isama
- */
 public class JDBCPersonManager implements PersonManager{
     
     private ConnectionManager cM;

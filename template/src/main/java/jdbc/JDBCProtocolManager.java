@@ -80,6 +80,7 @@ public class JDBCProtocolManager implements ProtocolManager{
         return protocol; 
     }
     
+    @Override
     public int getProtocolId(String protocolType) {
     int protocolId = 0; // Inicializamos a 0 por si no se encuentra ningún protocolo
 

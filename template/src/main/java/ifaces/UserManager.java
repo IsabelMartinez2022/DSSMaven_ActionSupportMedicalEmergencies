@@ -8,10 +8,6 @@ import java.util.List;
 import pojos.Person;
 import pojos.User;
 
-/**
- *
- * @author isama
- */
 public interface UserManager {
     public void addUser(User user);
     public boolean verifyPassword(String username, String passwordIntroduced);

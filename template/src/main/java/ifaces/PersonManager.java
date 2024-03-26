@@ -8,10 +8,6 @@ import java.util.List;
 import pojos.Person;
 import pojos.Protocol;
 
-/**
- *
- * @author isama
- */
 public interface PersonManager {
         public void addPerson(Person p);
         public Person selectPerson(int id);

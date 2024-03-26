@@ -7,10 +7,6 @@ package pojos;
 import java.io.Serializable;
 import static pojos.Protocol.PROTOCOLS_MAP;
 
-/**
- *
- * @author marty
- */
 public class Person implements Serializable{
     
     private static final long serialVersionUID = 1L;

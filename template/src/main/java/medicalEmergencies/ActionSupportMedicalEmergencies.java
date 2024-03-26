@@ -52,11 +52,6 @@ public class ActionSupportMedicalEmergencies {
         
         int option;
         try {
-            boolean log = true;
-            /*while (log) {
-                    log = logIn();
-            }*/
-            
             boolean control = true;
             while (control)  {
                 System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
