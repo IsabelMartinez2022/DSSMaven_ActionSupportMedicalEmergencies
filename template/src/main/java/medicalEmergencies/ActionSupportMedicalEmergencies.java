@@ -30,7 +30,7 @@ import jdbc.JDBCUserManager;
 import pojos.User;
 
 public class ActionSupportMedicalEmergencies {
-    private static ConnectionManager connectionManager;
+    public static ConnectionManager connectionManager;
     public static JDBCUserManager userManager;
     public static JDBCPersonManager personManager;
     public static JDBCProtocolManager protocolManager;
