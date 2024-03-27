@@ -10,7 +10,9 @@ import static Utilities.Auxiliar.translateNumberToString;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -169,7 +171,9 @@ public class ActionSupportMedicalEmergencies {
                     // We need to get this from the database
                     break;
                 case 2:
-                    userManager.listPeopleofUser(userId);
+                    List<Person> peopleOFuser = new ArrayList<>();
+                    peopleOFuser = userManager.listPeopleofUser(userId);
+                    System.out.println(peopleOFuser);
                     System.out.println("Do you want to choose a specific person to see its protocol? (1: yes \n 2: no");
                     int choice2 = sc.nextInt();
                     switch(choice2){
@@ -177,7 +181,7 @@ public class ActionSupportMedicalEmergencies {
                             //TODO hacer metodo que liste y muestre todas las personas en base de datos para que user meta id que quiere
                             System.out.println("Introduce the id of the person you want to see: ");
                             int idperson = sc.nextInt();
-                            protocolManager.getProtocolofPerson(idperson); //TODO arreglar ese método
+                            System.out.println(protocolManager.getProtocolofPerson(idperson)); //TODO arreglar ese método
                             break;
                         case 2:
                             running = false;

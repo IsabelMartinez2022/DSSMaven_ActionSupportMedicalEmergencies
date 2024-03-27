@@ -203,7 +203,7 @@ public class Person implements Serializable{
     
     @Override
     public String toString() {
-        return "Person{" + "conscious=" + conscious + ", dizzy=" + dizzy + ", breathing=" + breathing + ", bleeding=" + bleeding + ", emit_words=" + emit_words + ", chest_pain=" + chest_pain + ", cough=" + cough + ", seizure=" + seizure + ", possible_poisoning=" + possible_poisoning + ", electric_shock=" + electric_shock + ", major_trauma=" + major_trauma + ", car_accident=" + car_accident + ", vomit=" + vomit + ", difficulty_breathing=" + difficulty_breathing + ", communication_problems"+ communication_problems+ ", protocol=" +protocol + '}';
+        return "\nPerson{"+ "id=" + id + "conscious=" + conscious + ", dizzy=" + dizzy + ", breathing=" + breathing + ", bleeding=" + bleeding + ", emit_words=" + emit_words + ", chest_pain=" + chest_pain + ", cough=" + cough + ", seizure=" + seizure + ", possible_poisoning=" + possible_poisoning + ", electric_shock=" + electric_shock + ", major_trauma=" + major_trauma + ", car_accident=" + car_accident + ", vomit=" + vomit + ", difficulty_breathing=" + difficulty_breathing + ", communication_problems"+ communication_problems+ ", protocol=" +protocol + "}\n";
     }
     
     
