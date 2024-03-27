@@ -18,8 +18,9 @@ public class Protocol implements Serializable{
     private ProtocolType type;
     private List<Action> actions; //Many to many relationship
 
-    public Protocol(ProtocolType type, List<Action> actions) {
+    public Protocol(int id, ProtocolType type, List<Action> actions) {
         super();
+        this.id = id;
         this.type = type;
         this.actions = actions;
     }
@@ -59,7 +60,7 @@ public class Protocol implements Serializable{
         cardioArrestActions.add(new Action(ActionType.CALL_112));
         cardioArrestActions.add(new Action(ActionType.PERFORM_CPR));
         cardioArrestActions.add(new Action(ActionType.USE_AED));
-        Protocol cardioArrestProtocol = new Protocol(ProtocolType.CARDIOARREST, cardioArrestActions);
+        Protocol cardioArrestProtocol = new Protocol(1, ProtocolType.CARDIOARREST, cardioArrestActions);
         PROTOCOLS_MAP.put(ProtocolType.CARDIOARREST, cardioArrestProtocol);
 
         //2
@@ -68,7 +69,7 @@ public class Protocol implements Serializable{
         cardioArrestElectrocutionActions.add(new Action(ActionType.CALL_112));
         cardioArrestElectrocutionActions.add(new Action(ActionType.PERFORM_CPR));
         cardioArrestElectrocutionActions.add(new Action(ActionType.USE_AED));
-        Protocol cardioArrestElectrocutionProtocol = new Protocol(ProtocolType.CARDIOARREST_ELECTROCUTION, cardioArrestElectrocutionActions);
+        Protocol cardioArrestElectrocutionProtocol = new Protocol(2, ProtocolType.CARDIOARREST_ELECTROCUTION, cardioArrestElectrocutionActions);
         PROTOCOLS_MAP.put(ProtocolType.CARDIOARREST_ELECTROCUTION, cardioArrestElectrocutionProtocol);
 
         //3
@@ -77,7 +78,7 @@ public class Protocol implements Serializable{
         cardioArrestMajorTraumaActions.add(new Action(ActionType.DO_NOT_MOVE));
         cardioArrestMajorTraumaActions.add(new Action(ActionType.PERFORM_CPR));
         cardioArrestMajorTraumaActions.add(new Action(ActionType.USE_AED));
-        Protocol cardioArrestMajorTraumaProtocol = new Protocol(ProtocolType.CARDIOARREST_MAJORTRAUMA, cardioArrestMajorTraumaActions);
+        Protocol cardioArrestMajorTraumaProtocol = new Protocol(3, ProtocolType.CARDIOARREST_MAJORTRAUMA, cardioArrestMajorTraumaActions);
         PROTOCOLS_MAP.put(ProtocolType.CARDIOARREST_MAJORTRAUMA, cardioArrestMajorTraumaProtocol);
         
         //4
@@ -87,7 +88,7 @@ public class Protocol implements Serializable{
         cardioArrestMajorTraumaBleedingActions.add(new Action(ActionType.APPLY_PRESSURE));
         cardioArrestMajorTraumaBleedingActions.add(new Action(ActionType.PERFORM_CPR));
         cardioArrestMajorTraumaBleedingActions.add(new Action(ActionType.USE_AED));
-        Protocol cardioArrestMajorTraumaBleedingProtocol = new Protocol(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING, cardioArrestMajorTraumaBleedingActions);
+        Protocol cardioArrestMajorTraumaBleedingProtocol = new Protocol(4, ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING, cardioArrestMajorTraumaBleedingActions);
         PROTOCOLS_MAP.put(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING, cardioArrestMajorTraumaBleedingProtocol);
         
         //5
@@ -95,7 +96,7 @@ public class Protocol implements Serializable{
         carActions.add(new Action(ActionType.PROTECT_PAR));
         carActions.add(new Action(ActionType.CALL_112));
         carActions.add(new Action(ActionType.RESCUE_PAR));
-        Protocol carProtocol = new Protocol(ProtocolType.CAR, carActions);
+        Protocol carProtocol = new Protocol(5, ProtocolType.CAR, carActions);
         PROTOCOLS_MAP.put(ProtocolType.CAR, carProtocol);
         
         //6
@@ -105,7 +106,7 @@ public class Protocol implements Serializable{
         cardioArrestCarActions.add(new Action(ActionType.RESCUE_PAR));
         cardioArrestCarActions.add(new Action(ActionType.PERFORM_CPR));
         cardioArrestCarActions.add(new Action(ActionType.USE_AED));
-        Protocol cardioArrestCarProtocol = new Protocol(ProtocolType.CARDIOARREST_CAR, cardioArrestCarActions);
+        Protocol cardioArrestCarProtocol = new Protocol(6, ProtocolType.CARDIOARREST_CAR, cardioArrestCarActions);
         PROTOCOLS_MAP.put(ProtocolType.CARDIOARREST_CAR, cardioArrestCarProtocol);
         
         //7
@@ -116,26 +117,26 @@ public class Protocol implements Serializable{
         cardioArrestCarBleedingActions.add(new Action(ActionType.APPLY_PRESSURE));
         cardioArrestCarBleedingActions.add(new Action(ActionType.PERFORM_CPR));
         cardioArrestCarBleedingActions.add(new Action(ActionType.USE_AED));
-        Protocol cardioArrestCarBleedingProtocol = new Protocol(ProtocolType.CARDIOARREST_CAR_BLEEDING, cardioArrestCarBleedingActions);
+        Protocol cardioArrestCarBleedingProtocol = new Protocol(7, ProtocolType.CARDIOARREST_CAR_BLEEDING, cardioArrestCarBleedingActions);
         PROTOCOLS_MAP.put(ProtocolType.CARDIOARREST_CAR_BLEEDING, cardioArrestCarBleedingProtocol);
    
         //8
         List<Action> partialChokingActions = new LinkedList<>();
         partialChokingActions.add(new Action(ActionType.ENCOURAGE_COUGH));
-        Protocol partialChokingProtocol = new Protocol(ProtocolType.PARTIAL_CHOKING, partialChokingActions);
+        Protocol partialChokingProtocol = new Protocol(8, ProtocolType.PARTIAL_CHOKING, partialChokingActions);
         PROTOCOLS_MAP.put(ProtocolType.PARTIAL_CHOKING, partialChokingProtocol);
         
         //9
         List<Action> totalChokingActions = new LinkedList<>();
         totalChokingActions.add(new Action(ActionType.HEIMLICH_MANEUVER));
-        Protocol totalChokingProtocol = new Protocol(ProtocolType.TOTAL_CHOKING, totalChokingActions);
+        Protocol totalChokingProtocol = new Protocol(9, ProtocolType.TOTAL_CHOKING, totalChokingActions);
         PROTOCOLS_MAP.put(ProtocolType.TOTAL_CHOKING, totalChokingProtocol);
         
         //10
         List<Action> heartAttackActions = new LinkedList<>();
         heartAttackActions.add(new Action(ActionType.CALL_112));
         heartAttackActions.add(new Action(ActionType.SEARCH_MEDICATION));
-        Protocol heartAttackProtocol = new Protocol(ProtocolType.HEART_ATTACK, heartAttackActions);
+        Protocol heartAttackProtocol = new Protocol(10, ProtocolType.HEART_ATTACK, heartAttackActions);
         PROTOCOLS_MAP.put(ProtocolType.HEART_ATTACK, heartAttackProtocol);
         
         //11
@@ -143,7 +144,7 @@ public class Protocol implements Serializable{
         faintingActions.add(new Action(ActionType.SECURE_AREA));
         faintingActions.add(new Action(ActionType.LEGS_UP_LOOSEN));
         faintingActions.add(new Action(ActionType.CALL_112_RECOVERY));
-        Protocol faintingProtocol = new Protocol(ProtocolType.FAINTING, faintingActions);
+        Protocol faintingProtocol = new Protocol(11, ProtocolType.FAINTING, faintingActions);
         PROTOCOLS_MAP.put(ProtocolType.FAINTING, faintingProtocol);
         
         //12
@@ -151,7 +152,7 @@ public class Protocol implements Serializable{
         faintingVomitActions.add(new Action(ActionType.SECURE_AREA));
         faintingVomitActions.add(new Action(ActionType.RECOVERY_POSITION));
         faintingVomitActions.add(new Action(ActionType.CALL_112_RECOVERY));
-        Protocol faintingVomitProtocol = new Protocol(ProtocolType.FAINTING_VOMIT, faintingVomitActions);
+        Protocol faintingVomitProtocol = new Protocol(12, ProtocolType.FAINTING_VOMIT, faintingVomitActions);
         PROTOCOLS_MAP.put(ProtocolType.FAINTING_VOMIT, faintingVomitProtocol);
         
         //13
@@ -159,13 +160,13 @@ public class Protocol implements Serializable{
         dizzinessActions.add(new Action(ActionType.LAY_DOWN));
         dizzinessActions.add(new Action(ActionType.LEGS_UP_LOOSEN));
         dizzinessActions.add(new Action(ActionType.HYDRATION));
-        Protocol dizzinessProtocol = new Protocol(ProtocolType.DIZZINESS, dizzinessActions);
+        Protocol dizzinessProtocol = new Protocol(13, ProtocolType.DIZZINESS, dizzinessActions);
         PROTOCOLS_MAP.put(ProtocolType.DIZZINESS, dizzinessProtocol);
         
         //14
         List<Action> consSevereBleedingActions = new LinkedList<>();
         consSevereBleedingActions.add(new Action(ActionType.APPLY_PRESSURE));
-        Protocol consSevereBleedingProtocol = new Protocol(ProtocolType.CONS_SEVERE_BLEEDING, consSevereBleedingActions);
+        Protocol consSevereBleedingProtocol = new Protocol(14, ProtocolType.CONS_SEVERE_BLEEDING, consSevereBleedingActions);
         PROTOCOLS_MAP.put(ProtocolType.CONS_SEVERE_BLEEDING, consSevereBleedingProtocol);
         
         //15
@@ -174,14 +175,14 @@ public class Protocol implements Serializable{
         seizureActions.add(new Action(ActionType.CUSHION_HEAD));        
         seizureActions.add(new Action(ActionType.RECOVERY_POSITION));
         seizureActions.add(new Action(ActionType.CALL_112_RECOVERY));
-        Protocol seizureProtocol = new Protocol(ProtocolType.SEIZURE, seizureActions);
+        Protocol seizureProtocol = new Protocol(15, ProtocolType.SEIZURE, seizureActions);
         PROTOCOLS_MAP.put(ProtocolType.SEIZURE, seizureProtocol);
         
         //16
         List<Action> poisoningActions = new LinkedList<>();  
         poisoningActions.add(new Action(ActionType.RECOVERY_POSITION));
         poisoningActions.add(new Action(ActionType.FRESH_AIR));
-        Protocol poisoningProtocol = new Protocol(ProtocolType.POISONING, poisoningActions);
+        Protocol poisoningProtocol = new Protocol(16, ProtocolType.POISONING, poisoningActions);
         PROTOCOLS_MAP.put(ProtocolType.POISONING, poisoningProtocol);
         
         //17
@@ -189,7 +190,7 @@ public class Protocol implements Serializable{
         anaphylaxisActions.add(new Action(ActionType.CALL_112));
         anaphylaxisActions.add(new Action(ActionType.LAY_DOWN));
         anaphylaxisActions.add(new Action(ActionType.AUTO_INJECTOR));
-        Protocol anaphylaxisProtocol = new Protocol(ProtocolType.ANAPHYLAXIS, anaphylaxisActions);
+        Protocol anaphylaxisProtocol = new Protocol(17, ProtocolType.ANAPHYLAXIS, anaphylaxisActions);
         PROTOCOLS_MAP.put(ProtocolType.ANAPHYLAXIS, anaphylaxisProtocol);
         
         //18
@@ -197,27 +198,27 @@ public class Protocol implements Serializable{
         anaphylaxisVomitActions.add(new Action(ActionType.CALL_112));
         anaphylaxisVomitActions.add(new Action(ActionType.RECOVERY_POSITION));
         anaphylaxisVomitActions.add(new Action(ActionType.AUTO_INJECTOR));
-        Protocol anaphylaxisVomitProtocol = new Protocol(ProtocolType.ANAPHYLAXIS_VOMIT, anaphylaxisVomitActions);
+        Protocol anaphylaxisVomitProtocol = new Protocol(18, ProtocolType.ANAPHYLAXIS_VOMIT, anaphylaxisVomitActions);
         PROTOCOLS_MAP.put(ProtocolType.ANAPHYLAXIS_VOMIT, anaphylaxisVomitProtocol);
         
         //19
         List<Action> strokeActions = new LinkedList<>(); 
         strokeActions.add(new Action(ActionType.CALL_112));
         strokeActions.add(new Action(ActionType.AMBULANCE));
-        Protocol strokeProtocol = new Protocol(ProtocolType.STROKE, strokeActions);
+        Protocol strokeProtocol = new Protocol(19, ProtocolType.STROKE, strokeActions);
         PROTOCOLS_MAP.put(ProtocolType.STROKE, strokeProtocol);
         
         //20
         List<Action> noEmergencyActions = new LinkedList<>();
         noEmergencyActions.add(new Action(ActionType.NO_EMERGENCY));
-        Protocol noEmergencyProtocol = new Protocol(ProtocolType.NOEMERGENCYFOUND, noEmergencyActions);
+        Protocol noEmergencyProtocol = new Protocol(20, ProtocolType.NOEMERGENCYFOUND, noEmergencyActions);
         PROTOCOLS_MAP.put(ProtocolType.NOEMERGENCYFOUND, noEmergencyProtocol);
         
         //21
         List<Action> majorTraumaActions = new LinkedList<>(); 
         majorTraumaActions.add(new Action(ActionType.CALL_112));
         majorTraumaActions.add(new Action(ActionType.DO_NOT_MOVE));
-        Protocol majorTraumaProtocol = new Protocol(ProtocolType.MAJOR_TRAUMA, majorTraumaActions);
+        Protocol majorTraumaProtocol = new Protocol(21, ProtocolType.MAJOR_TRAUMA, majorTraumaActions);
         PROTOCOLS_MAP.put(ProtocolType.MAJOR_TRAUMA, majorTraumaProtocol);
         
         //22
@@ -225,7 +226,7 @@ public class Protocol implements Serializable{
         majorTraumaBleedingActions.add(new Action(ActionType.CALL_112));
         majorTraumaBleedingActions.add(new Action(ActionType.DO_NOT_MOVE));
         majorTraumaBleedingActions.add(new Action(ActionType.APPLY_PRESSURE));
-        Protocol majorTraumaBleedingProtocol = new Protocol(ProtocolType.MAJOR_TRAUMA_BLEEDING, majorTraumaBleedingActions);
+        Protocol majorTraumaBleedingProtocol = new Protocol(22, ProtocolType.MAJOR_TRAUMA_BLEEDING, majorTraumaBleedingActions);
         PROTOCOLS_MAP.put(ProtocolType.MAJOR_TRAUMA_BLEEDING, majorTraumaBleedingProtocol);
         
         //23
@@ -234,7 +235,7 @@ public class Protocol implements Serializable{
         carBleedingActions.add(new Action(ActionType.CALL_112));
         carBleedingActions.add(new Action(ActionType.RESCUE_PAR));
         carBleedingActions.add(new Action(ActionType.APPLY_PRESSURE));
-        Protocol carBleedingProtocol = new Protocol(ProtocolType.CAR_BLEEDING, carBleedingActions);
+        Protocol carBleedingProtocol = new Protocol(23, ProtocolType.CAR_BLEEDING, carBleedingActions);
         PROTOCOLS_MAP.put(ProtocolType.CAR_BLEEDING, carBleedingProtocol);
        
     }

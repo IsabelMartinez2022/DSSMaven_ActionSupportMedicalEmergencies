@@ -43,7 +43,7 @@ public class JDBCProtocolManager implements ProtocolManager{
         }
     }
     
-    @Override
+    /*@Override 
     public void assignProtocolActions() {
         
         try {
@@ -63,9 +63,9 @@ public class JDBCProtocolManager implements ProtocolManager{
             Logger.getLogger(JDBCActionManager.class.getName()).log(Level.SEVERE, null, ex);
         }
             
-    }
+    }*/
        
-    @Override
+    /*@Override
     public Protocol getProtocolofPerson(int personId){
         List<Action> actions= new ArrayList<>();
         ProtocolType pType = null;
@@ -94,14 +94,14 @@ public class JDBCProtocolManager implements ProtocolManager{
                     pType = ProtocolType.valueOf(rs.getString("protocolType"));
         }
     }
-            protocol= new Protocol(pType,actions);
+            protocol= new Protocol(1, pType,actions); //ESTO NO FUNCIONA EHHHH ES UNA ÑAPA
             
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
         return protocol; 
-    }
+    }*/
     
     @Override
     public int getProtocolId(String protocolType) {
@@ -125,6 +125,20 @@ public class JDBCProtocolManager implements ProtocolManager{
 
         return protocolId;
     }
+    
+    public Protocol obtainProtocol(int protocolId) {
+    // Iterar sobre los protocolos en el mapa
+    for (Protocol protocol : Protocol.PROTOCOLS_MAP.values()) {
+        // Comprobar si el ID del protocolo coincide
+        if (protocol.getId() == protocolId) {
+            // Si coincide, devolver el protocolo correspondiente
+            return protocol;
+        }
+    }
+    // Si no se encuentra el protocolo...
+    return null;
+    }
+
 
     /* NOT NEEDED (isabel)
     @Override

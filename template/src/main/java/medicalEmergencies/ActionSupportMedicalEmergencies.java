@@ -29,6 +29,7 @@ import pojos.Dizzy;
 import pojos.Person;
 import pojos.PersonUnit;
 import jdbc.JDBCUserManager;
+import pojos.Protocol;
 import pojos.User;
 
 public class ActionSupportMedicalEmergencies {
@@ -51,11 +52,10 @@ public class ActionSupportMedicalEmergencies {
         // Tables for protocols and actions are created and their relationship too
         protocolManager.addProtocol();
         actionManager.addAction();
-        protocolManager.assignProtocolActions();
+        //protocolManager.assignProtocolActions();
         
         int option;
         try {
-            //boolean control = true;
             control = true;
             while (control)  {
                 System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
@@ -134,7 +134,7 @@ public class ActionSupportMedicalEmergencies {
         Scanner sc = new Scanner(System.in);
         System.out.print("Username:");
         String username = sc.nextLine();
-        System.out.print("password:");
+        System.out.print("Password:");
         String password = sc.nextLine();
         //byte[] bytesDefaultCharset = password.getBytes();
         if (userManager.verifyUsername(username) && userManager.verifyPassword(username, password)) {
@@ -172,12 +172,20 @@ public class ActionSupportMedicalEmergencies {
                     int choice2 = sc.nextInt();
                     switch(choice2){
                         case 1:
-                            //TODO hacer metodo que liste y muestre todas las personas en base de datos para que user meta id que quiere
-                            System.out.println("Introduce the id of the person you want to see: ");
-                            int idperson = sc.nextInt();
-                            p=personManager.selectPerson(idperson);
-                            System.out.println(p.getProtocol().toString()); //TODO arreglar ese método
-                            break;
+                        System.out.println("Introduce the id of the person you want to see: ");
+                        int idperson = sc.nextInt();
+                        Person person = personManager.selectPerson(idperson);
+                        if (person != null) {
+                            Protocol protocol = protocolManager.obtainProtocol(person.getProtocol().getId());
+                            if (protocol != null) {
+                                System.out.println("Protocol of person " + person.getId() + ": " + person.getProtocol().toString());
+                            } else {
+                                System.out.println("No protocol found for person " + person.getId());
+                            }
+                        } else {
+                            System.out.println("Person not found with id: " + idperson);
+                        }
+                        break;
                         case 2:
                             running = false;
                             break;
@@ -282,7 +290,7 @@ public class ActionSupportMedicalEmergencies {
         instance.fire();
         instance.close();
         
-        System.out.println(p.getProtocol().toString()); //dejarla comentada? es la que imprime protocolo antes de add a db
+        //System.out.println(p.getProtocol().toString()); 
         
         personManager.addPerson(p); //se añade a la base de datos
     }

@@ -15,12 +15,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static medicalEmergencies.ActionSupportMedicalEmergencies.protocolManager;
 import pojos.Bleeding;
 import pojos.Breathing;
 import pojos.ChestPain;
 import pojos.DifficultyBreathing;
 import pojos.Dizzy;
 import pojos.Person;
+import pojos.Protocol;
 import pojos.User;
 
 public class JDBCUserManager implements UserManager{
@@ -32,7 +34,7 @@ public class JDBCUserManager implements UserManager{
     }
         
     @Override
-    public void addUser(User user) { //aqui tb se pasa el user correctamente
+    public void addUser(User user) { 
         try {
             String sql = "INSERT INTO user (username, password) VALUES (?, ?)";
             PreparedStatement prep = cM.getConnection().prepareStatement(sql);
@@ -83,47 +85,51 @@ public class JDBCUserManager implements UserManager{
     }
     
     @Override
-	public List<Person> listPeopleofUser(int userId) {
+    public List<Person> listPeopleofUser(int userId) {
+            
+            List<Person> peopleList = new ArrayList<>();
 
-		List<Person> peopleList = new ArrayList<>();
+            try {
+                    String sql = "SELECT * FROM person WHERE userId LIKE ?";
 
-		try {
-			String sql = "SELECT * FROM person WHERE userId LIKE ?";
+                    PreparedStatement prep = cM.getConnection().prepareStatement(sql);
+                    prep.setInt(1, userId);
+                    ResultSet rs = prep.executeQuery();
 
-			PreparedStatement prep = cM.getConnection().prepareStatement(sql);
-			prep.setInt(1, userId);
-			ResultSet rs = prep.executeQuery();
+                    while (rs.next()) { 
+                    Person person = new Person();
+                    //añade protocolo
+                    int protocolId = rs.getInt("protocolId");
+                    Protocol protocol = protocolManager.obtainProtocol(protocolId);
+                    
+                    person.setId(rs.getInt("id"));
+                    person.setConscious(rs.getBoolean("conscious"));
+                    person.setDizzy(Dizzy.valueOf(rs.getString("dizzy")));
+                    person.setBreathing(Breathing.valueOf(rs.getString("breathing")));
+                    person.setBleeding(Bleeding.valueOf(rs.getString("bleeding")));
+                    person.setEmit_words(rs.getBoolean("emit_words"));
+                    person.setChest_pain(ChestPain.valueOf(rs.getString("chest_pain")));
+                    person.setCough(rs.getBoolean("cough"));
+                    person.setSeizure(rs.getBoolean("seizure"));
+                    person.setPossible_poisoning(rs.getBoolean("possible_poisoning"));
+                    person.setElectric_shock(rs.getBoolean("electric_shock"));
+                    person.setMajor_trauma(rs.getBoolean("major_trauma"));
+                    person.setCar_accident(rs.getBoolean("car_accident"));
+                    person.setVomit(rs.getBoolean("vomit"));
+                    person.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
+                    person.setCommunication_problems((rs.getBoolean("communication_problems")));
+                    person.setProtocol(protocol); // Asignar el protocolo a la persona
+                    peopleList.add(person);
+                    }
+                    rs.close();
+                    prep.close();
 
-			while (rs.next()) { 
-                        Person person = new Person();
-                        person.setId(rs.getInt("id"));
-                        person.setConscious(rs.getBoolean("conscious"));
-                        person.setDizzy(Dizzy.valueOf(rs.getString("dizzy")));
-                        person.setBreathing(Breathing.valueOf(rs.getString("breathing")));
-                        person.setBleeding(Bleeding.valueOf(rs.getString("bleeding")));
-                        person.setEmit_words(rs.getBoolean("emit_words"));
-                        person.setChest_pain(ChestPain.valueOf(rs.getString("chest_pain")));
-                        person.setCough(rs.getBoolean("cough"));
-                        person.setSeizure(rs.getBoolean("seizure"));
-                        person.setPossible_poisoning(rs.getBoolean("possible_poisoning"));
-                        person.setElectric_shock(rs.getBoolean("electric_shock"));
-                        person.setMajor_trauma(rs.getBoolean("major_trauma"));
-                        person.setCar_accident(rs.getBoolean("car_accident"));
-                        person.setVomit(rs.getBoolean("vomit"));
-                        person.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
-                        person.setCommunication_problems((rs.getBoolean("communication_problems")));
-			peopleList.add(person);
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+            return peopleList;
+    }
 
-			}
-			rs.close();
-			prep.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return peopleList;
-	}
-        
      public User getUser(int id) {
         try {
             String sql = "SELECT * FROM USER WHERE id = ?";
@@ -157,5 +163,5 @@ public class JDBCUserManager implements UserManager{
         }
         return id;
     }
-
+    
 }

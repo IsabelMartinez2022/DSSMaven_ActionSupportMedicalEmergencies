@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static medicalEmergencies.ActionSupportMedicalEmergencies.protocolManager;
 //import static medicalEmergencies.ActionSupportMedicalEmergencies.protocolManager;
 import pojos.Bleeding;
 import pojos.Breathing;
@@ -17,6 +18,7 @@ import pojos.ChestPain;
 import pojos.DifficultyBreathing;
 import pojos.Dizzy;
 import pojos.Person;
+import pojos.Protocol;
 
 public class JDBCPersonManager implements PersonManager{
     
@@ -70,6 +72,9 @@ public class JDBCPersonManager implements PersonManager{
         ResultSet rs = pr.executeQuery();
         if (rs.next()) {
             p = new Person();
+            //añade protocolo
+            int protocolId = rs.getInt("protocolId");
+            Protocol protocol = protocolManager.obtainProtocol(protocolId);
             p.setId(rs.getInt("id"));
             p.setConscious(rs.getBoolean("conscious"));
             p.setDizzy(Dizzy.valueOf(rs.getString("dizzy")));
@@ -86,6 +91,7 @@ public class JDBCPersonManager implements PersonManager{
             p.setVomit(rs.getBoolean("vomit"));
             p.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
             p.setCommunication_problems(rs.getBoolean("communication_problems"));
+            p.setProtocol(protocol); // Asignar el protocolo a la persona
         }
         pr.close();
         rs.close();

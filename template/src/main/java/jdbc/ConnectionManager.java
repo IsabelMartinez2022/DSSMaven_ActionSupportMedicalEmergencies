@@ -75,7 +75,7 @@ public class ConnectionManager implements InterfaceConnectionManager{
                                 +"instruction TEXT NOT NULL"
                                 +");";
                         stmt.executeUpdate(table3);
-                        String table4 ="CREATE TABLE protocolAction ("
+                        String table4 ="CREATE TABLE protocolAction("
                                 +"protocolId INTEGER NOT NULL,"
                                 + "actionId INTEGER NOT NULL,"
                                 + "PRIMARY KEY (protocolId, actionId),"
