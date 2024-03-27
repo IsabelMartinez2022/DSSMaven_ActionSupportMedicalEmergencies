@@ -27,14 +27,13 @@ public class JDBCProtocolManager implements ProtocolManager{
     
     @Override
     public void addProtocol() {
-        // Se itera sobre los valores del enum ActionType.
+        // Se itera sobre los valores del enum ProtocolType
         for (ProtocolType protocolType : ProtocolType.values()) {
             try {
-                String sql = "INSERT INTO protocol (type) VALUES (?) ;";
-                //INSERT INTO protocol (type) SELECT ? WHERE NOT EXISTS (SELECT 1 FROM protocol WHERE type = ? LIMIT 1)
+                String sql = "INSERT INTO protocol (type) SELECT ? WHERE NOT EXISTS (SELECT 1 FROM protocol WHERE type = ? LIMIT 1);";
                 PreparedStatement statement = cM.getConnection().prepareStatement(sql);
                 statement.setString(1, protocolType.name());  
-                
+                statement.setString(2, protocolType.name()); // Para verificar si el tipo ya existe
                 statement.executeUpdate();
                 statement.close();
             } catch (SQLException ex) {
