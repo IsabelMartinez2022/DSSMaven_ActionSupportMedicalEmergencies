@@ -181,7 +181,8 @@ public class ActionSupportMedicalEmergencies {
                             //TODO hacer metodo que liste y muestre todas las personas en base de datos para que user meta id que quiere
                             System.out.println("Introduce the id of the person you want to see: ");
                             int idperson = sc.nextInt();
-                            System.out.println(protocolManager.getProtocolofPerson(idperson)); //TODO arreglar ese método
+                            p=personManager.selectPerson(idperson);
+                            System.out.println(p.getProtocol().toString()); //TODO arreglar ese método
                             break;
                         case 2:
                             running = false;
