@@ -5,13 +5,12 @@
 package jdbc;
 
 import ifaces.PersonManager;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static medicalEmergencies.ActionSupportMedicalEmergencies.protocolManager;
+//import static medicalEmergencies.ActionSupportMedicalEmergencies.protocolManager;
 import pojos.Bleeding;
 import pojos.Breathing;
 import pojos.ChestPain;

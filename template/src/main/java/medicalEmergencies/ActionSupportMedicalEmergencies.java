@@ -10,7 +10,6 @@ import static Utilities.Auxiliar.translateNumberToString;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -48,13 +47,16 @@ public class ActionSupportMedicalEmergencies {
         personManager = new JDBCPersonManager(connectionManager);
         protocolManager = new JDBCProtocolManager(connectionManager);
         actionManager = new JDBCActionManager(connectionManager);
+        
+        // Tables for protocols and actions are created and their relationship too
         protocolManager.addProtocol();
         actionManager.addAction();
-        Person p = null;
+        protocolManager.assignProtocolActions();
         
         int option;
         try {
-            boolean control = true;
+            //boolean control = true;
+            control = true;
             while (control)  {
                 System.out.println("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 System.out.println("@@                                                                  @@");
@@ -81,7 +83,6 @@ public class ActionSupportMedicalEmergencies {
                         login();
                         break;
                     case 0:
-                        //instance.close();
                         control = false;
 			break;
                     default:
@@ -135,7 +136,7 @@ public class ActionSupportMedicalEmergencies {
         String username = sc.nextLine();
         System.out.print("password:");
         String password = sc.nextLine();
-        byte[] bytesDefaultCharset = password.getBytes();
+        //byte[] bytesDefaultCharset = password.getBytes();
         if (userManager.verifyUsername(username) && userManager.verifyPassword(username, password)) {
             User u= userManager.getUser(userManager.getId(username));
             menuUser(u);
@@ -162,17 +163,10 @@ public class ActionSupportMedicalEmergencies {
 
             switch (choice) {
                 case 1:
-                    p= createPerson(u, personunit, instance);
-                    // RULES
-                    //personunit.getPeople().add(p);
-                    //instance.fire();
-                    //instance.close();
-                    //System.out.println(p.getProtocol().toString()); 
-                    // We need to get this from the database
+                    createPerson(u, personunit, instance);
                     break;
                 case 2:
-                    List<Person> peopleOFuser = new ArrayList<>();
-                    peopleOFuser = userManager.listPeopleofUser(userId);
+                    List<Person> peopleOFuser= userManager.listPeopleofUser(userId);
                     System.out.println(peopleOFuser);
                     System.out.println("Do you want to choose a specific person to see its protocol? (1: yes \n 2: no");
                     int choice2 = sc.nextInt();
@@ -199,7 +193,7 @@ public class ActionSupportMedicalEmergencies {
         }
     }
         
-    public static Person createPerson (User user, PersonUnit personunit, RuleUnitInstance<PersonUnit> instance) {
+    public static void createPerson (User user, PersonUnit personunit, RuleUnitInstance<PersonUnit> instance) {
         Person p = new Person();
         String info;
 
@@ -291,8 +285,6 @@ public class ActionSupportMedicalEmergencies {
         System.out.println(p.getProtocol().toString()); //dejarla comentada? es la que imprime protocolo antes de add a db
         
         personManager.addPerson(p); //se añade a la base de datos
-
-        return p;
     }
    
 }

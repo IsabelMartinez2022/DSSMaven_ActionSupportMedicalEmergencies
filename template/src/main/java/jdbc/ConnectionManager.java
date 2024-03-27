@@ -5,11 +5,8 @@
 package jdbc;
 
 import ifaces.InterfaceConnectionManager;
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -18,8 +15,6 @@ import java.util.logging.Logger;
 public class ConnectionManager implements InterfaceConnectionManager{
 
 	private Connection c= null;
-        private JDBCProtocolManager protocolManager;
-        private JDBCActionManager actionManager;
 
         public ConnectionManager() {
 		try {

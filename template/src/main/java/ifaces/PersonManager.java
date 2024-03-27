@@ -4,9 +4,7 @@
  */
 package ifaces;
 
-import java.util.List;
 import pojos.Person;
-import pojos.Protocol;
 
 public interface PersonManager {
         public void addPerson(Person p);

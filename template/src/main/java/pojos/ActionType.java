@@ -5,7 +5,6 @@
 package pojos;
 
 import java.io.Serializable;
-import java.util.List;
 
 public enum ActionType implements Serializable{
     NO_EMERGENCY("No medical emergency was found. \n\t\t\tIn case of doubt, call the emergency services and remain nearby to provide assistance if needed"),

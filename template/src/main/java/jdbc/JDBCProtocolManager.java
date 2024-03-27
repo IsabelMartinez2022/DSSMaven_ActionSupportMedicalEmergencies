@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pojos.Action;
@@ -42,6 +43,28 @@ public class JDBCProtocolManager implements ProtocolManager{
         }
     }
     
+    @Override
+    public void assignProtocolActions() {
+        
+        try {
+            String sql = "INSERT INTO protocolAction (protocolId, actionId) VALUES (?, ?)";
+            PreparedStatement statement = cM.getConnection().prepareStatement(sql);
+            
+            for (Protocol protocol: Protocol.PROTOCOLS_MAP.values()) {
+                List<Action> actions = protocol.getActions();
+                for (Action action : actions) {
+                    statement.setInt(1, protocol.getId());
+                    statement.setInt(2, action.getType().getId()); 
+                    statement.executeUpdate();
+                }
+            }
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(JDBCActionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+       
     @Override
     public Protocol getProtocolofPerson(int personId){
         List<Action> actions= new ArrayList<>();
@@ -102,4 +125,30 @@ public class JDBCProtocolManager implements ProtocolManager{
 
         return protocolId;
     }
+
+    /* NOT NEEDED (isabel)
+    @Override
+    public List<Protocol> getAllProtocols() {
+        
+        List<Protocol> protocolsList = new ArrayList<Protocol>();
+        Protocol protocol= null;
+        try {
+            String sql = "SELECT * FROM protocol";
+            PreparedStatement prep = cM.getConnection().prepareStatement(sql);
+            ResultSet rs = prep.executeQuery();
+
+            while (rs.next()) {
+                protocol= new Protocol();
+		protocol.setId(rs.getInt("id"));
+                protocol.setType(ProtocolType.valueOf(rs.getString("type")));
+		protocolsList.add(protocol);
+		}
+		rs.close();
+		prep.close();
+		} catch (SQLException e) {
+		e.printStackTrace();
+		}
+	return protocolsList;
+    }
+*/
 }

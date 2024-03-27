@@ -9,8 +9,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import org.drools.ruleunits.api.RuleUnitInstance;
-import org.drools.ruleunits.api.RuleUnitProvider;
 
 public class Protocol implements Serializable{
     
@@ -25,15 +23,31 @@ public class Protocol implements Serializable{
         this.type = type;
         this.actions = actions;
     }
+    
+    public Protocol() {
+        super();
+    }
 
     public int getId(){
         return id;
     }
     
+    public void setId(int id){
+        this.id= id;
+    }
+    
     public ProtocolType getType() {
         return type;
     }
+    
+    public void setType(ProtocolType type){
+        this.type= type;
+    }
 
+    public static Map<ProtocolType, Protocol> getPROTOCOLS_MAP() {
+        return PROTOCOLS_MAP;
+    }
+    
     public List<Action> getActions() {
         return actions;
     }

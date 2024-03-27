@@ -94,7 +94,7 @@ public class JDBCUserManager implements UserManager{
 			prep.setInt(1, userId);
 			ResultSet rs = prep.executeQuery();
 
-			while (rs.next()) { //aqui NO llega a entrar nunca
+			while (rs.next()) { 
                         Person person = new Person();
                         person.setId(rs.getInt("id"));
                         person.setConscious(rs.getBoolean("conscious"));
@@ -123,6 +123,7 @@ public class JDBCUserManager implements UserManager{
 		}
 		return peopleList;
 	}
+        
      public User getUser(int id) {
         try {
             String sql = "SELECT * FROM USER WHERE id = ?";
@@ -142,6 +143,7 @@ public class JDBCUserManager implements UserManager{
         }
         return null;
     }
+     
       public int getId(String username) {
         String sql1 = "SELECT * FROM USER WHERE username = ?";
         int id = 0;
