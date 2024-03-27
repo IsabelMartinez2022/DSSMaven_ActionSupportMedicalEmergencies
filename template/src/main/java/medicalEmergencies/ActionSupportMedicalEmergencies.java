@@ -287,7 +287,7 @@ public class ActionSupportMedicalEmergencies {
         instance.fire();
         instance.close();
         
-        //System.out.println(p.getProtocol().toString()); 
+        System.out.println(p.getProtocol().toString()); //dejarla comentada? es la que imprime protocolo antes de add a db
         
         personManager.addPerson(p); //se añade a la base de datos
 
