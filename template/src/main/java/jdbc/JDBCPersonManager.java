@@ -96,30 +96,5 @@ public class JDBCPersonManager implements PersonManager{
     return p;
     }
     
-    private boolean checkIfUserExists(int userId) throws SQLException {
-        String query = "SELECT COUNT(*) FROM user WHERE id = ?";
-        PreparedStatement prep = cM.getConnection().prepareStatement(query);
-        prep.setInt(1, userId);
-        ResultSet rs = prep.executeQuery();
-        if (rs.next()) {
-            return rs.getInt(1) > 0;
-        }
-        rs.close();
-        prep.close();
-        return false;
-    }
-    
-    private boolean checkIfProtocolExists(int protocolId) throws SQLException {
-        String query = "SELECT COUNT(*) FROM protocol WHERE id = ?";
-        PreparedStatement prep = cM.getConnection().prepareStatement(query);
-        prep.setInt(1, protocolId);
-        ResultSet rs = prep.executeQuery();
-        if (rs.next()) {
-            return rs.getInt(1) > 0;
-        }
-        rs.close();
-        prep.close();
-        return false;
-    }
 }
 
