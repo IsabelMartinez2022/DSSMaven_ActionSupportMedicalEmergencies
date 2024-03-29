@@ -5,6 +5,8 @@
 package jdbc;
 
 import ifaces.InterfaceConnectionManager;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,21 +16,33 @@ import java.util.logging.Logger;
 
 public class ConnectionManager implements InterfaceConnectionManager{
 
-	private Connection c= null;
+    private Connection c = null;
 
-        public ConnectionManager() {
-		try {
-                    Class.forName("org.sqlite.JDBC");
-                    c = DriverManager.getConnection("jdbc:sqlite:./db/ActionSupportMedicalEmergencies.db");
-                    c.createStatement().execute("PRAGMA foreign_keys=ON");
-                    System.out.println("Database connection opened.");
-                    this.createTables();
-		} catch (ClassNotFoundException e) {
-			System.out.println("Libraries not loaded");
-		} catch (SQLException ex) {
-                Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+    public ConnectionManager() {
+        try {
+            Class.forName("org.sqlite.JDBC");
+            File dbDirectory = new File("./db");
+
+            // Verificar si el directorio existe o se puede crear
+            if (!dbDirectory.exists()) {
+                if (!dbDirectory.mkdirs()) {
+                    throw new IOException("No se pudo crear el directorio ./db");
+                }
             }
-	}
+
+            // Establecer la conexión a la base de datos
+            c = DriverManager.getConnection("jdbc:sqlite:./db/ActionSupportMedicalEmergencies.db");
+            c.createStatement().execute("PRAGMA foreign_keys=ON");
+            System.out.println("Conexión a la base de datos abierta.");
+            this.createTables();
+        } catch (ClassNotFoundException e) {
+            System.out.println("Librerías no cargadas.");
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 //------CREATE TABLES-------------
         @Override
