@@ -12,7 +12,5 @@ public interface UserManager {
     public void addUser(User user);
     public boolean verifyPassword(String username, String passwordIntroduced);
     public boolean verifyUsername(String username);
-    //delete User??
-    //update password??
     public List<Person> listPeopleofUser(int userId);
 }

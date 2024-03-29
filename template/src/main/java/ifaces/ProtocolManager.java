@@ -4,13 +4,11 @@
  */
 package ifaces;
 
-import java.util.List;
 import pojos.Protocol;
 
 public interface ProtocolManager {
     
     public void addProtocol();
-    //public void assignProtocolActions();
     public int getProtocolId(String protocolType);
-    //NOT NEEDED (isabel) public List<Protocol> getAllProtocols();
+    public Protocol obtainProtocol(int protocolId);
 }

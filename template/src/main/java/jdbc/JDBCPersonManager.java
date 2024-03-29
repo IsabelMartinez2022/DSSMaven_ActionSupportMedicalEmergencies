@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static medicalEmergencies.ActionSupportMedicalEmergencies.protocolManager;
-//import static medicalEmergencies.ActionSupportMedicalEmergencies.protocolManager;
 import pojos.Bleeding;
 import pojos.Breathing;
 import pojos.ChestPain;
@@ -30,7 +29,6 @@ public class JDBCPersonManager implements PersonManager{
 
 	@Override
 	public void addPerson(Person p) {
-            //int protocolId = protocolManager.getProtocolId(p.getProtocol().getType().name());
             try {
 
                 String sql = "INSERT INTO person (conscious, dizzy, breathing, bleeding, "

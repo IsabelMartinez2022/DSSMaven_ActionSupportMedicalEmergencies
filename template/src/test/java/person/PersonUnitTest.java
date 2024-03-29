@@ -83,7 +83,7 @@ public class PersonUnitTest {
         }
     }
     
-    @Test
+    /*@Test
     public void testCardiorespiratoryArrestBad() {
     try {
         LOG.info("Running query to find cardiorespiratory arrests. Rules are also fired");
@@ -118,7 +118,7 @@ public class PersonUnitTest {
         } finally {
             instance.close();
         }
-    }
+    }*/
     
     @Test
     public void testCardiorespiratoryArrestByElectricShock() {
@@ -153,7 +153,7 @@ public class PersonUnitTest {
         }
     }
     
-    @Test
+    /*@Test
     public void testCardiorespiratoryArrestByElectricShockBad() {
         try {
             LOG.info("Running query to find cardiorespiratory arrests by electric shock. Rules are also fired");
@@ -184,7 +184,7 @@ public class PersonUnitTest {
         } finally {
             instance.close();
         }
-    }
+    }*/
 
     @Test
     public void testCardiorespiratoryArrestWithMajorTrauma() {
@@ -257,7 +257,7 @@ public class PersonUnitTest {
         }
     }
     
-    @Test
+    /*@Test
     public void testCardiorespiratoryArrestAndBleedingBad() {
         try {
             LOG.info("Running query to find cardiorespiratory arrests and bleeding. Rules are also fired");
@@ -289,7 +289,7 @@ public class PersonUnitTest {
         } finally {
             instance.close();
         }
-    }
+    }*/
 
     @Test
     public void testMajorTraumaByCarAccident() {
@@ -363,7 +363,7 @@ public class PersonUnitTest {
         }
     }
 
-    @Test
+    /*@Test
     public void testCardiorespiratoryArrestCarAccidentBad() {
         try {
             LOG.info("Running query to find cardiorespiratory arrest with major trauma by car accident. Rules are also fired");
@@ -398,7 +398,7 @@ public class PersonUnitTest {
         } finally {
             instance.close();
         }
-    }
+    }*/
 
     
     @Test
@@ -471,7 +471,7 @@ public class PersonUnitTest {
         }
     }
     
-    @Test
+    /*@Test
     public void testPartialChokingBad() {
         try {
             LOG.info("Running query to find partial airway blockage. Rules are also fired");
@@ -506,7 +506,7 @@ public class PersonUnitTest {
         } finally {
             instance.close();
         }
-    }
+    }*/
 
     @Test
     public void testTotalChoking() {

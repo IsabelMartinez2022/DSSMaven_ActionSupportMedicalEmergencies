@@ -28,11 +28,6 @@ public class Person implements Serializable{
     private Boolean communication_problems;
     private Protocol protocol; //Many to one relationship
     private User user; //Many to one relationship
-    
-    //TODO LATER (POSSIBLE ADDITIONAL FUNCTIONALITY)
-    //public static enum Urgency {URGENT,MEDIUM,MINOR};??
-   // private Urgency urgency;
-   //tenemos que preguntarle todo -> a partir de ahí ejecuta las reglas y el ES elige
 
     public Person(Boolean conscious, Dizzy dizzy, Breathing breathing, Bleeding bleeding, Boolean emit_words, ChestPain chest_pain, Boolean cough, Boolean seizure, Boolean possible_poisoning, Boolean electric_shock, Boolean major_trauma, Boolean car_accident, Boolean vomit, DifficultyBreathing difficulty_breathing, Boolean communication_problems) {
         super();

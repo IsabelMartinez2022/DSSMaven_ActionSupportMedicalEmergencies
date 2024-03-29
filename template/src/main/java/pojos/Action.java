@@ -18,10 +18,6 @@ public class Action implements Serializable {
         super();
         this.type = type;
     }
-    //When the doubts are solve change to this --> also change protocol
-    /*public Action(ActionType type, List<Protocol> protocols) {
-        this.type = type;
-    }*/
 
     public ActionType getType() {
         return type;
@@ -30,7 +26,6 @@ public class Action implements Serializable {
     public List<Protocol> getProtocols() {
         return protocols;
     }
-   
     
     @Override
     public String toString() {

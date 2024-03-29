@@ -49,10 +49,9 @@ public class ActionSupportMedicalEmergencies {
         protocolManager = new JDBCProtocolManager(connectionManager);
         actionManager = new JDBCActionManager(connectionManager);
         
-        // Tables for protocols and actions are created and their relationship too
+        // Tables for protocols and actions are created a
         protocolManager.addProtocol();
         actionManager.addAction();
-        //protocolManager.assignProtocolActions();
         
         int option;
         try {
@@ -136,7 +135,6 @@ public class ActionSupportMedicalEmergencies {
         String username = sc.nextLine();
         System.out.print("Password:");
         String password = sc.nextLine();
-        //byte[] bytesDefaultCharset = password.getBytes();
         if (userManager.verifyUsername(username) && userManager.verifyPassword(username, password)) {
             User u= userManager.getUser(userManager.getId(username));
             menuUser(u);
@@ -289,9 +287,7 @@ public class ActionSupportMedicalEmergencies {
         personunit.getPeople().add(p);
         instance.fire();
         instance.close();
-        
-        //System.out.println(p.getProtocol().toString()); 
-        
+                
         personManager.addPerson(p); //se añade a la base de datos
     }
    

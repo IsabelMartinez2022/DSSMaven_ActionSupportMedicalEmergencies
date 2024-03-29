@@ -245,25 +245,14 @@ public class Protocol implements Serializable{
         
         /*
         1_THIS FOR WILL GO THROUGH THE MAP
-        2_WHEN THE KEY IS THE SAME AS THE ONE THAT OUR PROTOCAL HAS IT WILL SAVE IT IN THE STRING
+        2_WHEN THE KEY IS THE SAME AS THE ONE THAT OUR PROTOCOL HAS IT WILL SAVE IT IN THE STRING
         */
         for (Map.Entry<ProtocolType, Protocol> entry : PROTOCOLS_MAP.entrySet()) {
-            //System.out.println("ENTRY KEY: "+entry.getKey().toString()); //IMPRIME BIEN --> son las Keys
-            //System.out.println("ENTRY VALUE: "+entry.getValue().toString()); //MAL --> Con est redirijo otra vez al tostring del protocol que vuelve a esta funcion --> errores
-            //System.out.println("ENTRY VALUE: "+entry.getValue().getActions()); //IMPRIME BIEN --> son las actions
-            //LOS 2 SOUT IMPRIMEN TODOS LOS PROTOCOLOS!!
-            
-            /*
-            getKey --> access the key
-            getValue --> access the value of the key
-            */
-            
             if(entry.getKey() == this.type){
                 //info = info + /*"[Key] : " + entry.getKey().toString() +*/ " [Value] : " + entry.getValue().getActions() + "\n";
                 info = info + entry.getValue().getActions() + "\n";
             }
         }
-
         return info;
     }
     
@@ -290,18 +279,13 @@ public class Protocol implements Serializable{
         person.setSeizure(false);
         personunit.getPeople().add(person);
         
-        // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio
         Protocol cardioArrestProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST);
-        // Asignar el protocolo a la persona
         person.setProtocol(cardioArrestProtocol);
         
         personunit.getPeople().add(person);
-        // Ejecutar las reglas sobre la instancia
         instance.fire();
         instance.close();
         System.out.println(person.getProtocol().toString());
-        
     }*/
-    
 }
 

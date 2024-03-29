@@ -9,5 +9,4 @@ import pojos.Person;
 public interface PersonManager {
         public void addPerson(Person p);
         public Person selectPerson(int id);
-        // SUBSTITUED public Person getPersonById(int choicePerson);
 }
