@@ -121,7 +121,7 @@ public class ActionSupportMedicalEmergencies {
             byte[] hash = md.digest();
             u.setPassword(hash);
             
-            userManager.addUser(u); //aqui el usuario se añade correctamente
+            userManager.addUser(u); //the user is added
 
         }catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(Auxiliar.class.getName()).log(Level.SEVERE, null, ex);
@@ -288,7 +288,7 @@ public class ActionSupportMedicalEmergencies {
         instance.fire();
         instance.close();
                 
-        personManager.addPerson(p); //se añade a la base de datos
+        personManager.addPerson(p); //the person is added to the database
     }
    
 }

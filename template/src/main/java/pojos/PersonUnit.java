@@ -19,7 +19,7 @@ public class PersonUnit implements RuleUnitData {
 
     public PersonUnit(DataStore<Person> people) {
         this.people = people;
-        this.protocols = Protocol.PROTOCOLS_MAP; // Utilizar directamente los protocolos definidos en Protocol
+        this.protocols = Protocol.PROTOCOLS_MAP; // Use the protocols defined on Protocol
     }
 
     public DataStore<Person> getPeople  () {

@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Auxiliar {
 private static Scanner sc = new Scanner(System.in);
   
-    public static String translateNumberToString(int optionsCount, String[] optionStrings) { //1º, nº total opciones posibles; 2º, txt opciones posibles
+    public static String translateNumberToString(int optionsCount, String[] optionStrings) { //optionalCount: number of possible options; optionStrings: txt for possible options
         int number;
         String string = "";
         do {

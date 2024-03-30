@@ -22,15 +22,14 @@ public class JDBCActionManager implements ActionManager{
     
     @Override
     public void addAction() {
-        // Se itera sobre los valores del enum ActionType
+        // Iterates over the enum ActionType values
         for (ActionType actionType : ActionType.values()) {
             try {
                 String sql = "INSERT INTO action (type, instruction) SELECT ?, ? WHERE NOT EXISTS (SELECT 1 FROM action WHERE type = ? LIMIT 1)";
-                //aqui hacer tb lo del protocol
                 PreparedStatement prep = cM.getConnection().prepareStatement(sql);
                 prep.setString(1, actionType.name()); 
                 prep.setString(2, actionType.getInstruction());
-                prep.setString(3, actionType.name()); // Para verificar si el tipo ya existe
+                prep.setString(3, actionType.name()); // Verify if the type already exists
                 prep.executeUpdate();
                 prep.close();
             } catch (SQLException ex) {

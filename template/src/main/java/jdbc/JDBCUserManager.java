@@ -98,7 +98,7 @@ public class JDBCUserManager implements UserManager{
 
                     while (rs.next()) { 
                     Person person = new Person();
-                    //añade protocolo
+                    //add the protocol
                     int protocolId = rs.getInt("protocolId");
                     Protocol protocol = protocolManager.obtainProtocol(protocolId);
                     
@@ -118,7 +118,7 @@ public class JDBCUserManager implements UserManager{
                     person.setVomit(rs.getBoolean("vomit"));
                     person.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
                     person.setCommunication_problems((rs.getBoolean("communication_problems")));
-                    person.setProtocol(protocol); // Asignar el protocolo a la persona
+                    person.setProtocol(protocol); // Assign the protocol to the person
                     peopleList.add(person);
                     }
                     rs.close();

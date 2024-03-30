@@ -23,13 +23,13 @@ public class JDBCProtocolManager implements ProtocolManager{
     
     @Override
     public void addProtocol() {
-        // Se itera sobre los valores del enum ProtocolType
+        //It iterates over the values of ProtocolType enum 
         for (ProtocolType protocolType : ProtocolType.values()) {
             try {
                 String sql = "INSERT INTO protocol (type) SELECT ? WHERE NOT EXISTS (SELECT 1 FROM protocol WHERE type = ? LIMIT 1);";
                 PreparedStatement statement = cM.getConnection().prepareStatement(sql);
                 statement.setString(1, protocolType.name());  
-                statement.setString(2, protocolType.name()); // Para verificar si el tipo ya existe
+                statement.setString(2, protocolType.name()); // Verify if the type añready exists
                 statement.executeUpdate();
                 statement.close();
             } catch (SQLException ex) {
@@ -40,7 +40,7 @@ public class JDBCProtocolManager implements ProtocolManager{
     
     @Override
     public int getProtocolId(String protocolType) {
-    int protocolId = 0; // Inicializamos a 0 por si no se encuentra ningún protocolo
+    int protocolId = 0; //Initialiced to 0 in case no protocol is found
 
         try {
             String sql = "SELECT id FROM protocol WHERE type = ? LIMIT 1";
@@ -63,15 +63,15 @@ public class JDBCProtocolManager implements ProtocolManager{
     
     @Override
     public Protocol obtainProtocol(int protocolId) {
-    // Iterar sobre los protocolos en el mapa
+    //Iterates over the protocols of the map
     for (Protocol protocol : Protocol.PROTOCOLS_MAP.values()) {
-        // Comprobar si el ID del protocolo coincide
+        //Verify if the protocol id is the same
         if (protocol.getId() == protocolId) {
-            // Si coincide, devolver el protocolo correspondiente
+            // If they are the same the protocol is returned
             return protocol;
         }
     }
-    // Si no se encuentra el protocolo...
+    //If no protocol is found then it returns null
     return null;
     }
 

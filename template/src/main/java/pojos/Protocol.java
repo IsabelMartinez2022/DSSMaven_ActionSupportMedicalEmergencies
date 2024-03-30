@@ -249,7 +249,6 @@ public class Protocol implements Serializable{
         */
         for (Map.Entry<ProtocolType, Protocol> entry : PROTOCOLS_MAP.entrySet()) {
             if(entry.getKey() == this.type){
-                //info = info + /*"[Key] : " + entry.getKey().toString() +*/ " [Value] : " + entry.getValue().getActions() + "\n";
                 info = info + entry.getValue().getActions() + "\n";
             }
         }
@@ -260,9 +259,7 @@ public class Protocol implements Serializable{
     public String toString() {
         return "\nProtocol{\n" + "\tid=" + this.id + "\n\ttype: " + this.type + "\n\tActions: " + actionString() + '}';
     }
-    
-    //TODO hashCode()
-    
+        
     //MAIN TO TRY PROTOCOL WITHOUT HAVING TO INPUT ALL THE DATA AND RUNNING OUR MENU
     /*public static void main(String[] args) {
         

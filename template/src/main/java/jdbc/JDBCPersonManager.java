@@ -70,7 +70,7 @@ public class JDBCPersonManager implements PersonManager{
         ResultSet rs = pr.executeQuery();
         if (rs.next()) {
             p = new Person();
-            //añade protocolo
+            //add protocol
             int protocolId = rs.getInt("protocolId");
             Protocol protocol = protocolManager.obtainProtocol(protocolId);
             p.setId(rs.getInt("id"));
@@ -89,7 +89,7 @@ public class JDBCPersonManager implements PersonManager{
             p.setVomit(rs.getBoolean("vomit"));
             p.setDifficulty_breathing(DifficultyBreathing.valueOf(rs.getString("difficulty_breathing")));
             p.setCommunication_problems(rs.getBoolean("communication_problems"));
-            p.setProtocol(protocol); // Asignar el protocolo a la persona
+            p.setProtocol(protocol); // Assign the protocol to the person
         }
         pr.close();
         rs.close();

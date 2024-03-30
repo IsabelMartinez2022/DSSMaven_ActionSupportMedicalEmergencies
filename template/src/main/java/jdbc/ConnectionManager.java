@@ -23,14 +23,14 @@ public class ConnectionManager implements InterfaceConnectionManager{
             Class.forName("org.sqlite.JDBC");
             File dbDirectory = new File("./db");
 
-            // Verificar si el directorio existe o se puede crear
+            // Verify if the directory exists or if it can be created
             if (!dbDirectory.exists()) {
                 if (!dbDirectory.mkdirs()) {
                     throw new IOException("No se pudo crear el directorio ./db");
                 }
             }
 
-            // Establecer la conexión a la base de datos
+            // Establish the connection to the database
             c = DriverManager.getConnection("jdbc:sqlite:./db/ActionSupportMedicalEmergencies.db");
             c.createStatement().execute("PRAGMA foreign_keys=ON");
             System.out.println("Conexión a la base de datos abierta.");
