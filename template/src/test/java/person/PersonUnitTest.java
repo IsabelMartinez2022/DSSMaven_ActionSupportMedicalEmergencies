@@ -46,13 +46,19 @@ public class PersonUnitTest {
         LOG.info("Insert data");
     }
     
+    /*
+    THE TESTS COMMENTED ARE THE ONES THAT WE CREATED IN A WRONG WAY SO WE CAN 
+    SEE IT THEY WORK OR NOT
+    THEY NEED TO BE COMMENTED SO THE JAR FILE CAN WORK
+    */
+    
     @Test
     public void testCardiorespiratoryArrest() {
     try {
         LOG.info("Running query to find cardiorespiratory arrests. Rules are also fired");
         instance.fire();
         
-        // Crear una instancia de Person
+        // Creates an instance of Person
         Person person = new Person();
         person.setConscious(false);
         person.setBreathing(Breathing.NO);
@@ -62,12 +68,12 @@ public class PersonUnitTest {
         person.setSeizure(false);
         personUnit.getPeople().add(person);
         
-        // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio
+        // Obtains the protocol suitable for cardiorespiratoryarrest emergency
         Protocol cardioArrestProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST);
-        // Asignar el protocolo a la persona
+        //Assign the protocol to the person
         person.setProtocol(cardioArrestProtocol);
 
-        // Realizar aserciones basadas en el contenido de person
+        // Makes assertions based on the person information
         assertFalse(person.getConscious());
         assertEquals(Breathing.NO, person.getBreathing());
         assertEquals(Bleeding.NO, person.getBleeding());
@@ -75,7 +81,7 @@ public class PersonUnitTest {
         assertFalse(person.getMajor_trauma());
         assertFalse(person.getSeizure());
 
-        // Verificar que la persona tiene el protocolo adecuado asignado
+        // Verify that the person has the proper protocol assigned 
         assertEquals(ProtocolType.CARDIOARREST, person.getProtocol().getType());
 
         } finally {
@@ -89,22 +95,22 @@ public class PersonUnitTest {
         LOG.info("Running query to find cardiorespiratory arrests. Rules are also fired");
         instance.fire();
         
-        // Crear una instancia de Person
+        // Creates an instance of Person
         Person person = new Person();
-        person.setConscious(true); //debería ser false
+        person.setConscious(true); //should be false
         person.setBreathing(Breathing.NO);
-        person.setBleeding(Bleeding.A_LOT); //debería ser No o A_Little
+        person.setBleeding(Bleeding.A_LOT); //should be No o A_Little
         person.setElectric_shock(false);
-        person.setMajor_trauma(true); //debería ser false
+        person.setMajor_trauma(true); //should be false
         person.setSeizure(false);
         personUnit.getPeople().add(person);
         
-        // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio
+        // Obtains the protocol suitable for cardiorespiratory arrest emergency
         Protocol cardioArrestProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST);
-        // Asignar el protocolo a la persona
+        //Assign the protocol to the person
         person.setProtocol(cardioArrestProtocol);
 
-        // Realizar aserciones basadas en el contenido de person
+       // Makes assertions based on the person information
         assertFalse(person.getConscious());
         assertEquals(Breathing.NO, person.getBreathing());
         assertEquals(Bleeding.NO, person.getBleeding());
@@ -112,7 +118,7 @@ public class PersonUnitTest {
         assertFalse(person.getMajor_trauma());
         assertFalse(person.getSeizure());
 
-        // Verificar que la persona tiene el protocolo adecuado asignado
+        // Verify that the person has the proper protocol assigned
         assertEquals(ProtocolType.CARDIOARREST, person.getProtocol().getType());
 
         } finally {
@@ -126,7 +132,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find cardiorespiratory arrests by electric shock. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.NO);
@@ -134,18 +140,18 @@ public class PersonUnitTest {
             person.setElectric_shock(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio por electrocución
+            // Obtains the protocol suitable for cardiorespiratoryarreste by electric shock emergency
             Protocol cardioArrestElectrocutionProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_ELECTROCUTION);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(cardioArrestElectrocutionProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.NO, person.getBreathing());
             assertEquals(Bleeding.NO, person.getBleeding());
             assertTrue(person.getElectric_shock());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CARDIOARREST_ELECTROCUTION, person.getProtocol().getType());
 
         } finally {
@@ -159,26 +165,26 @@ public class PersonUnitTest {
             LOG.info("Running query to find cardiorespiratory arrests by electric shock. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.NO);
-            person.setBleeding(Bleeding.A_LOT); //debería ser No o A_Litle
-            person.setElectric_shock(false); //debería ser true
+            person.setBleeding(Bleeding.A_LOT); //should be  No o A_Litle
+            person.setElectric_shock(false); //should be  true
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio por electrocución
+            // Obtains the protocol suitable for cardiorespiratory arrest by electric shock
             Protocol cardioArrestElectrocutionProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_ELECTROCUTION);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(cardioArrestElectrocutionProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.NO, person.getBreathing());
             assertEquals(Bleeding.NO, person.getBleeding());
             assertTrue(person.getElectric_shock());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CARDIOARREST_ELECTROCUTION, person.getProtocol().getType());
 
         } finally {
@@ -192,7 +198,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find cardiorespiratory arrests with major trauma. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.NO);
@@ -202,12 +208,12 @@ public class PersonUnitTest {
             person.setSeizure(false);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio con trauma mayor
+            // Obtains the protocol suitable for cardiorespiratory arrest by major trauma
             Protocol cardioArrestMajorTraumaProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_MAJORTRAUMA);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(cardioArrestMajorTraumaProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.NO,person.getBreathing());
             assertEquals(Bleeding.NO, person.getBleeding());
@@ -215,7 +221,7 @@ public class PersonUnitTest {
             assertTrue(person.getMajor_trauma()); 
             assertFalse(person.getSeizure());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CARDIOARREST_MAJORTRAUMA, person.getProtocol().getType());
 
         } finally {
@@ -229,7 +235,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find cardiorespiratory arrests and bleeding. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.NO);
@@ -238,18 +244,18 @@ public class PersonUnitTest {
  
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio y sangrado
+            // Obtains the protocol suitable for cardiorespiratoryarrest and bleeding
             Protocol cardioArrestBleedingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(cardioArrestBleedingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.NO,person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding()); 
             assertFalse(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING, person.getProtocol().getType());
 
         } finally {
@@ -263,27 +269,27 @@ public class PersonUnitTest {
             LOG.info("Running query to find cardiorespiratory arrests and bleeding. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
-            person.setConscious(true); //debería ser false
+            person.setConscious(true); //should be  false
             person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.A_LOT);
-            person.setCar_accident(true);  //debería ser false
+            person.setCar_accident(true);  //should be  false
  
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio y sangrado
+            // Obtains the protocol suitable for cardiorespiratoryarrest and bleeding
             Protocol cardioArrestBleedingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(cardioArrestBleedingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.NO,person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding()); 
             assertFalse(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CARDIOARREST_MAJORTRAUMA_BLEEDING, person.getProtocol().getType());
 
         } finally {
@@ -297,7 +303,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find major trauma by car accident. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.YES); 
@@ -306,19 +312,19 @@ public class PersonUnitTest {
             person.setCar_accident(true); 
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de trauma mayor por accidente automovilístico
+            // Obtains the protocol suitable for major trauma by car accident
             Protocol carProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CAR);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(carProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.YES, person.getBreathing()); 
             assertEquals(Bleeding.NO, person.getBleeding());
             assertTrue(person.getMajor_trauma()); 
             assertTrue(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CAR, person.getProtocol().getType());
 
         } finally {
@@ -332,30 +338,30 @@ public class PersonUnitTest {
             LOG.info("Running query to find cardiorespiratory arrest with major trauma by car accident. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.NO);
-            person.setBleeding(Bleeding.A_LITTLE); // Opcional, pero si se establece, debe ser Bleeding.A_LITTLE o Bleeding.NO
+            person.setBleeding(Bleeding.A_LITTLE); // Optional, but it should be Bleeding.A_LITTLE or Bleeding.NO
             person.setElectric_shock(false);
             person.setMajor_trauma(true);
             person.setCar_accident(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio con trauma mayor por accidente automovilístico
+            // Obtains the protocol suitable for cardiorespiratory arrest by car accident
             Protocol cardioArrestCarProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_CAR);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(cardioArrestCarProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.NO, person.getBreathing());
-            assertEquals(Bleeding.A_LITTLE, person.getBleeding()); // Opcional, pero si se establece, debe ser Bleeding.A_LITTLE o Bleeding.NO
+            assertEquals(Bleeding.A_LITTLE, person.getBleeding()); // optional, but it should be Bleeding.A_LITTLE o Bleeding.NO
             assertFalse(person.getElectric_shock());
             assertTrue(person.getMajor_trauma());
             assertTrue(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CARDIOARREST_CAR, person.getProtocol().getType());
 
         } finally {
@@ -369,30 +375,30 @@ public class PersonUnitTest {
             LOG.info("Running query to find cardiorespiratory arrest with major trauma by car accident. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.NO);
             person.setBleeding(Bleeding.A_LITTLE); 
-            person.setElectric_shock(true); //debería ser false
-            person.setMajor_trauma(false); //debería ser true
-            person.setCar_accident(false); //debería ser true
+            person.setElectric_shock(true); //should be  false
+            person.setMajor_trauma(false); //should be  true
+            person.setCar_accident(false); //should be  true
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio con trauma mayor por accidente automovilístico
+            // Obtains the protocol suitable for cardiorespiratory arrest by car accident
             Protocol cardioArrestCarProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_CAR);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(cardioArrestCarProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.NO, person.getBreathing());
-            assertEquals(Bleeding.A_LITTLE, person.getBleeding()); // Opcional, pero si se establece, debe ser Bleeding.A_LITTLE o Bleeding.NO
+            assertEquals(Bleeding.A_LITTLE, person.getBleeding()); // Optional, but it should be Bleeding.A_LITTLE or Bleeding.NO
             assertFalse(person.getElectric_shock());
             assertTrue(person.getMajor_trauma());
             assertTrue(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CARDIOARREST_CAR, person.getProtocol().getType());
 
         } finally {
@@ -407,7 +413,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find cardiorespiratory arrest by car accident and bleeding. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.NO);
@@ -415,18 +421,18 @@ public class PersonUnitTest {
             person.setCar_accident(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de paro cardiorrespiratorio por accidente automovilístico y sangrado
+            // Obtains the protocol suitable for cardiorespiratory arrest by car accident and bleeding
             Protocol cardioArrestCarBleedingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CARDIOARREST_CAR_BLEEDING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(cardioArrestCarBleedingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.NO, person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding());
             assertTrue(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CARDIOARREST_CAR_BLEEDING, person.getProtocol().getType());
 
         } finally {
@@ -440,7 +446,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find partial airway blockage. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.NO);
@@ -450,12 +456,12 @@ public class PersonUnitTest {
             person.setCough(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de obstrucción parcial de las vías respiratorias
+            // Obtains the protocol suitable for partial obstruction of air way
             Protocol partialChokingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.PARTIAL_CHOKING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(partialChokingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.NO, person.getChest_pain());
             assertEquals(Dizzy.NO, person.getDizzy());
@@ -463,7 +469,7 @@ public class PersonUnitTest {
             assertTrue( person.getEmit_words());
             assertTrue(person.getCough());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.PARTIAL_CHOKING, person.getProtocol().getType());
 
         } finally {
@@ -477,22 +483,22 @@ public class PersonUnitTest {
             LOG.info("Running query to find partial airway blockage. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.NO);
-            person.setDizzy(Dizzy.A_LOT); //deberia ser NO o A_Little
+            person.setDizzy(Dizzy.A_LOT); //should be  NO o A_Little
             person.setDifficulty_breathing(DifficultyBreathing.A_LOT);
-            person.setEmit_words(false); //debería ser true
-            person.setCough(false); //debería ser true
+            person.setEmit_words(false); //should be  true
+            person.setCough(false); //should be  true
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de obstrucción parcial de las vías respiratorias
+            // Obtains the protocol suitable for partial obstruction of air way
             Protocol partialChokingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.PARTIAL_CHOKING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(partialChokingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.NO, person.getChest_pain());
             assertEquals(Dizzy.NO, person.getDizzy());
@@ -500,7 +506,7 @@ public class PersonUnitTest {
             assertTrue(person.getEmit_words());
             assertTrue(person.getCough());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.PARTIAL_CHOKING, person.getProtocol().getType());
 
         } finally {
@@ -514,7 +520,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find total airway blockage. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.NO);
@@ -523,19 +529,19 @@ public class PersonUnitTest {
             person.setEmit_words(false);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de obstrucción total de las vías respiratorias
+            // Obtains the protocol suitable for total obstruction of air way
             Protocol totalChokingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.TOTAL_CHOKING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(totalChokingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.NO, person.getChest_pain());
             assertEquals(Dizzy.NO, person.getDizzy());
             assertEquals(DifficultyBreathing.A_LOT, person.getDifficulty_breathing());
             assertFalse(person.getEmit_words());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.TOTAL_CHOKING, person.getProtocol().getType());
 
         } finally {
@@ -549,22 +555,22 @@ public class PersonUnitTest {
             LOG.info("Running query to find heart attack. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.A_LOT);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la emergencia de ataque al corazón
+            // Obtains the protocol suitable for heart attack
             Protocol heartAttackProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.HEART_ATTACK);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(heartAttackProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.A_LOT, person.getChest_pain());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.HEART_ATTACK, person.getProtocol().getType());
 
         } finally {
@@ -578,7 +584,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find fainting without vomit. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.YES);
@@ -587,19 +593,19 @@ public class PersonUnitTest {
             person.setVomit(false);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para el desmayo sin vómito
+            // Obtains the protocol suitable for fainting without vomit
             Protocol faintingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.FAINTING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(faintingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            //Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding()); 
             assertFalse(person.getMajor_trauma());
             assertFalse(person.getVomit());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.FAINTING, person.getProtocol().getType());
 
         } finally {
@@ -613,7 +619,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find fainting with vomit. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.YES);
@@ -622,19 +628,19 @@ public class PersonUnitTest {
             person.setVomit(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para el desmayo con vómito
+            // Obtains the protocol suitable for fainting with vomit
             Protocol faintingVomitProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.FAINTING_VOMIT);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(faintingVomitProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding()); 
             assertFalse(person.getMajor_trauma());
             assertTrue(person.getVomit());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.FAINTING_VOMIT, person.getProtocol().getType());
 
         } finally {
@@ -648,7 +654,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find dizziness. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.NO);
@@ -656,18 +662,18 @@ public class PersonUnitTest {
             person.setBleeding(Bleeding.A_LITTLE); 
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para el mareo
+            // Obtains the protocol suitable for dizziness
             Protocol dizzinessProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.DIZZINESS);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(dizzinessProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.NO, person.getChest_pain());
             assertEquals(Dizzy.A_LOT, person.getDizzy());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding()); 
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.DIZZINESS, person.getProtocol().getType());
 
         } finally {
@@ -681,7 +687,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find severe bleeding while conscious. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.NO);
@@ -689,18 +695,18 @@ public class PersonUnitTest {
             person.setBleeding(Bleeding.A_LOT);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para el sangrado grave mientras está consciente
+            // Obtains the protocol suitable for heavy bleeding while conscious
             Protocol severeBleedingConsciousProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CONS_SEVERE_BLEEDING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(severeBleedingConsciousProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.NO, person.getChest_pain());
             assertEquals(Dizzy.A_LOT, person.getDizzy());
             assertEquals(Bleeding.A_LOT, person.getBleeding());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CONS_SEVERE_BLEEDING, person.getProtocol().getType());
 
         } finally {
@@ -714,7 +720,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find seizure. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.UNABLE_TO_CHECK);
@@ -724,12 +730,12 @@ public class PersonUnitTest {
             person.setSeizure(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la convulsión
+            // Obtains the protocol suitable for seizure
             Protocol seizureProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.SEIZURE);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(seizureProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.UNABLE_TO_CHECK,person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding());
@@ -737,7 +743,7 @@ public class PersonUnitTest {
             assertFalse(person.getMajor_trauma());
             assertTrue(person.getSeizure());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.SEIZURE, person.getProtocol().getType());
 
         } finally {
@@ -751,7 +757,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find poisoning. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.A_LITTLE);
@@ -762,12 +768,12 @@ public class PersonUnitTest {
             person.setPossible_poisoning(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la intoxicación
+            // Obtains the protocol suitable for poisoning
             Protocol poisoningProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.POISONING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(poisoningProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.A_LITTLE, person.getChest_pain()); 
             assertEquals(Dizzy.A_LITTLE, person.getDizzy()); 
@@ -776,7 +782,7 @@ public class PersonUnitTest {
             assertFalse(person.getCough());
             assertTrue(person.getPossible_poisoning());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.POISONING, person.getProtocol().getType());
 
         } finally {
@@ -790,7 +796,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find anaphylaxis without vomit. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.A_LITTLE);
@@ -802,12 +808,12 @@ public class PersonUnitTest {
             person.setVomit(false);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la anafilaxia sin vómito
+            // Obtains the protocol suitable for anaphylaxis without vomit
             Protocol anaphylaxisNoVomitProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.ANAPHYLAXIS);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(anaphylaxisNoVomitProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.A_LITTLE, person.getChest_pain()); 
             assertEquals(Dizzy.A_LITTLE, person.getDizzy());
@@ -817,7 +823,7 @@ public class PersonUnitTest {
             assertFalse(person.getPossible_poisoning());
             assertFalse(person.getVomit());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.ANAPHYLAXIS, person.getProtocol().getType());
 
         } finally {
@@ -831,7 +837,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find anaphylaxis with vomit. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.A_LITTLE); 
@@ -843,12 +849,12 @@ public class PersonUnitTest {
             person.setVomit(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para la anafilaxia con vómito
+            // Obtains the protocol suitable for anaphylaxis with vomit
             Protocol anaphylaxisVomitProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.ANAPHYLAXIS_VOMIT);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(anaphylaxisVomitProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.A_LITTLE, person.getChest_pain()); 
             assertEquals(Dizzy.A_LITTLE, person.getDizzy()); 
@@ -858,7 +864,7 @@ public class PersonUnitTest {
             assertFalse(person.getPossible_poisoning());
             assertTrue(person.getVomit());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.ANAPHYLAXIS_VOMIT, person.getProtocol().getType());
 
         } finally {
@@ -872,7 +878,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find stroke. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.A_LITTLE); 
@@ -881,19 +887,19 @@ public class PersonUnitTest {
             person.setCommunication_problems(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para el accidente cerebrovascular
+            // Obtains the protocol suitable for a stroke
             Protocol strokeProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.STROKE);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(strokeProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.A_LITTLE, person.getChest_pain()); 
             assertEquals(Dizzy.A_LITTLE, person.getDizzy()); 
             assertEquals(DifficultyBreathing.A_LITTLE, person.getDifficulty_breathing()); 
             assertTrue(person.getCommunication_problems());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.STROKE, person.getProtocol().getType());
 
         } finally {
@@ -907,7 +913,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find no medical emergency found. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(true);
             person.setChest_pain(ChestPain.A_LITTLE); 
@@ -916,19 +922,19 @@ public class PersonUnitTest {
             person.setCommunication_problems(false);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para cuando no se encuentra emergencia médica
+            // Obtains the protocol suitable when there is no emergency
             Protocol noEmergencyFoundProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.NOEMERGENCYFOUND);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(noEmergencyFoundProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertTrue(person.getConscious());
             assertEquals(ChestPain.A_LITTLE, person.getChest_pain());
             assertEquals(Dizzy.A_LITTLE, person.getDizzy()); 
             assertEquals(DifficultyBreathing.A_LITTLE, person.getDifficulty_breathing()); 
             assertFalse(person.getCommunication_problems());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.NOEMERGENCYFOUND, person.getProtocol().getType());
 
         } finally {
@@ -942,7 +948,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find major trauma. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Personn
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.YES);
@@ -951,19 +957,19 @@ public class PersonUnitTest {
             person.setCar_accident(false);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para el trauma mayor
+            // Obtains the protocol suitable for major trauma
             Protocol majorTraumaProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.MAJOR_TRAUMA);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(majorTraumaProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LITTLE, person.getBleeding()); 
             assertTrue(person.getMajor_trauma());
             assertFalse(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.MAJOR_TRAUMA, person.getProtocol().getType());
 
         } finally {
@@ -977,7 +983,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find major trauma and bleeding. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.YES);
@@ -985,18 +991,18 @@ public class PersonUnitTest {
             person.setCar_accident(false);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para el trauma mayor con sangrado
+            // Obtains the protocol suitable for major trauma and bleeding
             Protocol majorTraumaBleedingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.MAJOR_TRAUMA_BLEEDING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(majorTraumaBleedingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding());
             assertFalse(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.MAJOR_TRAUMA_BLEEDING, person.getProtocol().getType());
 
         } finally {
@@ -1010,7 +1016,7 @@ public class PersonUnitTest {
             LOG.info("Running query to find major trauma by car accident and bleeding. Rules are also fired");
             instance.fire();
 
-            // Crear una instancia de Person
+            // Creates an instance of Person
             Person person = new Person();
             person.setConscious(false);
             person.setBreathing(Breathing.YES);
@@ -1018,18 +1024,18 @@ public class PersonUnitTest {
             person.setCar_accident(true);
             personUnit.getPeople().add(person);
 
-            // Obtener el protocolo adecuado para el trauma mayor por accidente automovilístico con sangrado
+            // Obtains the protocol suitable for a car accident and bleeding
             Protocol carAccidentBleedingProtocol = Protocol.PROTOCOLS_MAP.get(ProtocolType.CAR_BLEEDING);
-            // Asignar el protocolo a la persona
+            //Assign the protocol to the person
             person.setProtocol(carAccidentBleedingProtocol);
 
-            // Realizar aserciones basadas en el contenido de person
+            // Makes assertions based on the person information
             assertFalse(person.getConscious());
             assertEquals(Breathing.YES, person.getBreathing());
             assertEquals(Bleeding.A_LOT, person.getBleeding());
             assertTrue(person.getCar_accident());
 
-            // Verificar que la persona tiene el protocolo adecuado asignado
+            // Verify that the person has the proper protocol assigned
             assertEquals(ProtocolType.CAR_BLEEDING, person.getProtocol().getType());
 
         } finally {
